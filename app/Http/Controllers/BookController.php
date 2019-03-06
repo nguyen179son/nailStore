@@ -8,7 +8,7 @@ use Validator;
 class BookController extends Controller
 {
     public function index() {
-        return view('booking');
+        return view('dropinbooking');
     }
     public function store(Request $request) {
         $input = $request->all();
