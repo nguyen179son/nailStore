@@ -14,4 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/booking','BookController@index');
+Route::get('/dropinBooking','BookController@index');
+Route::post('/dropinBooking','BookController@store');

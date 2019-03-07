@@ -27,7 +27,7 @@ class ValidatePhoneNumberProvider extends ServiceProvider
             if ($value[0]=='+') {
                 return is_numeric(substr($value,1));
             } else {
-                if (substr($value, 0, 2) == '01') {
+                if (substr($value, 0, 1) == '0'|| substr($value, 0, 1) =='1') {
                     return  is_numeric(substr($value,2));
                 }
                 return false;
