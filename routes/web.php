@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('dropinbooking');
+    return view('welcome');
 });
-
+Route::get('/dropinBooking','BookController@index');
+Route::post('/dropinBooking','BookController@store');
