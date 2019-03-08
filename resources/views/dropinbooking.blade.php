@@ -43,20 +43,21 @@
 					</div>
 					<div class="col-md-4 col-md-pull-7 col-sm-12 col-xs-12">
 						<div class="booking-form">
-							<form>
+							<form action="/dropinBooking" method="post">
+							@csrf
 								<div class="form-group">
 									<span class="form-label">Your name</span>
-									<input class="form-control" type="text" placeholder="Enter your fullname">
+									<input class="form-control" type="text" name="name" placeholder="Enter your fullname">
 								</div>
 
 								<div class="form-group">
 									<span class="form-label">Your email</span>
-									<input class="form-control" type="text" placeholder="Enter your email">
+									<input class="form-control" type="text" name="email" placeholder="Enter your email">
 								</div>
 
 								<div class="form-group">
 									<span class="form-label">Your phone</span>
-									<input class="form-control" type="text" placeholder="Enter your phone">
+									<input class="form-control" type="text" name="telephone" placeholder="Enter your phone">
 								</div>
 
 								<div class="row">
@@ -65,7 +66,7 @@
 											<span class="form-label">Service</span>
 											<!-- <input class="form-control" type="date" required> -->
 
-											<select class="form-control" id="">
+											<select class="form-control" name="type" id="">
 												<option>Finger nail art</option>
 												<option>Toe nail art</option>
 												<option>Eyelashes</option>
@@ -115,8 +116,9 @@
 										</div>
 									</div>
 								</div> -->
+								
 								<div class="form-btn">
-									<button class="submit-btn">Book</button>
+									<button class="submit-btn" type="submit">Book</button>
 								</div>
 							</form>
 						</div>
