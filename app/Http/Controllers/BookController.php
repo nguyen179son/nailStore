@@ -16,7 +16,7 @@ class BookController extends Controller
         $input = $request->all();
         $validation = Validator::make($input, [
             'name' => 'required|string',
-            'telephone' => 'required|phone_number|digits_between:8,12',
+            'telephone' => 'required|phone_number',
             'email' => 'email',
             'type' => 'required|string',
         ]);
