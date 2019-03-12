@@ -12,8 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dropinBooking');
 });
 Route::get('/dropinBooking','BookController@index');
 Route::post('/dropinBooking','BookController@store');
+
 Route::get('/reservations', 'ReservationController@getReservations');
+
+
+Route::get('/dropinQueue', 'BookController@show');
+Route::get('dropinQueue/fetch_data', 'BookController@fetch_data');
+
