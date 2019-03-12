@@ -70,7 +70,7 @@
                         <tbody>
                         @foreach($data as $key => $row)
                             <tr>
-                                <td>{{ ($data->currentPage()-1)*10+$key+10  1 }}</td>
+                                <td>{{ ($data->currentPage()-1)*10+$key+101 }}</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ $row->telephone }}</td>
                                 <td>{{ $row->type }}</td>
