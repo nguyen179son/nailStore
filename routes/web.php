@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 Route::get('/dropinBooking','BookController@index');
 Route::post('/dropinBooking','BookController@store');
+Route::get('/reservations', 'ReservationController@getReservations');
