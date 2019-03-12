@@ -37,11 +37,7 @@ class ReservationController extends Controller
                 if ($from_host != "bokadirekt.se") continue;
 
                 $subject = strtolower($header->subject);
-                if ($subject == "ny bokning") {
-                    $mail_type = "book";
-                } else if (strpos($subject, 'avbokning') !== false){
-                    $mail_type = "cancel";
-                } else continue;
+
 
                 $message = (imap_fetchbody($mbox,$email_number,1.1));
                 if($message == '')
@@ -52,43 +48,13 @@ class ReservationController extends Controller
 
                 $lines = explode("\r\n", $message);
 //                dd($lines);
-                foreach ($lines as $line) {
-                    if (strpos($line, 'Kundens namn') !== false) {
-                        $customer_name = ltrim($line, "Kundens namn: ");
-                        continue;
-                    }
-                    if (strpos($line, 'Mobil') !== false) {
-                        $customer_phone = ltrim($line, "Mobil: ");
-                        continue;
-                    }
-                    if (strpos($line, 'Tidpunkt') !== false) {
-                        $customer_booking_time = ltrim($line, "Tidpunkt: ").":00";
-                        continue;
-                    }
-                    if (strpos($line, 'Tjänst') !== false) {
-                        $customer_duration = (substr($line, -6, 2));
-                        if (strpos($line, 'Nagel') !== false) {
-                            $customer_service = "mong";
-                            continue;
-                        }
-                        if (strpos($line, 'Singel') !== false) {
-                            $customer_service = "mi";
-                            continue;
-                        }
-                        if (strpos($line, 'Manikyr') !== false) {
-                            $customer_service = "chan";
-                            continue;
-                        }
-                    }
-                    if (strpos($line, 'meddelande') !== false) {
-                        $customer_notice = ltrim($line, "Ev. meddelande: ");
-                    }
-                }
 
-//                DB::table("online_reservations")->insertGetId([
-//
-//                ]);
-
+                if ($subject == "ny bokning") {
+                    $this->handleNewBookingMail($lines, $email_number);
+                    continue;
+                } else if (strpos($subject, 'avbokning') !== false){
+                    $mail_type = "cancel";
+                } else continue;
 
                 array_push($email_list, $message);
 
@@ -98,5 +64,125 @@ class ReservationController extends Controller
         imap_close($mbox);
         dd($email_list);
 
+    }
+
+    public function handleNewBookingMail($lines, $email_number) {
+        $mail_type = "book";
+        $customer_name = $customer_email = $customer_mobile = $customer_telephone
+            = $customer_booking_time = $customer_duration = $customer_service = $customer_notice = "";
+        foreach ($lines as $line) {
+            if (strpos($line, 'Kundens namn') !== false) {
+                $customer_name = ltrim($line, "Kundens namn: ");
+                continue;
+            }
+            if (strpos($line,   'Mobil') !== false) {
+                $customer_mobile = ltrim($line, "Mobil: ");
+                continue;
+            }
+            if (strpos($line, 'Telefon') !== false) {
+                $customer_telephone = ltrim($line, "Telefon: ");
+                continue;
+            }
+            if (strpos($line, 'Epost') !== false) {
+                $customer_email = ltrim($line, "Epost: ");
+                continue;
+            }
+            if (strpos($line, 'Tidpunkt') !== false) {
+                $customer_booking_time = ltrim($line, "Tidpunkt: ").":00";
+                continue;
+            }
+            if (strpos($line, 'Tjänst') !== false) {
+                $customer_duration = (substr($line, -6, 2));
+                if (strpos($line, 'Nagel') !== false) {
+                    $customer_service = "Nagel";
+                    continue;
+                }
+                if (strpos($line, 'Singel') !== false) {
+                    $customer_service = "Singel";
+                    continue;
+                }
+                if (strpos($line, 'Manikyr') !== false) {
+                    $customer_service = "Manikyr";
+                    continue;
+                }
+            }
+            if (strpos($line, 'meddelande') !== false) {
+                $customer_notice = ltrim($line, "Ev. meddelande: ");
+            }
+
+        }
+
+        DB::table("online_reservations")->insertGetId([
+            'mobile' => $customer_mobile,
+            'telephone' => $customer_telephone,
+            'email' => $customer_email,
+            'reservations_time' => $customer_booking_time,
+            'customer_name' => $customer_name,
+            'type' => $mail_type,
+            'duration' => $customer_duration,
+            'service_type' => $customer_service,
+            'notice' => $customer_notice,
+            'mail_number' => $email_number,
+        ]);
+    }
+
+    public function handleCancelBookingMail($lines, $email_number) {
+        $mail_type = "book";
+        $customer_name = $customer_email = $customer_mobile = $customer_telephone
+            = $customer_booking_time = $customer_duration = $customer_service = $customer_notice = "";
+        foreach ($lines as $line) {
+            if (strpos($line, 'Kundens namn') !== false) {
+                $customer_name = ltrim($line, "Kundens namn: ");
+                continue;
+            }
+            if (strpos($line,   'Mobil') !== false) {
+                $customer_mobile = ltrim($line, "Mobil: ");
+                continue;
+            }
+            if (strpos($line, 'Telefon') !== false) {
+                $customer_telephone = ltrim($line, "Telefon: ");
+                continue;
+            }
+            if (strpos($line, 'Epost') !== false) {
+                $customer_email = ltrim($line, "Epost: ");
+                continue;
+            }
+            if (strpos($line, 'Tidpunkt') !== false) {
+                $customer_booking_time = ltrim($line, "Tidpunkt: ").":00";
+                continue;
+            }
+            if (strpos($line, 'Tjänst') !== false) {
+                $customer_duration = (substr($line, -6, 2));
+                if (strpos($line, 'Nagel') !== false) {
+                    $customer_service = "Nagel";
+                    continue;
+                }
+                if (strpos($line, 'Singel') !== false) {
+                    $customer_service = "Singel";
+                    continue;
+                }
+                if (strpos($line, 'Manikyr') !== false) {
+                    $customer_service = "Manikyr";
+                    continue;
+                }
+            }
+            if (strpos($line, 'meddelande') !== false) {
+                $customer_notice = ltrim($line, "Ev. meddelande: ");
+            }
+
+        }
+
+        DB::table("online_reservations")->insertGetId([
+            'mobile' => $customer_mobile,
+            'telephone' => $customer_telephone,
+            'email' => $customer_email,
+            'reservations_time' => $customer_booking_time,
+            'customer_name' => $customer_name,
+            'type' => $mail_type,
+            'duration' => $customer_duration,
+            'service_type' => $customer_service,
+            'notice' => $customer_notice,
+            'mail_number' => $email_number,
+        ]);
     }
 }
