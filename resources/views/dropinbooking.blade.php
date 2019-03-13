@@ -74,42 +74,47 @@
         <div class="section-center">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-10">
+                    <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10">
                         <div id="welcome-section" class="booking-cta">
                             <h1 id="welcome" class="welcome-text">Hej,</h1>
                             <p id="guide" class="welcome-text">Please fill in the form to reserve a seat !
                             </p>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-lg-5 col-md-8 col-sm-10">
+                    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
                         <div class="booking-form">
                         <form action="/dropinBooking" method="post">
-
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             @csrf
                             
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Your name</span>
                                 <input class="form-control" type="text" name="name" placeholder="Enter your fullname"
                                        value="{{old('name')}}">
+                                <div style="height: 30px">
+                                    @if ($errors->has('name'))
+                                        <div class="alert" style="padding-top: 0;color: red">{{ $errors->first('name') }}</div>
+                                    @endif
+                                </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Your email</span>
                                 <input class="form-control" type="text" name="email" placeholder="Enter your email" value="{{old('email')}}">
+                                <div style="height: 30px">
+                                    @if ($errors->has('email'))
+                                        <div class="alert" style="padding-top: 0;color: red">{{ $errors->first('email') }}</div>
+                                    @endif
+                                </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Your phone</span>
                                 <input class="form-control" type="text" name="telephone" placeholder="Enter your phone" value="{{old('telephone')}}">
+                                <div style="height: 30px">
+                                    @if ($errors->has('telephone'))
+                                        <div class="alert" style="padding-top: 0;color: red">{{ $errors->first('telephone') }}</div>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="row">
