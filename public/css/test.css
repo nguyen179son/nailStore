@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+}
+
+
+/* html {
+	background: linear-gradient(to bottom right, rgb(156, 136, 255), rgb(165, 94, 234)) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+} */
+
+body {
+    /* background: linear-gradient(to bottom right, rgb(156, 136, 255), rgb(165, 94, 234)) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+    background-size: cover; */
+    
+
+	/* background-color: transparent; */
+
+    
+    font-family: 'Montserrat', sans-serif;	
+}
+
+.bg-purple-gradient {
+    /* background: linear-gradient(to bottom right, rgb(108, 89, 202), rgb(165, 94, 234)) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover; */
+	background-color: #341f97;
+}
+
+#mainNav {
+    box-shadow: rgba(0,0,0,0.3) 0px 5px 30px 0px;
+    transition: 0.4s;
+}
+
+.height-80px {
+	min-height: 80px;
+	height: 80px;
+}
+
+.height-60px {
+	min-height: 60px;
+	height: 60px;
+}
+
+#logo-text {
+	font-family: 'Dancing Script', cursive;
+	font-size: 4.5vh;
+}
+
+.pv-10px {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.pv-20px {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+
+
