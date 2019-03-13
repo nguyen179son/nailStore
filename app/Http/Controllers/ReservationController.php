@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Webklex\IMAP\Client;
 use Validator;
+
 class ReservationController extends Controller
 {
-    public function getReservations() {
-        $mbox = imap_open ("{imap.gmail.com:993/imap/ssl}INBOX", "labella.collector@gmail.com", "uppsala123");
-        if($mbox === false){
+    public function getReservations()
+    {
+        $mbox = imap_open("{imap.gmail.com:993/imap/ssl}INBOX", "labella.collector@gmail.com", "uppsala123");
+        if ($mbox === false) {
             //If it failed, throw an exception that contains
             //the last imap error.
             return "loooix cmnr";
@@ -21,9 +23,9 @@ class ReservationController extends Controller
         $emails = imap_search($mbox, $search);
 //        $folders = imap_listmailbox($mbox, "{imap.gmail.com:993/imap/ssl}", "*");
         $email_list = array();
-        if(!empty($emails)){
+        if (!empty($emails)) {
             //Loop through the emails.
-            foreach($emails as $email){
+            foreach ($emails as $email) {
                 //Fetch an overview of the email.
                 $overview = imap_fetch_overview($mbox, $email);
                 $overview = $overview[0];
@@ -34,17 +36,16 @@ class ReservationController extends Controller
                     continue;
                 }
 
-                $header = imap_headerinfo($mbox,$email_number);
+                $header = imap_headerinfo($mbox, $email_number);
                 $from_host = $header->from[0]->host;
                 if ($from_host != "bokadirekt.se") continue;
 
                 $subject = strtolower($header->subject);
 
 
-                $message = (imap_fetchbody($mbox,$email_number,1.1));
-                if($message == '')
-                {
-                    $message = (imap_fetchbody($mbox,$email_number,1));
+                $message = (imap_fetchbody($mbox, $email_number, 1.1));
+                if ($message == '') {
+                    $message = (imap_fetchbody($mbox, $email_number, 1));
                 }
                 $message = quoted_printable_decode($message);
 
@@ -54,7 +55,7 @@ class ReservationController extends Controller
                 if ($subject == "ny bokning") {
                     $this->handleNewBookingMail($lines, $email_number);
                     continue;
-                } else if (strpos($subject, 'avbokning') !== false){
+                } else if (strpos($subject, 'avbokning') !== false) {
                     $mail_type = "cancel";
                 } else continue;
 
@@ -68,7 +69,8 @@ class ReservationController extends Controller
 
     }
 
-    public function handleNewBookingMail($lines, $email_number) {
+    public function handleNewBookingMail($lines, $email_number)
+    {
         $mail_type = "book";
         $customer_name = $customer_email = $customer_mobile = $customer_telephone
             = $customer_booking_time = $customer_duration = $customer_service = $customer_notice = "";
@@ -77,7 +79,7 @@ class ReservationController extends Controller
                 $customer_name = ltrim($line, "Kundens namn: ");
                 continue;
             }
-            if (strpos($line,   'Mobil') !== false) {
+            if (strpos($line, 'Mobil') !== false) {
                 $customer_mobile = ltrim($line, "Mobil: ");
                 continue;
             }
@@ -90,7 +92,7 @@ class ReservationController extends Controller
                 continue;
             }
             if (strpos($line, 'Tidpunkt') !== false) {
-                $customer_booking_time = ltrim($line, "Tidpunkt: ").":00";
+                $customer_booking_time = ltrim($line, "Tidpunkt: ") . ":00";
                 continue;
             }
             if (strpos($line, 'Tjänst') !== false) {
@@ -128,7 +130,8 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function handleCancelBookingMail($lines, $email_number) {
+    public function handleCancelBookingMail($lines, $email_number)
+    {
         $mail_type = "book";
         $customer_name = $customer_email = $customer_mobile = $customer_telephone
             = $customer_booking_time = $customer_duration = $customer_service = $customer_notice = "";
@@ -137,7 +140,7 @@ class ReservationController extends Controller
                 $customer_name = ltrim($line, "Kundens namn: ");
                 continue;
             }
-            if (strpos($line,   'Mobil') !== false) {
+            if (strpos($line, 'Mobil') !== false) {
                 $customer_mobile = ltrim($line, "Mobil: ");
                 continue;
             }
@@ -150,7 +153,7 @@ class ReservationController extends Controller
                 continue;
             }
             if (strpos($line, 'Tidpunkt') !== false) {
-                $customer_booking_time = ltrim($line, "Tidpunkt: ").":00";
+                $customer_booking_time = ltrim($line, "Tidpunkt: ") . ":00";
                 continue;
             }
             if (strpos($line, 'Tjänst') !== false) {
@@ -187,36 +190,47 @@ class ReservationController extends Controller
             'mail_number' => $email_number,
         ]);
     }
-    public function show(Request $request) {
+
+    public function show(Request $request)
+    {
         $input = $request->query();
         $validation = Validator::make($input, [
             'day' => 'required|date|date_format:Y-m-d'
         ]);
-        if($validation->fails()) {
+        if ($validation->fails()) {
             return $validation->messages();
         }
         $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
         foreach ($reservations as $key => $reservation) {
-            if (date('Y-m-d',strtotime($reservation->reservations_time)) != date('Y-m-d',strtotime($input['day']))) {
+            if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
                 unset($reservations[$key]);
             }
         }
         return $reservations;
     }
-    public function count(Request $request) {
+
+    public function count(Request $request)
+    {
         $input = $request->query();
         $validation = Validator::make($input, [
             'day' => 'required|date|date_format:Y-m-d'
         ]);
-        if($validation->fails()) {
+        if ($validation->fails()) {
             return $validation->messages();
         }
         $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
         foreach ($reservations as $key => $reservation) {
-            if (date('Y-m-d',strtotime($reservation->reservations_time)) != date('Y-m-d',strtotime($input['day']))) {
+            if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
                 unset($reservations[$key]);
             }
         }
         return $reservations->count();
+    }
+
+    public function destroy($id)
+    {
+        $res = DropInReservations::find($id);
+        $res->delete();
+        return response()->json(['success' => 'Record is successfully deleted']);
     }
 }

@@ -27,8 +27,10 @@ Route::get('/dropinQueue/fetch_data', 'BookController@fetch_data');
 
 Route::get('/reservations/list','ReservationController@show');
 Route::get('/reservations/count','ReservationController@count');
+Route::delete('/reservations/{id}','ReservationController@destroy');
 
 Route::post('/member','MemberController@store');
 Route::get('/members','MemberController@show');
 
 Route::post('/member/addPoint','MemberController@addPoint');
+Route::get('/member/{id}','MemberController@history');

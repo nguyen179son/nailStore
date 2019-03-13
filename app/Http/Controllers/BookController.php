@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\OnlineReservations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Helper\Table;
 use Validator;
 use App\DropInReservations;
+
 class BookController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('dropinbooking');
     }
-    public function store(Request $request) {
+
+    public function store(Request $request)
+    {
         $input = $request->all();
         $validation = Validator::make($input, [
             'name' => 'required|string',
@@ -20,35 +25,38 @@ class BookController extends Controller
             'email' => 'required|email',
             'type' => 'required|string',
         ]);
-        if($validation->fails()) {
+        if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation);
         }
-        $input['status']='WAITING';
+        $input['status'] = 'WAITING';
         $dropInBooking = new DropInReservations($input);
         $dropInBooking->save();
         return redirect('/dropinQueue');
     }
 
-    public function show() {
-        $data = \DB::table('drop_in_reservations')->whereNull('deleted_at')->orderBy('created_at','asc')->paginate(10);
-        return view('dropinQueue',compact('data'));
+    public function show()
+    {
+        $data = \DB::table('drop_in_reservations')->whereNull('deleted_at')->orderBy('created_at', 'asc')->paginate(10);
+        return view('dropinQueue', compact('data'));
     }
+
     function fetch_data(Request $request)
     {
-        if($request->ajax())
-        {
-            $data = \DB::table('drop_in_reservations')->whereNull('deleted_at')->orderBy('created_at','asc')->paginate(10);
+        if ($request->ajax()) {
+            $data = \DB::table('drop_in_reservations')->whereNull('deleted_at')->orderBy('created_at', 'asc')->paginate(10);
             return view('pagination_data', compact('data'))->render();
         }
     }
 
-    public function destroy($id) {
-        $res = DropInReservations::find($id);
+    public function destroy($id)
+    {
+        $res = OnlineReservations::find($id);
         $res->delete();
         return response()->json(['success' => 'Record is successfully deleted']);
     }
 
-    public function count() {
+    public function count()
+    {
         return DropInReservations::all()->count();
     }
 }
