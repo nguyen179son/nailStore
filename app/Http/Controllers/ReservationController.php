@@ -44,17 +44,27 @@ class ReservationController extends Controller
                 {
                     $message = (imap_fetchbody($mbox,$email_number,1));
                 }
-                $message = quoted_printable_decode($message);
+//                dd(mb_detect_encoding($message , 'UTF-16, UTF-8, UTF-7, ASCII, EUC-JP,SJIS, eucJP-win, SJIS-win, JIS, ISO-2022-JP'));
+                $message = imap_qprint($message);
+//                $message = str_replace("=", "\u00", $message);
+//                $message = utf8_encode($message);
+//                $message = preg_replace_callback('/\\\\u([0-9a-fA-F]{4})/', function ($match) {
+//                    return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UTF-16BE');
+//                }, $message);
+////                dd(($message));
 
                 $lines = explode("\r\n", $message);
 //                dd($lines);
-
+//                foreach ($lines as $line) {
+//                    $line = utf8_encode($line);
+//                    dd($line);
+//                }
                 $subject = strtolower($header->subject);
                 if ($subject == "ny bokning") {
                     $this->handleNewBookingMail($lines, $email_number);
                     continue;
                 } else if (strpos($subject, 'avbokning') !== false){
-//                    $this->handleCancelBookingMail($lines, $email_number);
+                    $this->handleCancelBookingMail($lines, $email_number);
                     continue;
                 } else continue;
 
@@ -69,6 +79,7 @@ class ReservationController extends Controller
     }
 
     public function handleNewBookingMail($lines, $email_number) {
+//        dd($lines);
         $mail_type = "book";
         $customer_name = $customer_email = $customer_mobile = $customer_telephone
             = $customer_booking_time = $customer_duration = $customer_service = $customer_notice = "";
@@ -93,7 +104,7 @@ class ReservationController extends Controller
                 $customer_booking_time = trim(str_replace("Tidpunkt: ", "", $line), "\t ").":00";
                 continue;
             }
-            if (strpos($line, 'Tjänst') !== false) {
+            if (strpos($line, 'fyllning') !== false) {
                 $customer_duration = (substr($line, -6, 2));
                 if (strpos($line, 'Nagel') !== false) {
                     $customer_service = "Nagel";
@@ -115,17 +126,21 @@ class ReservationController extends Controller
 
         }
 
+//        dd($customer_name, $customer_service, $customer_mobile, $customer_telephone, $customer_email, $customer_notice, $customer_booking_time, $customer_duration);
+
         DB::table("online_reservations")->insert([
             'mobile' => $customer_mobile,
             'telephone' => $customer_telephone,
             'email' => $customer_email,
-            'reservations_time' => $customer_booking_time,
+            'reservation_time' => $customer_booking_time,
             'customer_name' => $customer_name,
             'type' => $mail_type,
             'duration' => $customer_duration,
             'service_type' => $customer_service,
             'notice' => $customer_notice,
             'mail_number' => $email_number,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }
 
@@ -179,7 +194,7 @@ class ReservationController extends Controller
 
         DB::table("online_reservations")->where([
             ['customer_name', '=', $customer_name],
-            ['reservations_time', '=', $customer_booking_time],
+            ['reservation_time', '=', $customer_booking_time],
             ['service_type', '=', $customer_service],
             ['type', '=', "book"]
         ])->update(["deleted_at" => date('Y-m-d H:i:s')]);
@@ -188,13 +203,15 @@ class ReservationController extends Controller
             'mobile' => $customer_mobile,
             'telephone' => $customer_telephone,
             'email' => $customer_email,
-            'reservations_time' => $customer_booking_time,
+            'reservation_time' => $customer_booking_time,
             'customer_name' => $customer_name,
             'type' => $mail_type,
             'duration' => $customer_duration,
             'service_type' => $customer_service,
             'notice' => $customer_notice,
             'mail_number' => $email_number,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }
 }
