@@ -25,7 +25,8 @@ class OnlineReservations extends Model
         'duration',
         'notice',
         'mail_number',
-        'customer_name'
+        'customer_name',
+        'status'
     ];
 
     protected $casts = [
@@ -38,6 +39,7 @@ class OnlineReservations extends Model
         'notice'=>'string',
         'mail_number'=>'string',
         'customer_name'=>'string',
-        'type' => 'string'
+        'type' => 'string',
+        'status' => 'string'
     ];
 }
