@@ -1,0 +1,97 @@
+.container, #left-panel, #right-panel {
+    min-width: 450px;
+    /* max-width: 700px;; */
+    /* #a55eea;
+    rgb(165, 94, 234)
+    rgb(136, 84, 208) */
+    /* background-image: linear-gradient(to bottom right, rgb(156, 136, 255), rgb(165, 94, 234)); */
+}
+
+/* #left-panel, #right-panel{
+    max-width: 48%;
+    margin-left: 5px;
+    margin-right: 5px;
+} */
+
+.mb-10px 
+{
+    margin-bottom: 10px;
+}
+
+/* class="d-flex justify-content-center" */
+
+body {
+    overflow-x: hidden; 
+    overflow: auto;
+    overscroll-behavior: contain;
+    font-size: 1vw;
+}
+
+/* Copy tu Test */
+
+.bg-purple-gradient {
+	background-color: #341f97;
+}
+
+#mainNav {
+    box-shadow: rgba(0,0,0,0.3) 0px 5px 30px 0px;
+    transition: 0.4s;
+}
+
+.height-80px {
+	min-height: 80px;
+	height: 80px;
+}
+
+.height-60px {
+	min-height: 60px;
+	height: 60px;
+}
+
+#logo-text {
+	font-family: 'Dancing Script', cursive;
+	font-size: 4.5vh;
+}
+
+.pv-10px {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.pv-20px {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+table tbody tr td:nth-child(2) {
+    font-weight: bold;
+    color: #566787;
+    text-decoration: none;
+}
+
+@media (max-width: 576px) {
+
+}
+
+@media (max-width: 768px) {
+    th, td {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 992px) {
+    th, td {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 1200px) {
+
+    th, td {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 1200px) {
+
+}

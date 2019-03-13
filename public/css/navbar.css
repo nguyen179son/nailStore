@@ -1,0 +1,33 @@
+#logo-text {
+	font-family: 'Dancing Script', cursive;
+	font-size: 4.5vh;
+	font-weight: 700;
+	text-shadow: 0px 0px 20px rgb(211, 208, 214) ;
+}
+
+.pv-15px {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.pv-5px {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+#mainNav {
+    box-shadow: rgba(0,0,0,0.3) 0px 5px 30px 0px;
+    transition: 0.4s;
+}
+
+.bg-purple-gradient {
+	background-color: #5f27cd;
+}
+
+.height-60px {
+    height: 60px;
+}
+
+.height-80px {
+    height: 80px;
+}
