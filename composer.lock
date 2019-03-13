@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "daaaae76abe6bd34df51b4848521778b",
@@ -2733,65 +2733,6 @@
                 "environment"
             ],
             "time": "2019-01-30T10:43:17+00:00"
-        },
-        {
-            "name": "webklex/laravel-imap",
-            "version": "1.2.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Webklex/laravel-imap.git",
-                "reference": "22ef428718848f0dad3a32ea9cfa6e54971ad7b5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Webklex/laravel-imap/zipball/22ef428718848f0dad3a32ea9cfa6e54971ad7b5",
-                "reference": "22ef428718848f0dad3a32ea9cfa6e54971ad7b5",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": ">=5.0.0",
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Webklex\\IMAP\\Providers\\LaravelServiceProvider"
-                    ],
-                    "aliases": {
-                        "Client": "Webklex\\IMAP\\Facades\\Client"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webklex\\IMAP\\": "src/IMAP"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Malte Goldenbaum",
-                    "email": "github@webklex.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel IMAP client",
-            "homepage": "https://github.com/webklex/laravel-imap",
-            "keywords": [
-                "imap",
-                "laravel",
-                "laravel-imap",
-                "mail",
-                "webklex"
-            ],
-            "time": "2018-08-04T21:07:08+00:00"
         }
     ],
     "packages-dev": [

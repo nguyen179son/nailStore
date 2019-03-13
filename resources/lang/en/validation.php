@@ -115,7 +115,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
-    'phone_number' => 'The :attribute must be a valid phone number contain 8 to 12 digits',
+    'phone_number' => 'The :attribute must be a invalid',
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

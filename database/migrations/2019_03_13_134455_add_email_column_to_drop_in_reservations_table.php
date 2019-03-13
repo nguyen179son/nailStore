@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeleteToTableDropInReservation extends Migration
+class AddEmailColumnToDropInReservationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddSoftDeleteToTableDropInReservation extends Migration
     public function up()
     {
         Schema::table('drop_in_reservations', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->string('email');
         });
     }
 
@@ -25,8 +25,8 @@ class AddSoftDeleteToTableDropInReservation extends Migration
      */
     public function down()
     {
-        // Schema::table('table_drop_in_reservation', function (Blueprint $table) {
-        //     //
-        // });
+        Schema::table('drop_in_reservations', function (Blueprint $table) {
+            //
+        });
     }
 }

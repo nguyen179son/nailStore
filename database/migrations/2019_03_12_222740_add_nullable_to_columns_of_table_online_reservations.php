@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeleteToTableOnlineReservation extends Migration
+class AddNullableToColumnsOfTableOnlineReservations extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,12 @@ class AddSoftDeleteToTableOnlineReservation extends Migration
     public function up()
     {
         Schema::table('online_reservations', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->string('mobile')->nullable()->change();
+            $table->string('telephone')->nullable()->change();
+            $table->string('email')->nullable()->change();
+            $table->dateTime('reservations_time')->nullable()->change();
+            $table->string('type')->nullable()->change();
+            $table->integer('duration')->nullable()->change();
         });
     }
 
@@ -25,8 +30,6 @@ class AddSoftDeleteToTableOnlineReservation extends Migration
      */
     public function down()
     {
-        // Schema::table('table_online_reservation', function (Blueprint $table) {
-        //     //
-        // });
+
     }
 }

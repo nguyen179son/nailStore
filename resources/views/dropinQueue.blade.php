@@ -5,28 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Drop-in</title>
+    <title>Queue</title>
 
+    <!-- Google font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script:700">
 
-
+    <!-- Bootstrap 4.3.1 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
-          id="bootstrap-css">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"
+        id="bootstrap-css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
-
+    <!-- Pretty Checkbox -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
     <link href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet">
 
-
-    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/dropinQueue.css') }}"/>
-
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/style.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/tables.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/drop-in-queue.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/test.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/navbar.css') }}"/>
 
 </head>
 
@@ -68,14 +77,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($data as $key => $row)
+                        
+                            @foreach($data as $key => $row)
                             <tr>
                                 <td>{{ ($data->currentPage()-1)*10+$key+101 }}</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ $row->telephone }}</td>
                                 <td>{{ $row->type }}</td>
                             </tr>
-                        @endforeach
+                            @endforeach
+                        
                         </tbody>
                     </table>
                     {!! $data->links() !!}

@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\DropInReservations;
+use App\OnlineReservations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Webklex\IMAP\Client;
+use Illuminate\Support\Facades\Validator;
 
 class ReservationController extends Controller
 {
-    public function getReservations() {
-        $mbox = imap_open ("{imap.gmail.com:993/imap/ssl}INBOX", "labella.collector@gmail.com", "uppsala123");
-        if($mbox === false){
+    public function getReservations()
+    {
+        $mbox = imap_open("{imap.gmail.com:993/imap/ssl}INBOX", "labella.collector@gmail.com", "uppsala123");
+        if ($mbox === false) {
             //If it failed, throw an exception that contains
             //the last imap error.
             return "loooix cmnr";
@@ -19,9 +24,9 @@ class ReservationController extends Controller
         $emails = imap_search($mbox, $search);
 //        $folders = imap_listmailbox($mbox, "{imap.gmail.com:993/imap/ssl}", "*");
         $email_list = array();
-        if(!empty($emails)){
+        if (!empty($emails)) {
             //Loop through the emails.
-            foreach($emails as $email){
+            foreach ($emails as $email) {
                 //Fetch an overview of the email.
                 $overview = imap_fetch_overview($mbox, $email);
                 $overview = $overview[0];
@@ -32,17 +37,16 @@ class ReservationController extends Controller
                     continue;
                 }
 
-                $header = imap_headerinfo($mbox,$email_number);
+                $header = imap_headerinfo($mbox, $email_number);
                 $from_host = $header->from[0]->host;
                 if ($from_host != "bokadirekt.se") continue;
 
 
 
 
-                $message = (imap_fetchbody($mbox,$email_number,1.1));
-                if($message == '')
-                {
-                    $message = (imap_fetchbody($mbox,$email_number,1));
+                $message = (imap_fetchbody($mbox, $email_number, 1.1));
+                if ($message == '') {
+                    $message = (imap_fetchbody($mbox, $email_number, 1));
                 }
 //                dd(mb_detect_encoding($message , 'UTF-16, UTF-8, UTF-7, ASCII, EUC-JP,SJIS, eucJP-win, SJIS-win, JIS, ISO-2022-JP'));
                 $message = imap_qprint($message);
@@ -215,5 +219,48 @@ class ReservationController extends Controller
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
+    }
+
+    public function show(Request $request)
+    {
+        $input = $request->query();
+        $validation = Validator::make($input, [
+            'day' => 'required|date|date_format:Y-m-d'
+        ]);
+        if ($validation->fails()) {
+            return $validation->messages();
+        }
+        $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
+        foreach ($reservations as $key => $reservation) {
+            if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
+                unset($reservations[$key]);
+            }
+        }
+        return $reservations;
+    }
+
+    public function count(Request $request)
+    {
+        $input = $request->query();
+        $validation = Validator::make($input, [
+            'day' => 'required|date|date_format:Y-m-d'
+        ]);
+        if ($validation->fails()) {
+            return $validation->messages();
+        }
+        $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
+        foreach ($reservations as $key => $reservation) {
+            if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
+                unset($reservations[$key]);
+            }
+        }
+        return $reservations->count();
+    }
+
+    public function destroy($id)
+    {
+        $res = DropInReservations::find($id);
+        $res->delete();
+        return response()->json(['success' => 'Record is successfully deleted']);
     }
 }

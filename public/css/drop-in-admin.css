@@ -1,0 +1,41 @@
+#main-container {
+    min-width: 1000px;
+}
+
+body {
+    font-size: 2vh;
+}
+
+.filter-title {
+    padding-bottom: 15px;
+    background: #299be4;
+    color: #fff;
+    padding: 15px 30px;
+    margin: -20px -25px 10px;
+    border-radius: 3px 3px 0 0;
+}
+
+.filter-title .row {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.filter-title .dropdown {
+    width: 100%;
+}
+
+.filter-title .dropdown .btn {
+    width: 100%;
+    background-color: rgb(41, 155, 228);
+    border-color: #fff;
+    font-size: 16pt;
+    font-weight: 600;
+}
+
+#right-panel .dropdown .btn {
+    background-color: inherit;
+    border-color: #000;
+    border: none;
+    padding: 0;
+}
