@@ -85,7 +85,8 @@ class ReservationController extends Controller
             = $customer_booking_time = $customer_duration = $customer_service = $customer_notice = "";
         foreach ($lines as $line) {
             if (strpos($line, 'Kundens namn') !== false) {
-                $customer_name = trim(str_replace("Kundens namn: ", "", $line), "\t ");
+                $customer_name = json_encode(mb_strtolower(trim(str_replace("Kundens namn: ", "", $line), "\t ")));
+                echo $customer_name."<br>";
                 continue;
             }
             if (strpos($line,   'Mobil') !== false) {
@@ -152,7 +153,8 @@ class ReservationController extends Controller
             = $customer_booking_time = $customer_duration = $customer_service = $customer_notice = "";
         foreach ($lines as $line) {
             if (strpos($line, 'Kundens namn') !== false) {
-                $customer_name = trim(str_replace("Kundens namn: ", "", $line), "\t ");
+                $customer_name = json_encode(mb_strtolower(trim(str_replace("Kundens namn: ", "", $line), "\t ")));
+                echo $customer_name."<br>";
                 continue;
             }
             if (strpos($line, 'Mobil') !== false) {
