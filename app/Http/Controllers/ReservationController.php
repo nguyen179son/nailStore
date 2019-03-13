@@ -195,12 +195,28 @@ class ReservationController extends Controller
         if($validation->fails()) {
             return $validation->messages();
         }
-        $reservations = DB::table("online_reservations")->get();
+        $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
         foreach ($reservations as $key => $reservation) {
             if (date('Y-m-d',strtotime($reservation->reservations_time)) != date('Y-m-d',strtotime($input['day']))) {
                 unset($reservations[$key]);
             }
         }
         return $reservations;
+    }
+    public function count(Request $request) {
+        $input = $request->query();
+        $validation = Validator::make($input, [
+            'day' => 'required|date|date_format:Y-m-d'
+        ]);
+        if($validation->fails()) {
+            return $validation->messages();
+        }
+        $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
+        foreach ($reservations as $key => $reservation) {
+            if (date('Y-m-d',strtotime($reservation->reservations_time)) != date('Y-m-d',strtotime($input['day']))) {
+                unset($reservations[$key]);
+            }
+        }
+        return $reservations->count();
     }
 }

@@ -17,12 +17,13 @@ class BookController extends Controller
         $validation = Validator::make($input, [
             'name' => 'required|string',
             'telephone' => 'required|phone_number',
-            'email' => 'email',
+            'email' => 'required|email',
             'type' => 'required|string',
         ]);
         if($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation);
         }
+        $input['status']='WAITING';
         $dropInBooking = new DropInReservations($input);
         $dropInBooking->save();
         return redirect('/dropinQueue');
@@ -39,5 +40,15 @@ class BookController extends Controller
             $data = \DB::table('drop_in_reservations')->whereNull('deleted_at')->orderBy('created_at','asc')->paginate(10);
             return view('pagination_data', compact('data'))->render();
         }
+    }
+
+    public function destroy($id) {
+        $res = DropInReservations::find($id);
+        $res->delete();
+        return response()->json(['success' => 'Record is successfully deleted']);
+    }
+
+    public function count() {
+        return DropInReservations::all()->count();
     }
 }

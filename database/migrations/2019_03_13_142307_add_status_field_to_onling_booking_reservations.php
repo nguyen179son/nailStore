@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeleteToTableDropInReservation extends Migration
+class AddStatusFieldToOnlingBookingReservations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddSoftDeleteToTableDropInReservation extends Migration
      */
     public function up()
     {
-        Schema::table('drop_in_reservations', function (Blueprint $table) {
-            $table->softDeletes();
+        Schema::table('online_reservations', function (Blueprint $table) {
+            $table->string('status')->nullable();
         });
     }
 
@@ -25,8 +25,5 @@ class AddSoftDeleteToTableDropInReservation extends Migration
      */
     public function down()
     {
-        // Schema::table('table_drop_in_reservation', function (Blueprint $table) {
-        //     //
-        // });
     }
 }
