@@ -21,5 +21,7 @@ Route::get('/reservations', 'ReservationController@getReservations');
 
 
 Route::get('/dropinQueue', 'BookController@show');
-Route::get('dropinQueue/fetch_data', 'BookController@fetch_data');
+Route::get('/dropinQueue/fetch_data', 'BookController@fetch_data');
+
+Route::get('/reservations/list','ReservationController@show');
 
