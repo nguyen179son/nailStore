@@ -43,4 +43,17 @@ class MemberController extends Controller
         Member::where('email', $input['email'])->increment('point');
         return response()->json(['success' => 'Successfully added point']);
     }
+
+    function comparator($object1, $object2) {
+        return $object1->updated_at > $object2->updated_at;
+    }
+    public function history($id) {
+        $email = Member::find($id)->email;
+        $dropIn=DB::table('drop_in_reservations')->where('email','=',$email)->select(['updated_at','status','type'])->get()->toArray();
+        $online = DB::table('online_reservations')->where('email','=',$email)->select(['updated_at','status','service_type'])->get()->toArray();
+        $return_array = array_merge($dropIn,$online);
+        usort($return_array, array($this,'comparator'));
+        return response()->json($return_array,200);
+    }
+
 }
