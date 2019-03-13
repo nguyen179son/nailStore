@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\OnlineReservations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Webklex\IMAP\Client;
-
+use Validator;
 class ReservationController extends Controller
 {
     public function getReservations() {
@@ -184,5 +186,21 @@ class ReservationController extends Controller
             'notice' => $customer_notice,
             'mail_number' => $email_number,
         ]);
+    }
+    public function show(Request $request) {
+        $input = $request->query();
+        $validation = Validator::make($input, [
+            'day' => 'required|date|date_format:Y-m-d'
+        ]);
+        if($validation->fails()) {
+            return $validation->messages();
+        }
+        $reservations = DB::table("online_reservations")->get();
+        foreach ($reservations as $key => $reservation) {
+            if (date('Y-m-d',strtotime($reservation->reservations_time)) != date('Y-m-d',strtotime($input['day']))) {
+                unset($reservations[$key]);
+            }
+        }
+        return $reservations;
     }
 }
