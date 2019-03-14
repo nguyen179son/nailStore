@@ -40,31 +40,70 @@
 </head>
 
 <body>
-<div class="container bg-gray-0 border-radius-5px pv-20px mv-20px">
-    <div class="row d-flex justify-content-center">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-purple-gradient pv-15px" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand " href="#page-top" id="logo-text">Labella</a>
 
-        <div id="right-panel" class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <!-- class container -->
-            <div class="">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ml-auto">
+                    <!-- <li class="nav-item">
+                                        <a class="nav-link" href="#">Home</a>
+                                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">Home</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Introduction</a>
+                            <a class="dropdown-item" href="#">Gallery</a>
+                            <a class="dropdown-item" href="#">Contact</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Online booking</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#portfolio">Today's Queue</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="table-drop-in" class="container mt-100px">
+        <div class="row d-flex justify-content-center">
+            <div id="left-panel"
+                class="col-xl-8 col-lg-8 col-md-10 col-sm-11 col-11 bg-gray-0 border-radius-5px pv-20px mv-20px">
                 <div class="table-wrapper">
                     <div class="table-title">
-                        <!-- <div class="row"> -->
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                    <h2 style="font-size:15pt; float: left;">2019/03/08</h2>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle float-left" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Drop-in
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" onclick="showDropinTable();">Drop-in</a>
+                                            <a class="dropdown-item" onclick="showBookingTable();">Online booking</a>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                    <h2 style="font-size:15pt; float: right;">
-                                        <b>11:00</b> - <b>12:00</b>
-                                    </h2>
+                                    <div href="#" class="btn btn-primary"><i class="material-icons">person</i>
+                                        <span>20</span></div>
                                 </div>
                             </div>
                         </div>
-                        <!-- </div> -->
                     </div>
+
                     <table class="table table-striped table-hover" id="drop-in-queue-table">
                         <thead>
                         <tr>
@@ -94,12 +133,72 @@
             </div>
         </div>
     </div>
-</div>
+
+    <div id="table-booking" class="container mt-100px">
+        <div class="row d-flex justify-content-center">
+            <div id="left-panel"
+                class="col-xl-8 col-lg-8 col-md-10 col-sm-11 col-11 bg-gray-0 border-radius-5px pv-20px mv-20px">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle float-left" type="button"
+                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Booking
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" onclick="showDropinTable();">Drop-in</a>
+                                            <a class="dropdown-item" onclick="showBookingTable();">Online booking</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                                    <div href="#" class="btn btn-primary"><i class="material-icons">person</i>
+                                        <span>20</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped table-hover" id="booking-queue-table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="max-width-300px">Name</th>
+                            <th class="max-width-300px">Phone</th>
+                            <th class="max-width-250px">Service</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                            @foreach($data as $key => $row)
+                            <tr>
+                                <td>{{ ($data->currentPage()-1)*10+$key+101 }}</td>
+                                <td>{{ $row->name }}</td>
+                                <td>{{ $row->telephone }}</td>
+                                <td>{{ $row->type }}</td>
+                            </tr>
+                            @endforeach
+                        
+                        </tbody>
+                    </table>
+                    {!! $data->links() !!}
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
 <script>
     $(document).ready(function () {
+        $("#table-booking").hide();
 
         $(document).on('click', '.page-link a', function (event) {
             console.log(123);
@@ -117,5 +216,18 @@
             });
         }
 
+        
     });
+
+    function showDropinTable ()
+    {
+        $("#table-booking").hide();
+        $("#table-drop-in").show();
+    }
+
+    function showBookingTable ()
+    {
+        $("#table-drop-in").hide();
+        $("#table-booking").show();
+    }
 </script>
