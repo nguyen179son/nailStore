@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect('/dropinBooking');
+    return view('homepage');
 });
 Route::get('/dropinBooking','BookController@index');
 Route::post('/dropinBooking','BookController@store');
