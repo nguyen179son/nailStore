@@ -57,6 +57,11 @@ function showDropinTable(element) {
     window.check = 0;
     $.ajax({
         url: "/admin/fetch_dropin?page=" + 1,
+        data: {
+            status: window.data,
+            service_type: window.service_type,
+            day: $('#date').val()
+        },
         success: function (data) {
             $('#drop-in-queue-table').html(data);
         }
@@ -70,6 +75,11 @@ function showBookingTable(element) {
     window.check = 1;
     $.ajax({
         url: "/admin/fetch_onl?page=1",
+        data: {
+            status: window.data,
+            service_type: window.service_type,
+            day: $('#date').val()
+        },
         success: function (data) {
             $('#booking-queue-table').html(data);
         }
@@ -151,9 +161,36 @@ $('body').on('click', "input[class='checkbox-type']", function () {
 });
 
 $('body').on('click','.delete',function () {
+    $("#confirm-delete").attr('book-id',$(this).attr("id"));
+
+});
+
+$('body').on('click','#confirm-delete',function () {
     if (check==1) {
         $.ajax({
-            url: "/reservations/"+$(this).attr("id"),
+            url: "/reservations/"+$(this).attr("book-id"),
+            type: "DELETE",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            success: function () {
+                $.ajax({
+                    url: "/admin/fetch_onl?page=" + 1,
+                    type: "GET",
+                    data: {
+                        status: window.data,
+                        service_type: window.service_type,
+                        day: $('#date').val(),
+                    },
+                    success: function (data) {
+                        $('#booking-queue-table').html(data);
+                    }
+                });
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/dropinBooking/"+$(this).attr("book-id"),
             type: "DELETE",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
@@ -165,8 +202,7 @@ $('body').on('click','.delete',function () {
                     data: {
                         status: window.data,
                         service_type: window.service_type,
-                        day: $('#date').val(),
-                        _token: $("input[name=_token]").val()
+                        day: $("#date").val(),
                     },
                     success: function (data) {
                         $('#drop-in-queue-table').html(data);
@@ -174,27 +210,9 @@ $('body').on('click','.delete',function () {
                 });
             }
         });
-    } else {
-        $.ajax({
-            url: "/dropinBooking/"+$(this).attr("id"),
-            type: "DELETE",
-            success: function () {
-                $.ajax({
-                    url: "/admin/fetch_onl?page=" + 1,
-                    type: "GET",
-                    data: {
-                        status: window.data,
-                        service_type: window.service_type,
-                        day: $("#date").val(),
-                        _token: $("input[name=_token]").val()
-                    },
-                    success: function (data) {
-                        $('#booking-queue-table').html(data);
-                    }
-                });
-            }
-        });
     }
+
+    $(".modal").modal('hide');
 });
 
 $('body').on('click', "input[class='checkbox-status']", function () {

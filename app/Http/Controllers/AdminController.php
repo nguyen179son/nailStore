@@ -32,7 +32,7 @@ class AdminController extends Controller
                 foreach ($input['service_type'] as $key => $service_type) {
                     $input['service_type'][$key] = strtolower($service_type);
                 }
-                $data = $data->whereIn('service_type', $input['service']);
+                $data = $data->whereIn('service_type', $input['service_type']);
             }
             if (isset($input['day']) && $input['day'] != null) {
 
@@ -71,7 +71,7 @@ class AdminController extends Controller
                 foreach ($input['service_type'] as $key => $service_type) {
                     $input['service_type'][$key] = strtolower($service_type);
                 }
-                $data = $data->whereIn('service_type', $input['service']);
+                $data = $data->whereIn('type', $input['service_type']);
             }
 
             if (isset($input['day']) && $input['day'] != null) {

@@ -53,7 +53,7 @@ class BookController extends Controller
 
     public function destroy($id)
     {
-        $res = OnlineReservations::find($id);
+        $res = DropInReservations::find($id);
         $res->delete();
         return response()->json(['success' => 'Record is successfully deleted']);
     }

@@ -107,22 +107,6 @@
                         <input class="form-control date-picker" type="date" id="date" required>
                     </div>
 
-                    <!-- <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <span class="form-label">From</span>
-                                <input class="form-control" type="time" required>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <span class="form-label">To</span>
-                                <input class="form-control" type="time" required>
-                            </div>
-                        </div>
-                    </div> -->
-
                     <!-- <div class="container"> -->
                     <div class="row">
                         <div class="col-6">
@@ -247,7 +231,22 @@
             </div>
         </div>
     </div>
-
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confirm delete
+            </div>
+            <div class="modal-body">
+                Do you want to delete this record
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-danger btn-ok" id="confirm-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
     <a href="sms:+46765507228&body=hahahaahahaha">Link IOS</a>

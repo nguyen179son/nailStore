@@ -13,7 +13,7 @@
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr>
-                <td>{{ ($data->currentPage()-1)*10+$key }}</td>
+                <td>{{ $row->id }}</td>
                 <td><a href="#">{{ $row->name }}</a></td>
                 <td>{{ $row->telephone }}</td>
                 <td><span class="badge badge-secondary">{{ $row->type }}</span></td>
@@ -37,7 +37,7 @@
                     <a href="#" class="settings" title="Send a message" data-toggle="tooltip" data-telephone="{{$row->telephone}}">
                         <i class="material-icons">textsms</i>
                     </a>
-                    <a href="#" class="delete" title="Remove" data-toggle="tooltip" id="{{$row->id}}">
+                    <a href="#" class="delete" title="Remove" data-toggle="modal" data-target="#confirm-delete" id="{{$row->id}}">
                         <i class="material-icons">&#xE5C9;</i>
                     </a>
                 </td>
