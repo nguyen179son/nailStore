@@ -109,7 +109,7 @@ class ReservationController extends Controller
                 $customer_booking_time = trim(str_replace("Tidpunkt: ", "", $line), "\t ") . ":00";
                 continue;
             }
-            if (preg_match("/(\d+) min/", $line ,$m)) {
+            if (preg_match("/(\d+) min/", $line, $m)) {
                 $customer_duration = $m[1];
                 if (strpos($line, 'Nagel') !== false) {
                     $customer_service = "Nagel";
@@ -144,7 +144,7 @@ class ReservationController extends Controller
             'service_type' => $customer_service,
             'notice' => $customer_notice,
             'mail_number' => $email_number,
-            'created_at' => date('Y-m-d H:i:s'),
+            'reservations_time' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }
@@ -222,28 +222,26 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function show(Request $request)
-    {
-        $input = $request->query();
-        $validation = Validator::make($input, [
-            'day' => 'required|date|date_format:Y-m-d'
-        ]);
-        if ($validation->fails()) {
-            return $validation->messages();
-        }
-        $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
-        foreach ($reservations as $key => $reservation) {
-            if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
-                unset($reservations[$key]);
-            }
-        }
-        return $reservations;
-    }
-
     function fetch_data(Request $request)
     {
         if ($request->ajax()) {
-            $data = \DB::table('online_reservations')->whereNull('deleted_at')->orderBy('created_at', 'asc')->paginate(10);
+            $input = $request->all();
+            if (isset($input['day']) && $input['day'] != null) {
+                $validation = Validator::make($input, [
+                    'day' => 'required|date|date_format:Y-m-d'
+                ]);
+                if ($validation->fails()) {
+                    return $validation->messages();
+                }
+
+                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservations_time', date('Y-m-d', strtotime($input['day'])))->orderBy('reservations_time', 'desc');
+
+            } else {
+                $today = Carbon::now()->subDay()->format('Y-m-d');
+                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservations_time', $today)->orderBy('reservations_time', 'desc');
+
+            }
+            $data = $data->paginate(10);
             return view('pagination_online_reservations', compact('data'))->render();
         }
     }
@@ -281,7 +279,7 @@ class ReservationController extends Controller
 
     public function destroy($id)
     {
-        $res = DropInReservations::find($id);
+        $res = OnlineReservations::find($id);
         $res->delete();
         return response()->json(['success' => 'Record is successfully deleted']);
     }
