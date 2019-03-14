@@ -55,3 +55,31 @@ body {
 .status-removed {
     color: #dc3545 !important;
 }
+
+.text-waiting{
+    color: #007bff !important;
+}
+
+.text-doing{
+    color: #28a745!important;
+}
+
+.text-done{
+    color: #ffc107!important;
+}
+
+.text-removed{
+    color: #dc3545!important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #dcdde1;
+}
+
+.bootstrap-select button {
+    height: 40px;
+}
+
+.bootstrap-select {
+    background-color: inherit !important;
+}

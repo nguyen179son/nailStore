@@ -29,6 +29,12 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>   
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/bootstrap-select.min.js"></script>
+
     <link rel="stylesheet" href="{{ URL::asset('/css/style.css') }}"> 
     <link rel="stylesheet" href="{{ URL::asset('/css/tables.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('/css/navbar.css') }}"> 
@@ -231,17 +237,12 @@
                                     <td>076465507334</td>
                                     <td><span class="badge badge-secondary">Finger nail</span></td>
                                     <td>
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle status-waiting" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="status">&bull;</span> waiting
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item status-waiting" onclick="changeStatus(this, 'waiting');"><span class="status">&bull;</span> waiting</a>
-                                                <a class="dropdown-item status-doing" onclick="changeStatus(this, 'doing');"><span class="status">&bull;</span> doing</a>
-                                                <a class="dropdown-item status-done" onclick="changeStatus(this, 'done');"><span class="status">&bull;</span> done</a>
-                                                <a class="dropdown-item status-removed" onclick="changeStatus(this, 'removed');"><span class="status">&bull;</span> removed</a>
-                                            </div>
-                                        </div>
+                                        <select class="form-control selectpicker">
+                                            <option data-content="<span class='text-waiting'><span class='status'>&bull;</span>Waiting</span>">1</option>
+                                            <option data-content="<span class='text-doing'><span class='status'>&bull;</span>Doing</span>">2</option>
+                                            <option data-content="<span class='text-done'><span class='status'>&bull;</span>Done</span>">3</option>
+                                            <option data-content="<span class='text-removed'><span class='status'>&bull;</span>Removed</span>">4</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <a href="#" class="settings" title="Send a message" data-toggle="tooltip">
@@ -253,6 +254,28 @@
                                     </td>
                                 </tr>
                                 
+                                <tr>
+                                    <td>2</td>
+                                    <td><a href="#">Michael Holz</a></td>
+                                    <td>076465507334</td>
+                                    <td><span class="badge badge-secondary">Finger nail</span></td>
+                                    <td>
+                                        <select class="form-control selectpicker">
+                                            <option data-content="<span class='text-waiting'><span class='status'>&bull;</span>Waiting</span>">1</option>
+                                            <option data-content="<span class='text-doing'><span class='status'>&bull;</span>Doing</span>">2</option>
+                                            <option data-content="<span class='text-done'><span class='status'>&bull;</span>Done</span>">3</option>
+                                            <option data-content="<span class='text-removed'><span class='status'>&bull;</span>Removed</span>">4</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="settings" title="Send a message" data-toggle="tooltip">
+                                            <i class="material-icons">textsms</i>
+                                        </a>
+                                        <a href="#" class="delete" title="Remove" data-toggle="tooltip">
+                                            <i class="material-icons">&#xE5C9;</i>
+                                        </a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -291,17 +314,12 @@
                                     <td><span class="badge badge-secondary">Finger nail</span></td>
                                     <td style="max-width: 220px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque sapiente omnis vero quia error in sequi tenetur veniam nulla rerum vel ipsum mollitia, illum fugit distinctio asperiores, quae cum optio.</td>
                                     <td>
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle status-waiting" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="status">&bull;</span> waiting
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item status-waiting" onclick="changeStatus(this, 'waiting');"><span class="status">&bull;</span> waiting</a>
-                                                <a class="dropdown-item status-doing" onclick="changeStatus(this, 'doing');"><span class="status">&bull;</span> doing</a>
-                                                <a class="dropdown-item status-done" onclick="changeStatus(this, 'done');"><span class="status">&bull;</span> done</a>
-                                                <a class="dropdown-item status-removed" onclick="changeStatus(this, 'removed');"><span class="status">&bull;</span> removed</a>
-                                            </div>
-                                        </div>
+                                        <select class="form-control selectpicker">
+                                            <option data-content="<span class='text-waiting'><span class='status'>&bull;</span>Waiting</span>">1</option>
+                                            <option data-content="<span class='text-doing'><span class='status'>&bull;</span>Doing</span>">2</option>
+                                            <option data-content="<span class='text-done'><span class='status'>&bull;</span>Done</span>">3</option>
+                                            <option data-content="<span class='text-removed'><span class='status'>&bull;</span>Removed</span>">4</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <a href="#" class="settings" title="Send a message" data-toggle="tooltip">
@@ -320,17 +338,12 @@
                                     <td><span class="badge badge-secondary">Finger nail</span></td>
                                     <td style="max-width: 220px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque sapiente omnis vero quia error in sequi tenetur veniam nulla rerum vel ipsum mollitia, illum fugit distinctio asperiores, quae cum optio.</td>
                                     <td>
-                                        <div class="dropdown">
-                                            <button class="btn dropdown-toggle status-waiting" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="status">&bull;</span> waiting
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item status-waiting" onclick="changeStatus(this, 'waiting');"><span class="status">&bull;</span> waiting</a>
-                                                <a class="dropdown-item status-doing" onclick="changeStatus(this, 'doing');"><span class="status">&bull;</span> doing</a>
-                                                <a class="dropdown-item status-done" onclick="changeStatus(this, 'done');"><span class="status">&bull;</span> done</a>
-                                                <a class="dropdown-item status-removed" onclick="changeStatus(this, 'removed');"><span class="status">&bull;</span> removed</a>
-                                            </div>
-                                        </div>
+                                        <select class="form-control selectpicker">
+                                            <option data-content="<span class='text-waiting'><span class='status'>&bull;</span>Waiting</span>">1</option>
+                                            <option data-content="<span class='text-doing'><span class='status'>&bull;</span>Doing</span>">2</option>
+                                            <option data-content="<span class='text-done'><span class='status'>&bull;</span>Done</span>">3</option>
+                                            <option data-content="<span class='text-removed'><span class='status'>&bull;</span>Removed</span>">4</option>
+                                        </select>
                                     </td>
                                     <td>
                                         <a href="#" class="settings" title="Send a message" data-toggle="tooltip">
