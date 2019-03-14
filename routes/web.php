@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 Route::get('/dropinBooking','BookController@index');
 Route::post('/dropinBooking','BookController@store');
 Route::get('/dropinBooking/count','BookController@count');
@@ -35,3 +35,8 @@ Route::get('/members','MemberController@show');
 
 Route::post('/member/addPoint','MemberController@addPoint');
 Route::get('/member/{id}','MemberController@history');
+
+Route::get('/admin/login','AdminController@getLogin')->name('getAdminLogin');
+Route::post('/admin/login','AdminController@postLogin');
+
+Route::get('/admin','HomeController@getIndex');
