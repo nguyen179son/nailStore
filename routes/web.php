@@ -11,9 +11,12 @@
 |
 */
 
+
 Route::get('/', function () {
-    return view('admin');
+    return view('welcome');
 });
+
+
 Route::get('/dropinBooking','BookController@index');
 Route::post('/dropinBooking','BookController@store');
 Route::get('/dropinBooking/count','BookController@count');
@@ -36,6 +39,10 @@ Route::get('/members','MemberController@show');
 Route::post('/member/addPoint','MemberController@addPoint');
 Route::get('/member/{id}','MemberController@history');
 
-Route::get('/admin','AdminController@index');
+Route::get('/admin/login','AdminLoginController@getLogin')->name('getAdminLogin');
+Route::post('/admin/login','AdminLoginController@postLogin');
+
+Route::get('/admin','HomeController@getIndex');
+
 Route::get('/admin/fetch_dropin','AdminController@fetch_data_dropin');
 Route::get('/admin/fetch_onl','AdminController@fetch_data_online');
