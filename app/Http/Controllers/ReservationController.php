@@ -222,35 +222,6 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function show(Request $request)
-    {
-        $input = $request->query();
-        if (isset($input['day']) && $input['day'] != null) {
-            $validation = Validator::make($input, [
-                'day' => 'required|date|date_format:Y-m-d'
-            ]);
-            if ($validation->fails()) {
-                return $validation->messages();
-            }
-            $reservations = DB::table("online_reservations")->whereNull('deleted_at')->orderBy('reservations_time', 'desc')->get();
-            foreach ($reservations as $key => $reservation) {
-                if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
-                    unset($reservations[$key]);
-                }
-            }
-            return $reservations;
-        } else {
-            $today = Carbon::now()->subDay()->format('Y-m-d');
-            $reservations = DB::table("online_reservations")->whereNull('deleted_at')->orderBy('reservations_time', 'desc')->get();
-            foreach ($reservations as $key => $reservation) {
-                if (date('Y-m-d', strtotime($reservation->reservations_time)) != $today) {
-                    unset($reservations[$key]);
-                }
-            }
-            return $reservations;
-        }
-    }
-
     function fetch_data(Request $request)
     {
         if ($request->ajax()) {
@@ -263,22 +234,11 @@ class ReservationController extends Controller
                     return $validation->messages();
                 }
 
-                $data = DB::table("online_reservations")->whereNull('deleted_at')->orderBy('reservations_time', 'desc');
+                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservations_time', date('Y-m-d', strtotime($input['day'])))->orderBy('reservations_time', 'desc');
 
-                foreach ($data as $key => $reservation) {
-                    if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
-                        unset($data[$key]);
-                    }
-                }
             } else {
                 $today = Carbon::now()->subDay()->format('Y-m-d');
-                $data = DB::table("online_reservations")->whereNull('deleted_at')->orderBy('reservations_time', 'desc');
-
-                foreach ($data as $key => $reservation) {
-                    if (date('Y-m-d', strtotime($reservation->reservations_time)) != $today) {
-                        unset($data[$key]);
-                    }
-                }
+                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservations_time', $today)->orderBy('reservations_time', 'desc');
 
             }
             $data = $data->paginate(10);

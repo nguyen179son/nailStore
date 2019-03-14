@@ -33,21 +33,14 @@ class AdminController extends Controller
                 if ($validation->fails()) {
                     return $validation->messages();
                 }
-                foreach ($data as $key => $reservation) {
-                    if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
-                        unset($data[$key]);
-                    }
-                }
+                $data = $data->whereDate('reservations_time', date('Y-m-d', strtotime($input['day'])));
             } else {
                 $today = Carbon::now()->subDay()->format('Y-m-d');
-                foreach ($data as $key => $reservation) {
-                    if (date('Y-m-d', strtotime($reservation->reservations_time)) != $today) {
-                        unset($data[$key]);
-                    }
-                }
+                $data = $data->whereDate('reservations_time', $today);
+
             }
 
-            $data = $data->orderBy('created_at', 'asc')->paginate(10);
+            $data = $data->orderBy('created_at', 'desc')->paginate(10);
 
 
             return view('pagination_online_admin', compact('data'))->render();
@@ -58,7 +51,7 @@ class AdminController extends Controller
     {
         if ($request->ajax()) {
             $input = $request->all();
-            $data = DB::table('drop_in_reservation')->whereNull('deleted_at');
+            $data = DB::table('drop_in_reservations')->whereNull('deleted_at');
             if (isset($input['status']) && !empty($input['status'])) {
                 $data = $data->whereIn('status', $input['status']);
             }
@@ -73,21 +66,13 @@ class AdminController extends Controller
                 if ($validation->fails()) {
                     return $validation->messages();
                 }
-                foreach ($data as $key => $reservation) {
-                    if (date('Y-m-d', strtotime($reservation->created_at)) != date('Y-m-d', strtotime($input['day']))) {
-                        unset($data[$key]);
-                    }
-                }
+                $data = $data->whereDate('created_at', date('Y-m-d', strtotime($input['day'])));
             } else {
                 $today = Carbon::now()->subDay()->format('Y-m-d');
-                foreach ($data as $key => $reservation) {
-                    if (date('Y-m-d', strtotime($reservation->created_at)) != $today) {
-                        unset($data[$key]);
-                    }
-                }
+                $data = $data->whereDate('created_at', $today);
             }
 
-            $data = $data->orderBy('created_at', 'asc')->paginate(10);
+            $data = $data->orderBy('created_at', 'desc')->paginate(10);
 
 
             return view('pagination_dropin_admin', compact('data'))->render();

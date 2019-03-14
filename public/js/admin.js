@@ -1,19 +1,77 @@
 $(document).ready(function () {
+    window.check = 1;
 
     setDefaultValue();
 
     // $("#booking-container").hide();
     $("#dropin-table").hide();
+    $(document).on('click', '.page-link', function (event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        fetch_data(page);
+    });
 
+    function fetch_data(page) {
+
+        if (window.check == 0) {
+            $.ajax({
+                url: "/admin/fetch_dropin?page=" + page,
+                success: function (data) {
+                    $('#drop-in-queue-table').html(data);
+                }
+            });
+        } else {
+            $.ajax({
+                url: "/admin/fetch_onl?page=" + page,
+                success: function (data) {
+                    $('#booking-table').html(data);
+                }
+            });
+        }
+    }
+    $.ajax({
+        url: "/admin/fetch_onl?page=1",
+        success: function (data) {
+            console.log(data);
+            $('#booking-table').html(data);
+        }
+    });
 });
 
+function showDropinTable(element) {
+    $("#booking-table").hide();
+    $("#dropin-table").show();
+    window.check = 0;
+    $.ajax({
+        url: "/admin/fetch_dropin?page=" + 1,
+        success: function (data) {
+            $('#drop-in-queue-table').html(data);
+        }
+    });
+    $(element).parents('div.dropdown').find('button').text('Drop-in');
+}
+
+function showBookingTable(element) {
+    $("#dropin-table").hide();
+    $("#booking-table").show();
+    window.check = 1;
+    $.ajax({
+        url: "/admin/fetch_onl?page=1",
+        success: function (data) {
+            console.log(data);
+            $('#booking-table').html(data);
+        }
+    });
+    $(element).parents('div.dropdown').find('button').text('Booking');
+}
+
 function onClickCheckboxStatus() {
-    // $.each($("input[class='checkbox-status']:checked"), function(){            
+    // $.each($("input[class='checkbox-status']:checked"), function(){
     //     console.log($(this).attr('name'));
     // });
 }
 
-function setDefaultValue () {
+function setDefaultValue() {
 
     // Set today
     $(".date-picker").each(function () {
@@ -21,7 +79,7 @@ function setDefaultValue () {
     });
 }
 
-function getToday () {
+function getToday() {
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -36,25 +94,10 @@ function getToday () {
     }
 
     today = yyyy + '-' + mm + '-' + dd;
-    
+
     return today;
 }
 
-function showDropinTable (element)
-{
-    $("#booking-table").hide();
-    $("#dropin-table").show();
-
-    $(element).parents('div.dropdown').find('button').text('Drop-in');
-}
-
-function showBookingTable (element)
-{
-    $("#dropin-table").hide();
-    $("#booking-table").show();
-
-    $(element).parents('div.dropdown').find('button').text('Booking');
-}
 
 function changeStatus(element, newStatus) {
     var parent = $(element).parents("tr"); //.attr('id');

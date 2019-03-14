@@ -37,3 +37,5 @@ Route::post('/member/addPoint','MemberController@addPoint');
 Route::get('/member/{id}','MemberController@history');
 
 Route::get('/admin','AdminController@index');
+Route::get('/admin/fetch_dropin','AdminController@fetch_data_dropin');
+Route::get('/admin/fetch_onl','AdminController@fetch_data_online');

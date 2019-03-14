@@ -10,44 +10,29 @@
     </tr>
     </thead>
     <tbody>
-    <td>1</td>
-    <td><a href="#">Michael Holz</a></td>
-    <td>076465507334</td>
-    <td><span class="badge badge-secondary">Finger nail</span></td>
-    <td>
-        <div class="dropdown">
-            <button class="btn dropdown-toggle status-waiting" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="status">&bull;</span> waiting
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item status-waiting" onclick="changeStatus(this, 'waiting');"><span class="status">&bull;</span>
-                    waiting</a>
-                <a class="dropdown-item status-doing" onclick="changeStatus(this, 'doing');"><span
-                            class="status">&bull;</span> doing</a>
-                <a class="dropdown-item status-done" onclick="changeStatus(this, 'done');"><span
-                            class="status">&bull;</span> done</a>
-                <a class="dropdown-item status-removed" onclick="changeStatus(this, 'removed');"><span class="status">&bull;</span>
-                    removed</a>
-            </div>
-        </div>
-    </td>
-    <td>
-        <a href="#" class="settings" title="Send a message" data-toggle="tooltip">
-            <i class="material-icons">textsms</i>
-        </a>
-        <a href="#" class="delete" title="Remove" data-toggle="tooltip">
-            <i class="material-icons">&#xE5C9;</i>
-        </a>
-    </td>
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr>
                 <td>{{ ($data->currentPage()-1)*10+$key }}</td>
                 <td><a href="#">{{ $row->name }}</a></td>
                 <td>{{ $row->telephone }}</td>
-                <td>{{ $row->type }}</td>
-                <td>{{ $row->status }}</td>
+                <td><span class="badge badge-secondary">{{ $row->type }}</span></td>
+                <td>
+                    <select class="form-control selectpicker">
+                        <option data-content="<span class='text-waiting'><span class='status'>&bull;</span>Waiting</span>" {{$row->status=='wating'?'selected':''}}>wating</option>
+                        <option data-content="<span class='text-doing'><span class='status'>&bull;</span>Doing</span>" {{$row->status=='doing'?'selected':''}}>doing</option>
+                        <option data-content="<span class='text-done'><span class='status'>&bull;</span>Done</span>" {{$row->status=='done'?'selected':''}}>done</option>
+                        <option data-content="<span class='text-removed'><span class='status'>&bull;</span>Removed</span>" {{$row->status=='removed'?'selected':''}}>removed</option>
+                    </select>
+                </td>
+                <td>
+                    <a href="#" class="settings" title="Send a message" data-toggle="tooltip" data-telephone="{{$row->telephone}}">
+                        <i class="material-icons">textsms</i>
+                    </a>
+                    <a href="#" class="delete" title="Remove" data-toggle="tooltip" id="{{$row->id}}">
+                        <i class="material-icons">&#xE5C9;</i>
+                    </a>
+                </td>
             </tr>
         @endforeach
     @endif
