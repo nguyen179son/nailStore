@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('welcome');
 });
 Route::get('/dropinBooking','BookController@index');
 Route::post('/dropinBooking','BookController@store');
@@ -27,6 +27,7 @@ Route::get('/dropinQueue/fetch_data', 'BookController@fetch_data');
 
 Route::get('/reservations/list','ReservationController@show');
 Route::get('/reservations/count','ReservationController@count');
+Route::get('/reservations/fetch_data','ReservationController@fetch_data');
 Route::delete('/reservations/{id}','ReservationController@destroy');
 
 Route::post('/member','MemberController@store');

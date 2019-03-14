@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\OnlineReservations;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Helper\Table;
 use Validator;
@@ -37,6 +39,7 @@ class BookController extends Controller
     public function show()
     {
         $data = \DB::table('drop_in_reservations')->whereNull('deleted_at')->orderBy('created_at', 'asc')->paginate(10);
+
         return view('dropinQueue', compact('data'));
     }
 

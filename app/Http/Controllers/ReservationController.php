@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DropInReservations;
 use App\OnlineReservations;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -42,8 +43,6 @@ class ReservationController extends Controller
                 if ($from_host != "bokadirekt.se") continue;
 
 
-
-
                 $message = (imap_fetchbody($mbox, $email_number, 1.1));
                 if ($message == '') {
                     $message = (imap_fetchbody($mbox, $email_number, 1));
@@ -67,7 +66,7 @@ class ReservationController extends Controller
                 if ($subject == "ny bokning") {
                     $this->handleNewBookingMail($lines, $email_number);
                     continue;
-                } else if (strpos($subject, 'avbokning') !== false){
+                } else if (strpos($subject, 'avbokning') !== false) {
                     $this->handleCancelBookingMail($lines, $email_number);
                     continue;
                 } else continue;
@@ -82,7 +81,8 @@ class ReservationController extends Controller
 
     }
 
-    public function handleNewBookingMail($lines, $email_number) {
+    public function handleNewBookingMail($lines, $email_number)
+    {
 //        dd($lines);
         $mail_type = "book";
         $customer_name = $customer_email = $customer_mobile = $customer_telephone
@@ -90,10 +90,10 @@ class ReservationController extends Controller
         foreach ($lines as $line) {
             if (strpos($line, 'Kundens namn') !== false) {
                 $customer_name = json_encode(mb_strtolower(trim(str_replace("Kundens namn: ", "", $line), "\t ")));
-                echo $customer_name."<br>";
+                echo $customer_name . "<br>";
                 continue;
             }
-            if (strpos($line,   'Mobil') !== false) {
+            if (strpos($line, 'Mobil') !== false) {
                 $customer_mobile = trim(str_replace("Mobil: ", "", $line), "\t ");
                 continue;
             }
@@ -106,7 +106,7 @@ class ReservationController extends Controller
                 continue;
             }
             if (strpos($line, 'Tidpunkt') !== false) {
-                $customer_booking_time = trim(str_replace("Tidpunkt: ", "", $line), "\t ").":00";
+                $customer_booking_time = trim(str_replace("Tidpunkt: ", "", $line), "\t ") . ":00";
                 continue;
             }
             if (strpos($line, 'fyllning') !== false) {
@@ -149,7 +149,8 @@ class ReservationController extends Controller
         ]);
     }
 
-    public function handleCancelBookingMail($lines, $email_number) {
+    public function handleCancelBookingMail($lines, $email_number)
+    {
 //        dd(strpos($line, 'tjänst'));
 //        dd($lines);
         $mail_type = "cancel";
@@ -158,7 +159,7 @@ class ReservationController extends Controller
         foreach ($lines as $line) {
             if (strpos($line, 'Kundens namn') !== false) {
                 $customer_name = json_encode(mb_strtolower(trim(str_replace("Kundens namn: ", "", $line), "\t ")));
-                echo $customer_name."<br>";
+                echo $customer_name . "<br>";
                 continue;
             }
             if (strpos($line, 'Mobil') !== false) {
@@ -175,7 +176,7 @@ class ReservationController extends Controller
             }
             if (strpos($line, 'har avbokats') !== false) {
 //                $customer_duration = (substr($line, -6, 2));
-                $customer_booking_time = substr(explode("fyllning, ", $line)[1], 0, 16).":00";
+                $customer_booking_time = substr(explode("fyllning, ", $line)[1], 0, 16) . ":00";
                 if (strpos($line, 'Nagel') !== false) {
                     $customer_service = "Nagel";
                     continue;
@@ -239,22 +240,43 @@ class ReservationController extends Controller
         return $reservations;
     }
 
+    function fetch_data(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = \DB::table('online_reservations')->whereNull('deleted_at')->orderBy('created_at', 'asc')->paginate(10);
+            return view('pagination_online_reservations', compact('data'))->render();
+        }
+    }
+
     public function count(Request $request)
     {
         $input = $request->query();
-        $validation = Validator::make($input, [
-            'day' => 'required|date|date_format:Y-m-d'
-        ]);
-        if ($validation->fails()) {
-            return $validation->messages();
-        }
-        $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
-        foreach ($reservations as $key => $reservation) {
-            if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
-                unset($reservations[$key]);
+        if (isset($input['day']) && $input['day'] != null) {
+
+            $validation = Validator::make($input, [
+                'day' => 'date|date_format:Y-m-d'
+            ]);
+            if ($validation->fails()) {
+                return $validation->messages();
             }
+            $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
+            foreach ($reservations as $key => $reservation) {
+                if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
+                    unset($reservations[$key]);
+                }
+            }
+            return $reservations->count();
+        } else {
+            $today = Carbon::now()->subDay()->format('Y-m-d');
+            $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
+            foreach ($reservations as $key => $reservation) {
+                if (date('Y-m-d', strtotime($reservation->reservations_time)) != $today) {
+                    unset($reservations[$key]);
+                }
+            }
+            return $reservations->count();
         }
-        return $reservations->count();
+
     }
 
     public function destroy($id)
