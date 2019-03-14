@@ -220,8 +220,8 @@
     </div>
 
     <div class="container-fluid padding">
-        <div class="row text-center">
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 col-12">
                 <div class="mapouter">
                     <div class="gmap_canvas">
                         <iframe width="100%" height="100%" id="gmap_canvas"
@@ -233,7 +233,7 @@
                 <!-- <hr class="d-md-none"> -->
             </div>
 
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
                 <hr>
                 <h4 class="text-left">Address</h4>
                 <p class="text-left">Sernanders Vag 6, 75261, Uppsala</p>
@@ -243,7 +243,7 @@
                 <hr class="d-none d-md-block">
             </div>
 
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
                 <hr>
                 <h4 class="text-left">Opening hours</h4>
                 <p class="text-left">8-10</p>
