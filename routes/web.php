@@ -36,7 +36,7 @@ Route::get('/members','MemberController@show');
 Route::post('/member/addPoint','MemberController@addPoint');
 Route::get('/member/{id}','MemberController@history');
 
-Route::get('/admin/login','AdminController@getLogin')->name('getAdminLogin');
-Route::post('/admin/login','AdminController@postLogin');
+Route::get('/admin/login','AdminLoginController@getLogin')->name('getAdminLogin');
+Route::post('/admin/login','AdminLoginController@postLogin');
 
 Route::get('/admin','HomeController@getIndex');
