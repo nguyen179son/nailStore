@@ -78,7 +78,7 @@ table.table td:last-child i {
     margin: 0 5px;
 }
 table.table td a {
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #566787;
     display: inline-block;
     text-decoration: none;
