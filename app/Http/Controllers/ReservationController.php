@@ -109,8 +109,8 @@ class ReservationController extends Controller
                 $customer_booking_time = trim(str_replace("Tidpunkt: ", "", $line), "\t ") . ":00";
                 continue;
             }
-            if (strpos($line, 'fyllning') !== false) {
-                $customer_duration = (substr($line, -6, 2));
+            if (preg_match("/(\d+) min/", $line ,$m)) {
+                $customer_duration = $m[1];
                 if (strpos($line, 'Nagel') !== false) {
                     $customer_service = "Nagel";
                     continue;
