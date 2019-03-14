@@ -2,8 +2,8 @@ $(document).ready(function () {
 
     setDefaultValue();
 
-    // $("#booking-container").hide();
-    $("#dropin-table").hide();
+    $("#booking-container").hide();
+    // $("#dropin-table").hide();
 
 });
 
