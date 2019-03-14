@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ReservationController;
 
 class UpdateReservationEmail extends Command
 {
@@ -11,7 +13,7 @@ class UpdateReservationEmail extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'updateEmails:cron';
 
     /**
      * The console command description.
@@ -37,6 +39,6 @@ class UpdateReservationEmail extends Command
      */
     public function handle()
     {
-        //
+        (new ReservationController())->getReservations();
     }
 }

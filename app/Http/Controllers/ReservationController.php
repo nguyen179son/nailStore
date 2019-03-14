@@ -20,7 +20,7 @@ class ReservationController extends Controller
             //the last imap error.
             return "loooix cmnr";
         }
-        $search = 'SINCE "' . date("j F Y", strtotime("-1 days")) . '"';
+        $search = 'SINCE "' . date("j F Y", strtotime("-0 days")) . '"';
         $emails = imap_search($mbox, $search);
 //        $folders = imap_listmailbox($mbox, "{imap.gmail.com:993/imap/ssl}", "*");
         $email_list = array();
