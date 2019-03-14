@@ -38,7 +38,7 @@ COMPOSE_PROJECT_NAME=laradock
 ### PHP Version ###########################################
 
 # Select a PHP version of the Workspace and PHP-FPM containers (Does not apply to HHVM). Accepted values: 7.3 - 7.2 - 7.1 - 7.0 - 5.6
-PHP_VERSION=7.1
+PHP_VERSION=7.2
 
 ### Phalcon Version ###########################################
 
@@ -149,7 +149,7 @@ PHP_FPM_INSTALL_PHPREDIS=true
 PHP_FPM_INSTALL_MEMCACHED=false
 PHP_FPM_INSTALL_XDEBUG=false
 PHP_FPM_INSTALL_PHPDBG=false
-PHP_FPM_INSTALL_IMAP=true
+PHP_FPM_INSTALL_IMAP=false
 PHP_FPM_INSTALL_MONGO=false
 PHP_FPM_INSTALL_AMQP=false
 PHP_FPM_INSTALL_MSSQL=false
@@ -212,10 +212,10 @@ APACHE_DOCUMENT_ROOT=/var/www/
 
 ### MYSQL #################################################
 
-MYSQL_VERSION=5.7
+MYSQL_VERSION=latest
 MYSQL_DATABASE=default
-MYSQL_USER=nhatminh
-MYSQL_PASSWORD=123456
+MYSQL_USER=default
+MYSQL_PASSWORD=secret
 MYSQL_PORT=3306
 MYSQL_ROOT_PASSWORD=root
 MYSQL_ENTRYPOINT_INITDB=./mysql/docker-entrypoint-initdb.d
