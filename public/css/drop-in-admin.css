@@ -1,4 +1,4 @@
-#main-container {
+.main-container {
     min-width: 1000px;
 }
 
@@ -33,9 +33,25 @@ body {
     font-weight: 600;
 }
 
-#right-panel .dropdown .btn {
+.right-panel .dropdown .btn {
     background-color: inherit;
     border-color: #000;
     border: none;
     padding: 0;
+}
+
+.status-waiting {
+    color: #007bff !important;
+}
+
+.status-doing {
+    color: #28a745 !important;
+}
+
+.status-done {
+    color: #ffc107 !important;
+}
+
+.status-removed {
+    color: #dc3545 !important;
 }
