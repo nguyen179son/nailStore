@@ -35,3 +35,5 @@ Route::get('/members','MemberController@show');
 
 Route::post('/member/addPoint','MemberController@addPoint');
 Route::get('/member/{id}','MemberController@history');
+
+Route::get('/admin','AdminController@index');

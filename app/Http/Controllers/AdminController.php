@@ -2,9 +2,95 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('admin');
+    }
+
+    function fetch_data_online(Request $request)
+    {
+        if ($request->ajax()) {
+            $input = $request->all();
+            $data = DB::table('online_reservations')->whereNull('deleted_at');
+            if (isset($input['status']) && !empty($input['status'])) {
+                $data = $data->whereIn('status', $input['status']);
+            }
+            if (isset($input['service_type']) && !empty($input['service_type'])) {
+                $data = $data->whereIn('service_type', $input['service']);
+            }
+
+            if (isset($input['day']) && $input['day'] != null) {
+
+                $validation = Validator::make($input, [
+                    'day' => 'date|date_format:Y-m-d'
+                ]);
+                if ($validation->fails()) {
+                    return $validation->messages();
+                }
+                foreach ($data as $key => $reservation) {
+                    if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
+                        unset($data[$key]);
+                    }
+                }
+            } else {
+                $today = Carbon::now()->subDay()->format('Y-m-d');
+                foreach ($data as $key => $reservation) {
+                    if (date('Y-m-d', strtotime($reservation->reservations_time)) != $today) {
+                        unset($data[$key]);
+                    }
+                }
+            }
+
+            $data = $data->orderBy('created_at', 'asc')->paginate(10);
+
+
+            return view('pagination_online_admin', compact('data'))->render();
+        }
+    }
+
+    function fetch_data_dropin(Request $request)
+    {
+        if ($request->ajax()) {
+            $input = $request->all();
+            $data = DB::table('drop_in_reservation')->whereNull('deleted_at');
+            if (isset($input['status']) && !empty($input['status'])) {
+                $data = $data->whereIn('status', $input['status']);
+            }
+            if (isset($input['service_type']) && !empty($input['service_type'])) {
+                $data = $data->whereIn('service_type', $input['service']);
+            }
+
+            if (isset($input['day']) && $input['day'] != null) {
+                $validation = Validator::make($input, [
+                    'day' => 'date|date_format:Y-m-d'
+                ]);
+                if ($validation->fails()) {
+                    return $validation->messages();
+                }
+                foreach ($data as $key => $reservation) {
+                    if (date('Y-m-d', strtotime($reservation->created_at)) != date('Y-m-d', strtotime($input['day']))) {
+                        unset($data[$key]);
+                    }
+                }
+            } else {
+                $today = Carbon::now()->subDay()->format('Y-m-d');
+                foreach ($data as $key => $reservation) {
+                    if (date('Y-m-d', strtotime($reservation->created_at)) != $today) {
+                        unset($data[$key]);
+                    }
+                }
+            }
+
+            $data = $data->orderBy('created_at', 'asc')->paginate(10);
+
+
+            return view('pagination_dropin_admin', compact('data'))->render();
+        }
+    }
 }
