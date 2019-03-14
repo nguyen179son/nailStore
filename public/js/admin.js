@@ -1,21 +1,23 @@
 $(document).ready(function () {
     window.check = 1;
-
     setDefaultValue();
 
-    // $("#booking-container").hide();
     $("#dropin-table").hide();
     $(document).on('click', '.page-link', function (event) {
         event.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         fetch_data(page);
     });
+    $("#booking-container").hide();
 
     function fetch_data(page) {
 
         if (window.check == 0) {
             $.ajax({
                 url: "/admin/fetch_dropin?page=" + page,
+                data: {
+                    day:  $('#date').datepicker({ dateFormat: 'yyyy-mm-dd' }).val()
+                },
                 success: function (data) {
                     $('#drop-in-queue-table').html(data);
                 }
@@ -23,20 +25,31 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 url: "/admin/fetch_onl?page=" + page,
+                data: {
+                    day:  $('#date').datepicker({ dateFormat: 'yyyy-mm-dd' }).val()
+                },
                 success: function (data) {
-                    $('#booking-table').html(data);
+                    $('#booking-queue-table').html(data);
                 }
             });
         }
     }
+
     $.ajax({
         url: "/admin/fetch_onl?page=1",
+        data: {
+            day:  $('#date').val()
+        },
         success: function (data) {
-            console.log(data);
-            $('#booking-table').html(data);
+            $('#booking-queue-table').html(data);
         }
     });
+    $('.dropdown').find('button').text('Booking');
+window.data = [];
+window.service_type = [];
 });
+window.data = [];
+window.service_type = [];
 
 function showDropinTable(element) {
     $("#booking-table").hide();
@@ -58,8 +71,7 @@ function showBookingTable(element) {
     $.ajax({
         url: "/admin/fetch_onl?page=1",
         success: function (data) {
-            console.log(data);
-            $('#booking-table').html(data);
+            $('#booking-queue-table').html(data);
         }
     });
     $(element).parents('div.dropdown').find('button').text('Booking');
@@ -70,6 +82,155 @@ function onClickCheckboxStatus() {
     //     console.log($(this).attr('name'));
     // });
 }
+
+$('body').on('change',"#date",function () {
+    var date = $('#date').val();
+    if (window.check == 0) {
+        $.ajax({
+            url: "/admin/fetch_dropin?page=" + 1,
+            type: "GET",
+            data: {
+                status: window.data,
+                service_type: window.service_type,
+                day: date
+            },
+            success: function (data) {
+                $('#drop-in-queue-table').html(data);
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/admin/fetch_onl?page=" + 1,
+            type: "GET",
+            data: {
+                status: window.data,
+                service_type: window.service_type,
+                day: date
+            },
+            success: function (data) {
+                $('#booking-queue-table').html(data);
+            }
+        });
+    }
+});
+
+$('body').on('click', "input[class='checkbox-type']", function () {
+    window.service_type=[];
+
+    $.each($("input[class='checkbox-type']:checked"), function () {
+        window.service_type.push($(this).val());
+    });
+
+    if (window.check == 0) {
+        $.ajax({
+            url: "/admin/fetch_dropin?page=" + 1,
+            type: "GET",
+            data: {
+                status: window.data,
+                service_type: window.service_type,
+                day: $('#date').val()
+            },
+            success: function (data) {
+                $('#drop-in-queue-table').html(data);
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/admin/fetch_onl?page=" + 1,
+            type: "GET",
+            data: {
+                status: window.data,
+                service_type: window.service_type,
+                day: $('#date').val()
+            },
+            success: function (data) {
+                $('#booking-queue-table').html(data);
+            }
+        });
+    }
+});
+
+$('body').on('click','.delete',function () {
+    if (check==1) {
+        $.ajax({
+            url: "/reservations/"+$(this).attr("id"),
+            type: "DELETE",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            success: function () {
+                $.ajax({
+                    url: "/admin/fetch_dropin?page=" + 1,
+                    type: "GET",
+                    data: {
+                        status: window.data,
+                        service_type: window.service_type,
+                        day: $('#date').val(),
+                        _token: $("input[name=_token]").val()
+                    },
+                    success: function (data) {
+                        $('#drop-in-queue-table').html(data);
+                    }
+                });
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/dropinBooking/"+$(this).attr("id"),
+            type: "DELETE",
+            success: function () {
+                $.ajax({
+                    url: "/admin/fetch_onl?page=" + 1,
+                    type: "GET",
+                    data: {
+                        status: window.data,
+                        service_type: window.service_type,
+                        day: $("#date").val(),
+                        _token: $("input[name=_token]").val()
+                    },
+                    success: function (data) {
+                        $('#booking-queue-table').html(data);
+                    }
+                });
+            }
+        });
+    }
+});
+
+$('body').on('click', "input[class='checkbox-status']", function () {
+    window.data=[];
+    $.each($("input[class='checkbox-status']:checked"), function () {
+        // console.log($(this).attr('name'));
+        window.data.push($(this).val());
+    });
+    if (window.check == 0) {
+        $.ajax({
+            url: "/admin/fetch_dropin?page=" + 1,
+            type: "GET",
+            data: {
+                status: window.data,
+                service_type: window.service_type,
+                day: $("#date").val()
+            },
+            success: function (data) {
+                $('#drop-in-queue-table').html(data);
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/admin/fetch_onl?page=" + 1,
+            type: "GET",
+            data: {
+                status: window.data,
+                service_type: window.service_type,
+                day: $("#date").val()
+            },
+            success: function (data) {
+                $('#booking-queue-table').html(data);
+            }
+        });
+    }
+});
 
 function setDefaultValue() {
 
@@ -115,3 +276,4 @@ function changeStatus(element, newStatus) {
 
     // goi api o day
 }
+

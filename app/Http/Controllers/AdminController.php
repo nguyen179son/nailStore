@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Validator;
 class AdminController extends Controller
 {
     public function index()
@@ -19,12 +19,17 @@ class AdminController extends Controller
             $input = $request->all();
             $data = DB::table('online_reservations')->whereNull('deleted_at');
             if (isset($input['status']) && !empty($input['status'])) {
+                foreach ($input['status'] as $key => $status) {
+                    $input['status'][$key] = strtolower($status);
+                }
                 $data = $data->whereIn('status', $input['status']);
             }
             if (isset($input['service_type']) && !empty($input['service_type'])) {
+                foreach ($input['service_type'] as $key => $service_type) {
+                    $input['service_type'][$key] = strtolower($service_type);
+                }
                 $data = $data->whereIn('service_type', $input['service']);
             }
-
             if (isset($input['day']) && $input['day'] != null) {
 
                 $validation = Validator::make($input, [
@@ -53,9 +58,15 @@ class AdminController extends Controller
             $input = $request->all();
             $data = DB::table('drop_in_reservations')->whereNull('deleted_at');
             if (isset($input['status']) && !empty($input['status'])) {
+                foreach ($input['status'] as $key => $status) {
+                    $input['status'][$key] = strtolower($status);
+                }
                 $data = $data->whereIn('status', $input['status']);
             }
             if (isset($input['service_type']) && !empty($input['service_type'])) {
+                foreach ($input['service_type'] as $key => $service_type) {
+                    $input['service_type'][$key] = strtolower($service_type);
+                }
                 $data = $data->whereIn('service_type', $input['service']);
             }
 

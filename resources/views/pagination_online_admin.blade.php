@@ -22,15 +22,24 @@
                 <td>{{ $row->notice }}</td>
                 <td>{{ explode(' ',$row->reservations_time)[1] }}</td>
                 <td>
-                    <select class="form-control selectpicker">
-                        <option data-content="<span class='text-waiting'><span class='status'>&bull;</span>Waiting</span>" {{$row->status=='wating'?'selected':''}}>wating</option>
-                        <option data-content="<span class='text-doing'><span class='status'>&bull;</span>Doing</span>" {{$row->status=='doing'?'selected':''}}>doing</option>
-                        <option data-content="<span class='text-done'><span class='status'>&bull;</span>Done</span>" {{$row->status=='done'?'selected':''}}>done</option>
-                        <option data-content="<span class='text-removed'><span class='status'>&bull;</span>Removed</span>" {{$row->status=='removed'?'selected':''}}>removed</option>
+                    <select class="form-control form-control-lg">
+                        <option value="waiting" {{$row->status=='waiting'?'selected':''}}>
+                            waiting
+                        </option>
+                        <option value="doing" {{$row->status=='doing'?'selected':''}}>
+                            doing
+                        </option>
+                        <option value="done" {{$row->status=='done'?'selected':''}}>
+                            done
+                        </option>
+                        <option value="removed" {{$row->status=='removed'?'selected':''}}>
+                            removed
+                        </option>
                     </select>
                 </td>
                 <td>
-                    <a href="#" class="settings" title="Send a message" data-toggle="tooltip" data-telephone="{{$row->telephone}}">
+                    <a href="#" class="settings" title="Send a message" data-toggle="tooltip"
+                       data-telephone="{{$row->telephone}}">
                         <i class="material-icons">textsms</i>
                     </a>
                     <a href="#" class="delete" title="Remove" data-toggle="tooltip" id="{{$row->id}}">

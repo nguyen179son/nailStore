@@ -45,7 +45,7 @@
 </head>
 
 <body>
-
+@csrf
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-purple-gradient" id="mainNav">
         <div class="container">
             <a class="navbar-brand " href="#page-top" id="logo-text">Labella</a>
@@ -104,7 +104,7 @@
                 <div class="container border-radius-3px pt-20px" style="background-color: #fff;">
                     <div class="form-group">
                         <span class="form-label">Date</span>
-                        <input class="form-control date-picker" type="date" required>
+                        <input class="form-control date-picker" type="date" id="date" required>
                     </div>
 
                     <!-- <div class="row">
@@ -132,7 +132,7 @@
                                     <div class="row mb-10px">
 
                                         <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="checkbox-type" value="Eyelashes"/>
                                             <div class="state p-primary">
                                                 <label style="padding-top: 1px;">Eyelashes</label>
                                             </div>
@@ -141,7 +141,7 @@
                                     <div class="row mb-10px">
 
                                         <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="checkbox-type" value="Finger nail"/>
                                             <div class="state p-primary">
                                                 <label style="padding-top: 1px;">Finger nail</label>
                                             </div>
@@ -150,7 +150,7 @@
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="checkbox-type" value="Toe nail"/>
                                             <div class="state p-primary">
                                                 <label style="padding-top: 1px;">Toe nail</label>
                                             </div>
@@ -168,16 +168,16 @@
                                     <div class="row mb-10px">
 
                                         <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="checkbox-status" value="waiting" />
                                             <div class="state p-primary">
-                                                <label style="padding-top: 1px;">Wating</label>
+                                                <label style="padding-top: 1px;">Waiting</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row mb-10px">
 
                                         <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="checkbox-status" value="doing"/>
                                             <div class="state p-success">
                                                 <label style="padding-top: 1px;">Doing</label>
                                             </div>
@@ -186,7 +186,7 @@
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="checkbox-status" value="done"/>
                                             <div class="state p-warning">
                                                 <label style="padding-top: 1px;">Done</label>
                                             </div>
@@ -195,7 +195,7 @@
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" />
+                                            <input type="checkbox" class="checkbox-status" value="removed" />
                                             <div class="state p-danger">
                                                 <label style="padding-top: 1px;">Removed</label>
                                             </div>
@@ -239,7 +239,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="booking-table">
+                        <div id="booking-queue-table">
 
                         </div>
                     </div>
