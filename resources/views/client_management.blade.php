@@ -42,7 +42,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-purple-gradient" id="mainNav">
     <div class="container">
-        <a class="navbar-brand " href="#page-top" id="logo-text">Labella</a>
+        <a class="navbar-brand " href="/" id="logo-text">Labella</a>
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -69,7 +69,7 @@
 <div id="main-container" class="container bg-gray-0 border-radius-5px pv-20px mv-20px mt-200px">
     <div class="row">
         <div class="col-xl-12">
-            <h2 style="font-size:2rem;"><b>User Management</b></h2>
+            <h2 style="font-size:2rem;"><b>Customer Management</b></h2>
         </div>
     </div>
     <div class="row">
@@ -116,8 +116,8 @@
                         <div class="col-10">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title text-primary" id="exampleModalLabel">
-                                        <span></span></h5>
+                                    <h5 class="modal-title text-primary" id="label-customer-name-modal">Customer History
+                                    </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
