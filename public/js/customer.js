@@ -43,5 +43,10 @@ $(document).ready(function () {
         });
     });
     fetch_data(1);
+
+    $('body').on('click', '#submit-add-customer', function(e) {
+        $('#form-add-customer').submit();
+        e.preventDefault();
+    });
 });
 
