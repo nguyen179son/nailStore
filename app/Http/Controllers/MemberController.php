@@ -33,14 +33,21 @@ class MemberController extends Controller
     }
 
     public function addMember(Request $request) {
+        $input = $request->all();
+        $validation = Validator::make($input, [
+            'email' => 'required|email',
+            'name' => 'required|string'
+        ]);
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->messages()]);
+        }
         $email = $request->email;
         $name = $request->name;
 //        dd($email, $name);
         $check = DB::table("customers")->where("email", "=",$email)->first();
         if ($check != null) {
             return response()->json([
-                "success" => false,
-                "message" => "Customer already existed !"
+                "errors" => ['email'=>["Duplicated email"]]
             ]);
         }
         DB::table("customers")->insert([
@@ -71,29 +78,58 @@ class MemberController extends Controller
         $input = $request->all();
         $validation = Validator::make($input, [
             'email' => 'required|email',
+            'name' => 'required|string',
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()->all()]);
         }
-        Member::where('email', $input['email'])->increment('point');
-        return response()->json(['success' => 'Successfully added point']);
+
+        $member = Member::where('email', $input['email'])->get();
+        if (!$member->isEmpty()) {
+            Member::where('email', $input['email'])->increment('point', 1);
+            return response()->json(['success' => 'Successfully added point']);
+        } else {
+            $input['point'] = 1;
+            $member = new Member($input);
+            $member->save();
+            return response()->json(['success' => 'Successfully added point']);
+        }
     }
 
-    function comparator($object1, $object2) {
+    public function minusPoint(Request $request)
+    {
+        $input = $request->all();
+        $validation = Validator::make($input, [
+            'email' => 'required|email',
+            'name' => 'required|string',
+        ]);
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->errors()->all()]);
+        }
+        $member = Member::where('email', $input['email'])->get();
+        if (!$member->isEmpty()) {
+            Member::where('email', $input['email'])->decrement('point', 1);
+            return response()->json(['success' => 'Successfully decreased point']);
+        } else {
+            $input['point'] = 0;
+            $member = new Member($input);
+            $member->save();
+            return response()->json(['success' => 'Successfully decreased point']);
+        }
+    }
+
+    function comparator($object1, $object2)
+    {
         return $object1->updated_at > $object2->updated_at;
     }
-    public function history($id) {
+
+    public function history($id)
+    {
         $email = Member::find($id)->email;
         $dropIn=DB::table('drop_in_reservations')->where('email','=',$email)->select(['updated_at','status','type as service_type'])->get()->toArray();
         $online = DB::table('online_reservations')->where('email','=',$email)->select(['updated_at','status','service_type'])->get()->toArray();
-//        dd($dropIn, $online);
         $return_array = array_merge($dropIn,$online);
-//        dd($return_array);
         usort($return_array, array($this,'comparator'));
-//        foreach ($return_array as $key => $value) {
-//            $return_array[$key] = Collection::make($value);
-//        }
-//        $return_array->paginate(10);
 
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $col = new Collection($return_array);
