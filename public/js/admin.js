@@ -14,7 +14,7 @@ $(document).ready(function () {
 
         if (window.check == 0) {
             $.ajax({
-                url: "/admin/fetch_dropin?page=" + page,
+                url: "/admin/fetch-dropin?page=" + page,
                 data: {
                     status: window.data,
                     service_type: window.service_type,
@@ -26,7 +26,7 @@ $(document).ready(function () {
             });
         } else {
             $.ajax({
-                url: "/admin/fetch_onl?page=" + page,
+                url: "/admin/fetch-onl?page=" + page,
                 data: {
                     status: window.data,
                     service_type: window.service_type,
@@ -40,7 +40,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-        url: "/admin/fetch_onl?page=1",
+        url: "/admin/fetch-onl?page=1",
         data: {
             day:  $('#date').val()
         },
@@ -60,7 +60,7 @@ function showDropinTable(element) {
     $("#dropin-table").show();
     window.check = 0;
     $.ajax({
-        url: "/admin/fetch_dropin?page=" + 1,
+        url: "/admin/fetch-dropin?page=" + 1,
         data: {
             status: window.data,
             service_type: window.service_type,
@@ -78,7 +78,7 @@ function showBookingTable(element) {
     $("#booking-table").show();
     window.check = 1;
     $.ajax({
-        url: "/admin/fetch_onl?page=1",
+        url: "/admin/fetch-onl?page=1",
         data: {
             status: window.data,
             service_type: window.service_type,
@@ -101,7 +101,7 @@ $('body').on('change',"#date",function () {
     var date = $('#date').val();
     if (window.check == 0) {
         $.ajax({
-            url: "/admin/fetch_dropin?page=" + 1,
+            url: "/admin/fetch-dropin?page=" + 1,
             type: "GET",
             data: {
                 status: window.data,
@@ -114,7 +114,7 @@ $('body').on('change',"#date",function () {
         });
     } else {
         $.ajax({
-            url: "/admin/fetch_onl?page=" + 1,
+            url: "/admin/fetch-onl?page=" + 1,
             type: "GET",
             data: {
                 status: window.data,
@@ -137,7 +137,7 @@ $('body').on('click', "input[class='checkbox-type']", function () {
 
     if (window.check == 0) {
         $.ajax({
-            url: "/admin/fetch_dropin?page=" + 1,
+            url: "/admin/fetch-dropin?page=" + 1,
             type: "GET",
             data: {
                 status: window.data,
@@ -150,7 +150,7 @@ $('body').on('click', "input[class='checkbox-type']", function () {
         });
     } else {
         $.ajax({
-            url: "/admin/fetch_onl?page=" + 1,
+            url: "/admin/fetch-onl?page=" + 1,
             type: "GET",
             data: {
                 status: window.data,
@@ -180,7 +180,7 @@ $('body').on('click','#confirm-delete',function () {
             },
             success: function () {
                 $.ajax({
-                    url: "/admin/fetch_onl?page=" + 1,
+                    url: "/admin/fetch-onl?page=" + 1,
                     type: "GET",
                     data: {
                         status: window.data,
@@ -196,14 +196,14 @@ $('body').on('click','#confirm-delete',function () {
     } else {
         console.log(2);
         $.ajax({
-            url: "/dropinBooking/"+$(this).attr("book-id"),
+            url: "/dropin-booking/"+$(this).attr("book-id"),
             type: "DELETE",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
             },
             success: function () {
                 $.ajax({
-                    url: "/admin/fetch_dropin?page=" + 1,
+                    url: "/admin/fetch-dropin?page=" + 1,
                     type: "GET",
                     data: {
                         status: window.data,
@@ -225,7 +225,7 @@ $('body').on('change','.dropdown-status',function () {
     console.log($(this).val(), $(this).attr("id"));
     if (window.check == 0) {
         $.ajax({
-            url: "/dropinBooking/updateStatus",
+            url: "/dropin-booking/update-status",
             type: "POST",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
@@ -236,7 +236,7 @@ $('body').on('change','.dropdown-status',function () {
             },
             success: function (data) {
                 $.ajax({
-                    url: "/admin/fetch_dropin?page=" + 1,
+                    url: "/admin/fetch-dropin?page=" + 1,
                     type: "GET",
                     data: {
                         status: window.data,
@@ -253,7 +253,7 @@ $('body').on('change','.dropdown-status',function () {
 
     } else {
         $.ajax({
-            url: "/reservations/updateStatus",
+            url: "/reservations/update-status",
             type: "POST",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
@@ -264,7 +264,7 @@ $('body').on('change','.dropdown-status',function () {
             },
             success: function (data) {
                 $.ajax({
-                    url: "/admin/fetch_onl?page=" + 1,
+                    url: "/admin/fetch-onl?page=" + 1,
                     type: "GET",
                     data: {
                         status: window.data,
@@ -290,7 +290,7 @@ $('body').on('click', "input[class='checkbox-status']", function () {
     console.log(window.data);
     if (window.check == 0) {
         $.ajax({
-            url: "/admin/fetch_dropin?page=" + 1,
+            url: "/admin/fetch-dropin?page=" + 1,
             type: "GET",
             data: {
                 status: window.data,
@@ -303,7 +303,7 @@ $('body').on('click', "input[class='checkbox-status']", function () {
         });
     } else {
         $.ajax({
-            url: "/admin/fetch_onl?page=" + 1,
+            url: "/admin/fetch-onl?page=" + 1,
             type: "GET",
             data: {
                 status: window.data,

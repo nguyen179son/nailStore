@@ -62,7 +62,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/dropinQueue">Today's Queue</a>
+                    <a class="nav-link" href="/dropin-queue">Today's Queue</a>
                 </li>
             </ul>
 
@@ -83,7 +83,7 @@
                     </div>
                     <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
                         <div class="booking-form">
-                        <form action="/dropinBooking" method="post">
+                        <form action="/dropin-booking" method="post">
                             @csrf
                             
                             <div class="form-group" style="margin-bottom: 0">

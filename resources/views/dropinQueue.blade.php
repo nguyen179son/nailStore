@@ -189,14 +189,14 @@
             console.log(window.check);
             if (window.check == 0) {
                 $.ajax({
-                    url: "/dropinQueue/fetch_data?page=" + page,
+                    url: "/dropin-queue/fetch-data?page=" + page,
                     success: function (data) {
                         $('#drop-in-queue-table').html(data);
                     }
                 });
             } else {
                 $.ajax({
-                    url: "/reservations/fetch_data?page=" + page,
+                    url: "/reservations/fetch-data?page=" + page,
                     success: function (data) {
                         $('#booking-table').html(data);
                     }
@@ -205,7 +205,7 @@
         }
 
         $.ajax({
-            url: "/dropinBooking/count",
+            url: "/dropin-booking/count",
             success: function (data) {
                 $('#drop-in-res-num').text(data);
             }
@@ -224,7 +224,7 @@
         $("#table-booking").hide();
         $("#table-drop-in").show();
         $.ajax({
-            url: "/dropinQueue/fetch_data?page=" + 1,
+            url: "/dropin-queue/fetch-data?page=" + 1,
             success: function (data) {
                 $('#drop-in-queue-table').html(data);
             }
@@ -236,7 +236,7 @@
         $("#table-drop-in").hide();
         $("#table-booking").show();
         $.ajax({
-            url: "/reservations/fetch_data?page=" + 1,
+            url: "/reservations/fetch-data?page=" + 1,
             success: function (data) {
                 $('#booking-table').html(data);
             }

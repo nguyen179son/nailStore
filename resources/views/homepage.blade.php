@@ -59,7 +59,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/dropinQueue">Today's Queue</a>
+                        <a class="nav-link" href="/dropin-queue">Today's Queue</a>
                     </li>
                 </ul>
 

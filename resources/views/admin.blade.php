@@ -64,7 +64,7 @@
                         <a class="nav-link" href="#">Admin page</a>
                     </li>
                     <li class="nav-item  mr-20px">
-                        <a class="nav-link" href="/customer-management">Customer Management</a>
+                        <a class="nav-link" href="/admin/customer-management">Customer Management</a>
                     </li>
                     <li class="nav-item">
                         <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"

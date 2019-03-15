@@ -9,7 +9,7 @@ $(document).ready(function () {
     function fetch_data(page) {
         if(window.check==0) {
             $.ajax({
-                url: "/customer-management/show?page=" + page,
+                url: "/admin/customer-management/show?page=" + page,
                 success: function (data) {
                     $('#customer-table').html(data);
                 }
@@ -42,7 +42,7 @@ $(document).ready(function () {
     $('body').on("change", "#keyword", function () {
         console.log($('#keyword').val());
         $.ajax({
-            url: "/customer-management/show?page=1",
+            url: "/admin/customer-management/show?page=1",
             data: {
                 keyword: $('#keyword').val()
             },
@@ -57,7 +57,7 @@ $(document).ready(function () {
         var name = $('#name-add-customer').val();
 
         $.ajax({
-            url: "/member",
+            url: "/admin/member",
             method: "post",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()

@@ -34,7 +34,7 @@ class BookController extends Controller
         $input['status'] = 'WAITING';
         $dropInBooking = new DropInReservations($input);
         $dropInBooking->save();
-        return redirect('/dropinQueue');
+        return redirect('/dropin-queue');
     }
 
     public function show()
