@@ -9,7 +9,7 @@ $(document).ready(function () {
     function fetch_data(page) {
         if(window.check==0) {
             $.ajax({
-                url: "/customer-management/show?page=" + page,
+                url: "/admin/customer-management/show?page=" + page,
                 success: function (data) {
                     $('#customer-table').html(data);
                 }
@@ -42,7 +42,7 @@ $(document).ready(function () {
     $('body').on("change", "#keyword", function () {
         console.log($('#keyword').val());
         $.ajax({
-            url: "/customer-management/show?page=1",
+            url: "/admin/customer-management/show?page=1",
             data: {
                 keyword: $('#keyword').val()
             },
@@ -50,12 +50,52 @@ $(document).ready(function () {
                 $('#customer-table').html(data);
             }
         });
-    })
-
-    $('body').on('click', '#submit-add-customer', function(e) {
-        $('#form-add-customer').submit();
-        e.preventDefault();
     });
 
+    $('body').on('click', '#submit-add-customer', function(e) {
+        var email = $('#email-add-customer').val();
+        var name = $('#name-add-customer').val();
+
+        $.ajax({
+            url: "/admin/member",
+            method: "post",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                email: email,
+                name: name,
+            },
+
+
+            success: function (data) {
+                console.log(data);
+                if (data.success) {
+                    $('#email-add-customer').val("");
+                    $('#name-add-customer').val("");
+
+                    $("#alert-text").removeClass("text-danger text-success").addClass("text-success");
+                    $("#alert-text").text(data.message);
+                    $("#alert-text").show();
+
+                    setTimeout(function() {
+                        $("#alert-text").hide();
+                        $("#add-customer-modal").modal("hide");
+
+                    }, 1000);
+                }
+                else {
+                    $("#alert-text").removeClass("text-danger text-success").addClass("text-danger");
+                    $("#alert-text").text(data.message);
+                    $("#alert-text").show();
+
+                    setTimeout(function() {
+                        $("#alert-text").hide();
+                    }, 2000);
+
+                }
+            }
+        });
+    });
 });
 

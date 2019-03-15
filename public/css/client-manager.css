@@ -2,6 +2,10 @@ body {
     font-size: 1vw;
 }
 
+.mt-200px {
+    margin-top: 200px;
+}
+
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 80%;
