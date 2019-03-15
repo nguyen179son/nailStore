@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('clientManagement');
+    return view('homepage');
 });
 
 
@@ -36,8 +36,10 @@ Route::get('/reservations/count','ReservationController@count');
 Route::get('/reservations/fetch_data','ReservationController@fetch_data');
 Route::delete('/reservations/{id}','ReservationController@destroy');
 
+Route::get('/customer-management', 'ClientManagerController@index');
+
 Route::post('/member','MemberController@store');
-Route::get('/members','MemberController@show');
+Route::get('/customer-management/show','MemberController@show');
 
 Route::post('/member/addPoint','MemberController@addPoint');
 Route::get('/member/{id}','MemberController@history');
@@ -49,5 +51,6 @@ Route::get('/admin','HomeController@getIndex');
 
 Route::get('/admin/fetch_dropin','AdminController@fetch_data_dropin');
 Route::get('/admin/fetch_onl','AdminController@fetch_data_online');
+
 
 Route::get('/admin/logout','HomeController@logout')->name("adminLogout");

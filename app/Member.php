@@ -17,11 +17,13 @@ class Member extends Model
     protected $primaryKey = 'id';
     public $fillable = [
         'email',
-        'point'
+        'point',
+        'name'
     ];
 
     protected $casts = [
         'email'=>'string',
         'point'=>'integer',
+        'name' => 'string'
     ];
 }
