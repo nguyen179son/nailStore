@@ -247,9 +247,6 @@
 </div>
 
 
-    <a href="sms:+46765507228&body=hahahaahahaha">Link IOS</a>
-    <a href="sms:+19725551212?body=hello%20there">Link Android</a>
-
     <script src="{{ URL::asset('/js/admin.js') }}"></script>
 </body>
 </html>
