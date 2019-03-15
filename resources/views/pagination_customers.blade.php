@@ -12,8 +12,9 @@
         @foreach ($members as $key => $member)
             <tr>
                 <td>{{ ($members->currentPage()-1)*10+$key+1 }}</td>
-                <td><a href="#" data-toggle="modal" data-target="#history-modal" data-id="{{$member->id}}" class="member-name">{{$member->name}}</a></td>
-                <td>{{$member->email}}
+                <td ><a href="#" data-toggle="modal" data-target="#history-modal" data-id="{{$member->id}}"
+                                          class="member-name word-break">{{ ucwords(trim($member->name, "\"")) }}</a></td>
+                <td class="word-break">{{$member->email}}
                 </td>
                 <td>{{$member->point}}</td>
             </tr>

@@ -120,9 +120,9 @@
                         @foreach($data as $key => $row)
                             <tr>
                                 <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
-                                <td>{{ $row->name }}</td>
-                                <td>{{ $row->telephone }}</td>
-                                <td>{{ $row->type }}</td>
+                                <td class="word-break">{{ $row->name }}</td>
+                                <td class="word-break">{{ $row->telephone }}</td>
+                                <td class="word-break">{{ $row->type }}</td>
                             </tr>
                         @endforeach
 

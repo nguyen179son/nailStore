@@ -16,7 +16,7 @@
         @foreach($data as $key => $row)
             <tr>
                 <td>{{ $row->id }}</td>
-                <td><a href="#">{{ ucwords(json_decode($row->customer_name)) }}</a></td>
+                <td class="word-break">{{ ucwords(json_decode($row->customer_name)) }}</td>
 {{--                <td>{{ $row->telephone }}</td>--}}
                 <td>{{ $row->mobile }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>
