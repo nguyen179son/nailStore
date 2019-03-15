@@ -1,20 +1,20 @@
 <table class="table table-striped table-hover" id="drop-in-table">
     <thead>
     <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Service</th>
-        <th>Status</th>
-        <th>Action</th>
+        <th width="5%">#</th>
+        <th width="25%">Name</th>
+        <th width="20%">Phone</th>
+        <th width="20%">Service</th>
+        <th width="15%">Status</th>
+        <th width="15%">Action</th>
     </tr>
     </thead>
     <tbody>
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
-            <tr>
+            <tr style="word-break: break-all">
                 <td>{{ $row->id }}</td>
-                <td><a href="#">{{ $row->name }}</a></td>
+                <td>{{ $row->name }}</td>
                 <td>{{ $row->telephone }}</td>
                 <td><span class="badge badge-secondary" data-email="{{$row->email}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
                 <td>
