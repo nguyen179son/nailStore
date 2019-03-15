@@ -64,7 +64,8 @@
                         <a class="dropdown-item" href="/#gallery">Gallery</a>
                         <a class="dropdown-item" href="/#contact">Contact</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679">Online booking</a>
+                        <a class="dropdown-item" href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679">Online
+                            booking</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -108,21 +109,21 @@
 
                     <table class="table table-striped table-hover">
                         <thead>
-                        <tr>
-                            <th>#</th>
-                            <th class="max-width-300px">Name</th>
-                            <th class="max-width-300px">Phone</th>
-                            <th class="max-width-250px">Service</th>
-                        </tr>
+                            <tr>
+                                <th width="10%">#</th>
+                                <th width="50%">Name</th>
+                                <th width="20%">Phone</th>
+                                <th width="20%">Service</th>
+                            </tr>
                         </thead>
                         <tbody>
 
                         @foreach($data as $key => $row)
-                            <tr>
+                            <tr style="word-break: break-all">
                                 <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
-                                <td class="word-break">{{ $row->name }}</td>
-                                <td class="word-break">{{ $row->telephone }}</td>
-                                <td class="word-break">{{ $row->type }}</td>
+                                <td>{{ $row->name }}</td>
+                                <td>{{ $row->telephone }}</td>
+                                <td>{{ $row->type }}</td>
                             </tr>
                         @endforeach
 
