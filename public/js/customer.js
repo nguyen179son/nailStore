@@ -50,11 +50,52 @@ $(document).ready(function () {
                 $('#customer-table').html(data);
             }
         });
-    })
+    });
 
     $('body').on('click', '#submit-add-customer', function(e) {
-        $('#form-add-customer').submit();
-        e.preventDefault();
+        var email = $('#email-add-customer').val();
+        var name = $('#name-add-customer').val();
+
+        $.ajax({
+            url: "/member",
+            method: "post",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                email: email,
+                name: name,
+            },
+
+
+            success: function (data) {
+                console.log(data);
+                if (data.success) {
+                    $('#email-add-customer').val("");
+                    $('#name-add-customer').val("");
+
+                    $("#alert-text").removeClass("text-danger text-success").addClass("text-success");
+                    $("#alert-text").text(data.message);
+                    $("#alert-text").show();
+
+                    setTimeout(function() {
+                        $("#alert-text").hide();
+                        $("#add-customer-modal").modal("hide");
+
+                    }, 1000);
+                }
+                else {
+                    $("#alert-text").removeClass("text-danger text-success").addClass("text-danger");
+                    $("#alert-text").text(data.message);
+                    $("#alert-text").show();
+
+                    setTimeout(function() {
+                        $("#alert-text").hide();
+                    }, 2000);
+
+                }
+            }
+        });
     });
 });
 

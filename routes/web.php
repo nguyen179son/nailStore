@@ -38,11 +38,13 @@ Route::delete('/reservations/{id}','ReservationController@destroy');
 
 Route::get('/customer-management', 'ClientManagerController@index');
 
-Route::post('/member','MemberController@store');
+//Route::post('/member','MemberController@store');
 Route::get('/customer-management/show','MemberController@show');
 
 Route::post('/member/addPoint','MemberController@addPoint');
 Route::get('/member/{id}','MemberController@history');
+
+Route::post('/member', 'MemberController@addMember');
 
 Route::get('/admin/login','AdminLoginController@getLogin')->name('getAdminLogin');
 Route::post('/admin/login','AdminLoginController@postLogin');

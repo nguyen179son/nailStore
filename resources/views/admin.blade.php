@@ -53,15 +53,22 @@
             <a class="navbar-brand " href="#page-top" id="logo-text">Labella</a>
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
+                    data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                    aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
+                    <li class="nav-item active mr-20px">
+                        <a class="nav-link" href="#">Admin page</a>
+                    </li>
+                    <li class="nav-item  mr-20px">
+                        <a class="nav-link" href="/customer-management">Customer Management</a>
+                    </li>
                     <li class="nav-item">
-                        <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}" style="color: purple; opacity: 0.8;">LOGOUT</a>
+                        <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
+                           style="color: purple; opacity: 0.8;">LOGOUT</a>
                     </li>
                 </ul>
             </div>

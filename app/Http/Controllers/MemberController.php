@@ -28,6 +28,31 @@ class MemberController extends Controller
         return response()->json(['success' => 'Record is successfully added']);
     }
 
+    public function addMember(Request $request) {
+        $email = $request->email;
+        $name = $request->name;
+//        dd($email, $name);
+        $check = DB::table("customers")->where("email", "=",$email)->first();
+        if ($check != null) {
+            return response()->json([
+                "success" => false,
+                "message" => "Customer already existed !"
+            ]);
+        }
+        DB::table("customers")->insert([
+            'email' => $email,
+            'name' => $name,
+            'point' => 0,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Customer successfully added !"
+        ]);
+    }
+
     public function show(Request $request)
     {
         $members = DB::table("customers");

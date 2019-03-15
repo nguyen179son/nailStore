@@ -130,8 +130,8 @@ class ReservationController extends Controller
             'service_type' => $customer_service,
             'notice' => $customer_notice,
             'mail_number' => $email_number,
-            'reservation_time' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
     }
 
