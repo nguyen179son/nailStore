@@ -69,7 +69,7 @@ class MemberController extends Controller
         $members = DB::table("customers");
         $keyword = $request->keyword;
         $members = $members->where('name','like', '%' . $keyword . '%');
-        $members = $members->orderBy("point", "desc")->paginate(3);
+        $members = $members->orderBy("point", "desc")->paginate(10);
         return view("pagination_customers", compact("members"))->render();
     }
 
@@ -133,7 +133,7 @@ class MemberController extends Controller
 
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $col = new Collection($return_array);
-        $perPage = 3;
+        $perPage = 10;
         $currentPageSearchResult = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
         $entries = new LengthAwarePaginator($currentPageSearchResult, count($col), $perPage);
 

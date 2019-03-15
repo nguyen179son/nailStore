@@ -223,7 +223,7 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="row">
-                                        <h2 style="font-size:16pt;">2019/03/08 <b>11:00</b> - <b>12:00</b></h2>
+                                        <h2 style="font-size:16pt;" class="selected-date">2019/03/08</h2>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@
                             <div class="row">
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="row">
-                                        <h2 style="font-size:16pt;">2019/03/08 <b>11:00</b> - <b>12:00</b></h2>
+                                        <h2 style="font-size:16pt;" class="selected-date">2019/03/08</h2>
                                     </div>
                                 </div>
                             </div>
