@@ -215,8 +215,8 @@ class ReservationController extends Controller
                 if ($validation->fails()) {
                     return $validation->messages();
                 }
-
-                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservation_time', date('Y-m-d', strtotime($input['day'])))->orderBy('reservation_time', 'asc');
+                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereIn('status',['waiting','doing'])
+                    ->whereDate('reservation_time', date('Y-m-d', strtotime($input['day'])))->orderBy('reservation_time', 'asc');
 
             } else {
                 $today = date('Y-m-d');
@@ -242,7 +242,7 @@ class ReservationController extends Controller
             if ($validation->fails()) {
                 return $validation->messages();
             }
-            $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
+            $reservations = DB::table("online_reservations")->whereNull('deleted_at')->whereIn('status',['waiting','doing'])->get();
             foreach ($reservations as $key => $reservation) {
                 if (date('Y-m-d', strtotime($reservation->reservation_time)) != date('Y-m-d', strtotime($input['day']))) {
                     unset($reservations[$key]);
