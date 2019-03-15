@@ -63,6 +63,11 @@ body {
 	padding-bottom: 20px;
 }
 
+.word-break {
+    word-break: break-all;
+    max-width: inherit;
+}
+
 table tbody tr td:nth-child(2) {
     font-weight: bold;
     color: #566787;

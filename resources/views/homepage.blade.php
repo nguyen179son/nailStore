@@ -247,8 +247,7 @@
             <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
                 <hr>
                 <h4 class="text-left">Opening hours</h4>
-                <p class="text-left">8-10</p>
-                <p class="text-left">8-10</p>
+                <p class="text-left">8a.m - 10p.m</p>
 
                 <div class="text-left">
                     <a class="btn btn-primary" href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679" id="footer-booking-btn">Booking</a>

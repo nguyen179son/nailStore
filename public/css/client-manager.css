@@ -12,3 +12,8 @@ body {
         margin: 1.75rem auto;
     }
 }
+
+.word-break {
+    word-break: break-all;
+    max-width: inherit;
+}

@@ -43,7 +43,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-purple-gradient pv-15px" id="mainNav">
     <div class="container">
-        <a class="navbar-brand " href="#page-top" id="logo-text">Labella</a>
+        <a class="navbar-brand " href="/" id="logo-text">Labella</a>
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -60,11 +60,11 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Home</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Introduction</a>
-                        <a class="dropdown-item" href="#">Gallery</a>
-                        <a class="dropdown-item" href="#">Contact</a>
+                        <a class="dropdown-item" href="/#introduction">Introduction</a>
+                        <a class="dropdown-item" href="/#gallery">Gallery</a>
+                        <a class="dropdown-item" href="/#contact">Contact</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Online booking</a>
+                        <a class="dropdown-item" href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679">Online booking</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -120,9 +120,9 @@
                         @foreach($data as $key => $row)
                             <tr>
                                 <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
-                                <td>{{ $row->name }}</td>
-                                <td>{{ $row->telephone }}</td>
-                                <td>{{ $row->type }}</td>
+                                <td class="word-break">{{ $row->name }}</td>
+                                <td class="word-break">{{ $row->telephone }}</td>
+                                <td class="word-break">{{ $row->type }}</td>
                             </tr>
                         @endforeach
 
