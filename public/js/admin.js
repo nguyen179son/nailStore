@@ -91,12 +91,6 @@ function showBookingTable(element) {
     $(element).parents('div.dropdown').find('button').text('Booking');
 }
 
-function onClickCheckboxStatus() {
-    // $.each($("input[class='checkbox-status']:checked"), function(){
-    //     console.log($(this).attr('name'));
-    // });
-}
-
 $('body').on('change',"#date",function () {
     var date = $('#date').val();
     if (window.check == 0) {
@@ -171,7 +165,6 @@ $('body').on('click','.delete',function () {
 
 $('body').on('click','#confirm-delete',function () {
     if (check==1) {
-        console.log('1');
         $.ajax({
             url: "/reservations/"+$(this).attr("book-id"),
             type: "DELETE",
@@ -194,7 +187,6 @@ $('body').on('click','#confirm-delete',function () {
             }
         });
     } else {
-        console.log(2);
         $.ajax({
             url: "/dropinBooking/"+$(this).attr("book-id"),
             type: "DELETE",
@@ -250,6 +242,19 @@ $('body').on('change','.dropdown-status',function () {
             }
         });
 
+        $.ajax({
+            url: "/member/addPoint",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                email: $(this).attr("data-email")
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
 
     } else {
         $.ajax({
@@ -287,7 +292,6 @@ $('body').on('click', "input[class='checkbox-status']", function () {
         // console.log($(this).attr('name'));
         window.data.push($(this).val());
     });
-    console.log(window.data);
     if (window.check == 0) {
         $.ajax({
             url: "/admin/fetch_dropin?page=" + 1,

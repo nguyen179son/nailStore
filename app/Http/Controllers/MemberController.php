@@ -40,6 +40,7 @@ class MemberController extends Controller
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()->all()]);
         }
+        
         Member::where('email', $input['email'])->increment('point');
         return response()->json(['success' => 'Successfully added point']);
     }

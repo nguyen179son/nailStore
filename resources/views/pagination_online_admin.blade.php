@@ -22,7 +22,7 @@
                 <td>{{ $row->notice }}</td>
                 <td>{{ explode(' ',$row->reservation_time)[1] }}</td>
                 <td>
-                    <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}">
+                    <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}" data-email="{{$row->email}}">
                         <option value="waiting" {{$row->status=='waiting'?'selected':''}}>
                             waiting
                         </option>
