@@ -1,23 +1,22 @@
 <table class="table table-striped table-hover" id="booking-table">
     <thead>
     <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Service</th>
-        <th>Notice</th>
-        <th>Time</th>
-        <th>Status</th>
-        <th>Action</th>
+        <th width="5%">#</th>
+        <th width="17%">Name</th>
+        <th width="15%">Phone</th>
+        <th width="10%">Service</th>
+        <th width="15%">Notice</th>
+        <th width="13%">Time</th>
+        <th width="12%">Status</th>
+        <th width="13%">Action</th>
     </tr>
     </thead>
     <tbody>
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
-            <tr>
+            <tr style="word-break: break-all">
                 <td>{{ $row->id }}</td>
-                <td class="word-break">{{ ucwords(json_decode($row->customer_name)) }}</td>
-{{--                <td>{{ $row->telephone }}</td>--}}
+                <td>{{ json_decode($row->customer_name) }}</td>
                 <td>{{ $row->mobile }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>
                 <td>{{ $row->notice }}</td>
