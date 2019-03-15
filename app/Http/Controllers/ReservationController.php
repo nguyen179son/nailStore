@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Webklex\IMAP\Client;
 use Illuminate\Support\Facades\Validator;
 
@@ -144,7 +145,7 @@ class ReservationController extends Controller
             'service_type' => $customer_service,
             'notice' => $customer_notice,
             'mail_number' => $email_number,
-            'reservations_time' => date('Y-m-d H:i:s'),
+            'reservation_time' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
     }
@@ -234,11 +235,11 @@ class ReservationController extends Controller
                     return $validation->messages();
                 }
 
-                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservations_time', date('Y-m-d', strtotime($input['day'])))->orderBy('reservations_time', 'desc');
+                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservation_time', date('Y-m-d', strtotime($input['day'])))->orderBy('reservation_time', 'asc');
 
             } else {
                 $today = Carbon::now()->subDay()->format('Y-m-d');
-                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservations_time', $today)->orderBy('reservations_time', 'desc');
+                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservation_time', $today)->orderBy('reservation_time', 'asc');
 
             }
             $data = $data->paginate(10);
@@ -259,7 +260,7 @@ class ReservationController extends Controller
             }
             $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
             foreach ($reservations as $key => $reservation) {
-                if (date('Y-m-d', strtotime($reservation->reservations_time)) != date('Y-m-d', strtotime($input['day']))) {
+                if (date('Y-m-d', strtotime($reservation->reservation_time)) != date('Y-m-d', strtotime($input['day']))) {
                     unset($reservations[$key]);
                 }
             }
@@ -268,7 +269,7 @@ class ReservationController extends Controller
             $today = Carbon::now()->subDay()->format('Y-m-d');
             $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
             foreach ($reservations as $key => $reservation) {
-                if (date('Y-m-d', strtotime($reservation->reservations_time)) != $today) {
+                if (date('Y-m-d', strtotime($reservation->reservation_time)) != $today) {
                     unset($reservations[$key]);
                 }
             }
@@ -282,5 +283,19 @@ class ReservationController extends Controller
         $res = OnlineReservations::find($id);
         $res->delete();
         return response()->json(['success' => 'Record is successfully deleted']);
+    }
+
+    public function update(Request $request)
+    {
+        $input = $request->all();
+        $validation = Validator::make($input, [
+            'id' => 'required|integer',
+            'status' => 'required|string',
+        ]);
+        if ($validation->fails()) {
+            return $validation->messages();
+        }
+        DB::table('online_reservations')->where('id', '=', $input['id'])->update(array('status', $input['status']));
+        return Response::make("", 204);
     }
 }

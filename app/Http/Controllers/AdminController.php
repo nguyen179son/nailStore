@@ -42,14 +42,14 @@ class AdminController extends Controller
                 if ($validation->fails()) {
                     return $validation->messages();
                 }
-                $data = $data->whereDate('reservations_time', date('Y-m-d', strtotime($input['day'])));
+                $data = $data->whereDate('reservation_time', date('Y-m-d', strtotime($input['day'])));
             } else {
                 $today = Carbon::now()->subDay()->format('Y-m-d');
-                $data = $data->whereDate('reservations_time', $today);
+                $data = $data->whereDate('reservation_time', $today);
 
             }
 
-            $data = $data->orderBy('created_at', 'desc')->paginate(10);
+            $data = $data->orderBy('created_at', 'asc')->paginate(10);
 
 
             return view('pagination_online_admin', compact('data'))->render();
@@ -87,7 +87,7 @@ class AdminController extends Controller
                 $data = $data->whereDate('created_at', $today);
             }
 
-            $data = $data->orderBy('created_at', 'desc')->paginate(10);
+            $data = $data->orderBy('created_at', 'asc')->paginate(10);
 
 
             return view('pagination_dropin_admin', compact('data'))->render();
