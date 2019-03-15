@@ -130,6 +130,7 @@ class ReservationController extends Controller
             'service_type' => $customer_service,
             'notice' => $customer_notice,
             'mail_number' => $email_number,
+            'status' => 'waiting',
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),
         ]);
@@ -199,6 +200,7 @@ class ReservationController extends Controller
             'service_type' => $customer_service,
             'notice' => $customer_notice,
             'mail_number' => $email_number,
+            'status' => 'removed',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
@@ -250,7 +252,7 @@ class ReservationController extends Controller
             }
             return $reservations->count();
         } else {
-            $today = Carbon::now()->subDay()->format('Y-m-d');
+            $today = date('Y-m-d');
             $reservations = DB::table("online_reservations")->whereNull('deleted_at')->get();
             foreach ($reservations as $key => $reservation) {
                 if (date('Y-m-d', strtotime($reservation->reservation_time)) != $today) {
@@ -279,7 +281,7 @@ class ReservationController extends Controller
         if ($validation->fails()) {
             return $validation->messages();
         }
-        DB::table('online_reservations')->where('id', '=', $input['id'])->update(array('status', $input['status']));
+        DB::table('online_reservations')->where('id', '=', $input['id'])->update(array('status'=> $input['status']));
         return Response::make("", 204);
     }
 }

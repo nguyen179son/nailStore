@@ -23,9 +23,9 @@ class BookController extends Controller
     {
         $input = $request->all();
         $validation = Validator::make($input, [
-            'name' => 'required|string',
-            'telephone' => 'required|phone_number',
-            'email' => 'required|email',
+            'name' => 'required|string|max:100',
+            'telephone' => 'required|phone_number|max:20',
+            'email' => 'required|email|max:100',
             'type' => 'required|string',
         ]);
         if ($validation->fails()) {
