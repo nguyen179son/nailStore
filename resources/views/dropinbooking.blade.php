@@ -92,7 +92,7 @@
                                        value="{{old('name')}}">
                                 <div style="height: 30px">
                                     @if ($errors->has('name'))
-                                        <div class="alert" style="padding-top: 0;color: red">{{ $errors->first('name') }}</div>
+                                        <div class="alert" style="padding-top: 0;color: red;font-size: 12px;">{{ $errors->first('name') }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                                 <input class="form-control" type="text" name="email" placeholder="Enter your email" value="{{old('email')}}">
                                 <div style="height: 30px">
                                     @if ($errors->has('email'))
-                                        <div class="alert" style="padding-top: 0;color: red">{{ $errors->first('email') }}</div>
+                                        <div class="alert" style="padding-top: 0;color: red;font-size: 12px;">{{ $errors->first('email') }}</div>
                                     @endif
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                 <input class="form-control" type="text" name="telephone" placeholder="Enter your phone" value="{{old('telephone')}}">
                                 <div style="height: 30px">
                                     @if ($errors->has('telephone'))
-                                        <div class="alert" style="padding-top: 0;color: red">{{ $errors->first('telephone') }}</div>
+                                        <div class="alert" style="padding-top: 0;color: red;font-size: 12px;">{{ $errors->first('telephone') }}</div>
                                     @endif
                                 </div>
                             </div>

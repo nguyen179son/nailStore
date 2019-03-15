@@ -91,7 +91,7 @@ $(document).ready(function () {
                     //     }, 5000);
                     // });
                     $('#flash-message').flash_message({
-                        text: 'Added to cart!',
+                        text: 'Customer successfully added!',
                         how: 'append'
                     });
                 } else {

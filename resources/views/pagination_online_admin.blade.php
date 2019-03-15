@@ -38,7 +38,7 @@
                     </select>
                 </td>
                 <td>
-                    <a href="#" class="settings" title="Send a message" data-toggle="tooltip"
+                    <a href="sms:{{$row->mobile}}&body=Hej {{ucwords(json_decode($row->customer_name))}}, please be back to Labella within 10 minutes !" class="settings" title="Send a message" data-toggle="tooltip"
                        data-telephone="{{$row->mobile}}">
                         <i class="material-icons">textsms</i>
                     </a>

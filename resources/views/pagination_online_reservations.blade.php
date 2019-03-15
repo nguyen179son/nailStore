@@ -15,7 +15,7 @@
     @foreach($data as $key => $row)
         <tr>
             <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
-            <td>{{ json_decode($row->customer_name) }}</td>
+            <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
             <td>{{ $row->mobile }}</td>
             <td>{{ explode(' ',$row->reservation_time)[1] }}</td>
             <td>{{ $row->service_type }}</td>

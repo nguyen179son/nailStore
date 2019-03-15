@@ -1,12 +1,12 @@
 <table class="table table-striped table-hover" id="drop-in-table">
     <thead>
     <tr>
-        <th width="5%">#</th>
+        <th width="7%">#</th>
         <th width="25%">Name</th>
         <th width="20%">Phone</th>
         <th width="20%">Service</th>
         <th width="15%">Status</th>
-        <th width="15%">Action</th>
+        <th width="13%">Action</th>
     </tr>
     </thead>
     <tbody>

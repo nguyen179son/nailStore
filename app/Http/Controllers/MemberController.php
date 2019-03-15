@@ -35,8 +35,8 @@ class MemberController extends Controller
     public function addMember(Request $request) {
         $input = $request->all();
         $validation = Validator::make($input, [
-            'email' => 'required|email',
-            'name' => 'required|string'
+            'email' => 'required|email|max: 100',
+            'name' => 'required|string|max: 100'
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);

@@ -50,7 +50,7 @@
 @csrf
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-purple-gradient" id="mainNav">
         <div class="container">
-            <a class="navbar-brand " href="#page-top" id="logo-text">Labella</a>
+            <a class="navbar-brand " href="/" id="logo-text">Labella</a>
 
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -137,7 +137,33 @@
                                                 <label style="padding-top: 1px;">Toe nail</label>
                                             </div>
                                         </div>
+                                    </div>
 
+                                    <div class="row mb-10px">
+                                        <div class="pretty p-default p-curve p-bigger">
+                                            <input type="checkbox" class="checkbox-type" value="Nagel"/>
+                                            <div class="state p-primary">
+                                                <label style="padding-top: 1px;">Nagel</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-10px">
+                                        <div class="pretty p-default p-curve p-bigger">
+                                            <input type="checkbox" class="checkbox-type" value="Singel"/>
+                                            <div class="state p-primary">
+                                                <label style="padding-top: 1px;">Singel</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-10px">
+                                        <div class="pretty p-default p-curve p-bigger">
+                                            <input type="checkbox" class="checkbox-type" value="Manikyr"/>
+                                            <div class="state p-primary">
+                                                <label style="padding-top: 1px;">Manikyr</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +176,7 @@
                                     <div class="row mb-10px">
 
                                         <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" class="checkbox-status" value="waiting" />
+                                            <input type="checkbox" class="checkbox-status" value="waiting" checked/>
                                             <div class="state p-primary">
                                                 <label style="padding-top: 1px;">Waiting</label>
                                             </div>
@@ -159,7 +185,7 @@
                                     <div class="row mb-10px">
 
                                         <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" class="checkbox-status" value="doing"/>
+                                            <input type="checkbox" class="checkbox-status" value="doing" checked/>
                                             <div class="state p-success">
                                                 <label style="padding-top: 1px;">Doing</label>
                                             </div>
@@ -168,7 +194,7 @@
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" class="checkbox-status" value="done"/>
+                                            <input type="checkbox" class="checkbox-status" value="done" checked/>
                                             <div class="state p-warning">
                                                 <label style="padding-top: 1px;">Done</label>
                                             </div>
@@ -177,7 +203,7 @@
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" class="checkbox-status" value="removed" />
+                                            <input type="checkbox" class="checkbox-status" value="removed" checked/>
                                             <div class="state p-danger">
                                                 <label style="padding-top: 1px;">Removed</label>
                                             </div>
@@ -246,9 +272,6 @@
     </div>
 </div>
 
-
-    <a href="sms:+46765507228&body=hahahaahahaha">Link IOS</a>
-    <a href="sms:+19725551212?body=hello%20there">Link Android</a>
 
     <script src="{{ URL::asset('/js/admin.js') }}"></script>
 </body>
