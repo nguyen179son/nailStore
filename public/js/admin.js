@@ -42,15 +42,15 @@ $(document).ready(function () {
     $.ajax({
         url: "/admin/fetch_onl?page=1",
         data: {
-            day:  $('#date').val()
+            day: $('#date').val()
         },
         success: function (data) {
             $('#booking-queue-table').html(data);
         }
     });
     $('.dropdown').find('button').text('Booking');
-window.data = [];
-window.service_type = [];
+    window.data = [];
+    window.service_type = [];
 });
 window.data = [];
 window.service_type = [];
@@ -91,7 +91,7 @@ function showBookingTable(element) {
     $(element).parents('div.dropdown').find('button').text('Booking');
 }
 
-$('body').on('change',"#date",function () {
+$('body').on('change', "#date", function () {
     var date = $('#date').val();
     if (window.check == 0) {
         $.ajax({
@@ -123,7 +123,7 @@ $('body').on('change',"#date",function () {
 });
 
 $('body').on('click', "input[class='checkbox-type']", function () {
-    window.service_type=[];
+    window.service_type = [];
 
     $.each($("input[class='checkbox-type']:checked"), function () {
         window.service_type.push($(this).val());
@@ -158,15 +158,15 @@ $('body').on('click', "input[class='checkbox-type']", function () {
     }
 });
 
-$('body').on('click','.delete',function () {
-    $("#confirm-delete").attr('book-id',$(this).attr("id"));
+$('body').on('click', '.delete', function () {
+    $("#confirm-delete").attr('book-id', $(this).attr("id"));
 
 });
 
-$('body').on('click','#confirm-delete',function () {
-    if (check==1) {
+$('body').on('click', '#confirm-delete', function () {
+    if (check == 1) {
         $.ajax({
-            url: "/reservations/"+$(this).attr("book-id"),
+            url: "/reservations/" + $(this).attr("book-id"),
             type: "DELETE",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
@@ -188,7 +188,7 @@ $('body').on('click','#confirm-delete',function () {
         });
     } else {
         $.ajax({
-            url: "/dropinBooking/"+$(this).attr("book-id"),
+            url: "/dropinBooking/" + $(this).attr("book-id"),
             type: "DELETE",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
@@ -212,8 +212,11 @@ $('body').on('click','#confirm-delete',function () {
 
     $(".modal").modal('hide');
 });
-
-$('body').on('change','.dropdown-status',function () {
+window.oldVal='';
+$('body').on('focusin', '.dropdown-status',function(){
+    window.oldVal = $(this).val();
+});
+$('body').on('change', '.dropdown-status', function () {
     console.log($(this).val(), $(this).attr("id"));
     if (window.check == 0) {
         $.ajax({
@@ -239,20 +242,6 @@ $('body').on('change','.dropdown-status',function () {
                         $('#drop-in-queue-table').html(data);
                     }
                 });
-            }
-        });
-
-        $.ajax({
-            url: "/member/addPoint",
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $("input[name=_token]").val()
-            },
-            data: {
-                email: $(this).attr("data-email")
-            },
-            success: function (data) {
-                console.log(data);
             }
         });
 
@@ -284,10 +273,41 @@ $('body').on('change','.dropdown-status',function () {
         });
 
     }
-
+    if ($(this).val() == 'done' && window.oldVal != 'done') {
+        $.ajax({
+            url: "/member/addPoint",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                email: $(this).children(":first").attr("data-email"),
+                name: $(this).children(":first").attr("data-name")
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+    if ($(this).val() != 'done' && window.oldVal == 'done') {
+        $.ajax({
+            url: "/member/minusPoint",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                email: $(this).children(":first").attr("data-email"),
+                name: $(this).children(":first").attr("data-name")
+            },
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
 });
 $('body').on('click', "input[class='checkbox-status']", function () {
-    window.data=[];
+    window.data = [];
     $.each($("input[class='checkbox-status']:checked"), function () {
         // console.log($(this).attr('name'));
         window.data.push($(this).val());

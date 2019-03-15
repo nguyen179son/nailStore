@@ -16,19 +16,19 @@
                 <td>{{ $row->id }}</td>
                 <td><a href="#">{{ $row->name }}</a></td>
                 <td>{{ $row->telephone }}</td>
-                <td><span class="badge badge-secondary" data-email="{{$row->email}}">{{ $row->type }}</span></td>
+                <td><span class="badge badge-secondary" data-email="{{$row->email}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
                 <td>
                     <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}">
-                        <option value="wating" {{$row->status=='wating'?'selected':''}}>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="wating" {{$row->status=='wating'?'selected':''}}>
                             waiting
                         </option>
-                        <option value="doing" {{$row->status=='doing'?'selected':''}}>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="doing" {{$row->status=='doing'?'selected':''}}>
                             doing
                         </option>
-                        <option value="done" {{$row->status=='done'?'selected':''}}>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
                         </option>
-                        <option value="removed" {{$row->status=='removed'?'selected':''}}>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="removed" {{$row->status=='removed'?'selected':''}}>
                             removed
                         </option>
                     </select>

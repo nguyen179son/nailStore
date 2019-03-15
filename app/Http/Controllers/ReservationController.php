@@ -276,7 +276,7 @@ class ReservationController extends Controller
         if ($validation->fails()) {
             return $validation->messages();
         }
-        DB::table('online_reservations')->where('id', '=', $input['id'])->update(array('status', $input['status']));
+        DB::table('online_reservations')->where('id', '=', $input['id'])->update(array('status'=> $input['status']));
         return Response::make("", 204);
     }
 }

@@ -40,6 +40,7 @@ Route::post('/member','MemberController@store');
 Route::get('/members','MemberController@show');
 
 Route::post('/member/addPoint','MemberController@addPoint');
+Route::post('/member/minusPoint','MemberController@minusPoint');
 Route::get('/member/{id}','MemberController@history');
 
 Route::get('/admin/login','AdminLoginController@getLogin')->name('getAdminLogin');
