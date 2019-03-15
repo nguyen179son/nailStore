@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+    <link rel="icon" href="{{URL::asset('/images/labella_logo.png')}}">
     <title>Admin login</title>
 
     <!-- Google font -->
@@ -43,28 +43,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ml-auto">
-                <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li> -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button"
-                       aria-haspopup="true" aria-expanded="false">Home</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/#introduction">Introduction</a>
-                        <a class="dropdown-item" href="/#gallery">Gallery</a>
-                        <a class="dropdown-item" href="/#contact">Contact</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679">Online booking</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/dropinQueue">Today's Queue</a>
-                </li>
-            </ul>
 
-        </div>
     </div>
 </nav>
 
