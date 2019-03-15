@@ -16,11 +16,11 @@
         @foreach($data as $key => $row)
             <tr style="word-break: break-all">
                 <td>{{ $row->id }}</td>
-                <td>{{ json_decode($row->customer_name) }}</td>
+                <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
                 <td>{{ $row->mobile }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>
                 <td>{{ $row->notice }}</td>
-                <td>{{ explode(' ',$row->reservation_time)[1] }}</td>
+                <td>{{ substr(explode(' ',$row->reservation_time)[1], 0, 5) }}</td>
                 <td>
                     <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}" data-email="{{$row->email}}" data-name="{{$row->customer_name}}">
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="waiting" {{$row->status=='waiting'?'selected':''}}>
