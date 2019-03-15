@@ -28,9 +28,12 @@ class MemberController extends Controller
         return response()->json(['success' => 'Record is successfully added']);
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        $members = DB::table("customers")->orderBy("point", "desc")->paginate(3);
+        $members = DB::table("customers");
+        $keyword = $request->keyword;
+        $members = $members->where('name','like', '%' . $keyword . '%');
+        $members = $members->orderBy("point", "desc")->paginate(3);
         return view("pagination_customers", compact("members"))->render();
     }
 

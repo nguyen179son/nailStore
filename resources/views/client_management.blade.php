@@ -58,7 +58,7 @@
                                 </div>
 
                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                    <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="keyword">
                                 </div>
                             </div>
                         </div>

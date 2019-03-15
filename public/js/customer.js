@@ -10,11 +10,6 @@ $(document).ready(function () {
         if(window.check==0) {
             $.ajax({
                 url: "/customer-management/show?page=" + page,
-                data: {
-                    status: window.data,
-                    service_type: window.service_type,
-                    day: $('#date').val()
-                },
                 success: function (data) {
                     $('#customer-table').html(data);
                 }
@@ -44,9 +39,23 @@ $(document).ready(function () {
     });
     fetch_data(1);
 
+    $('body').on("change", "#keyword", function () {
+        console.log($('#keyword').val());
+        $.ajax({
+            url: "/customer-management/show?page=1",
+            data: {
+                keyword: $('#keyword').val()
+            },
+            success: function (data) {
+                $('#customer-table').html(data);
+            }
+        });
+    })
+
     $('body').on('click', '#submit-add-customer', function(e) {
         $('#form-add-customer').submit();
         e.preventDefault();
     });
+
 });
 
