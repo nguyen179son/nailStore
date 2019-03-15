@@ -155,6 +155,10 @@ body
 	font-weight: 700;
 }
 
+.mt-50px {
+	margin-top: 50px;
+}
+
 .booking-cta p {
     font-size: 16px;
     font-weight: 600;
@@ -175,7 +179,17 @@ body
     #booking {
         min-height: 1100px;
     }
-    
+
+	.mt-50px {
+		margin-top: -100px;
+	}
+}
+
+@media (min-width:768px) {
+
+	.mt-50px {
+		margin-top: -100px;
+	}
 }
 
 /* Block scrolling down... */
@@ -208,9 +222,7 @@ body
 	height: 60px;
 }
 
-.mt-50px {
-	margin-top: 50px;
-}
+
 
 .pv-5px {
 	padding-top: 5px;

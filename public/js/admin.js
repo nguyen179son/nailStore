@@ -346,7 +346,14 @@ function setDefaultValue() {
     // Set today
     $(".date-picker").each(function () {
         $(this).val(getToday());
+        $(".selected-date").text($(this).val());
+
+        $(this).on('change', function() {
+            $(".selected-date").text($(this).val());
+        });
     });
+
+
 }
 
 function getToday() {
