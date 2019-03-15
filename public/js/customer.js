@@ -51,5 +51,11 @@ $(document).ready(function () {
             }
         });
     })
+
+    $('body').on('click', '#submit-add-customer', function(e) {
+        $('#form-add-customer').submit();
+        e.preventDefault();
+    });
+
 });
 
