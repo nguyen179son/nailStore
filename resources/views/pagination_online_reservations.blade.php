@@ -1,11 +1,11 @@
 <table class="table table-striped table-hover" id="booking-queue-table">
     <thead>
     <tr>
-        <th>#</th>
-        <th class="max-width-300px">Name</th>
-        <th class="max-width-300px">Phone</th>
-        <th class="max-width-300px">Time</th>
-        <th class="max-width-250px">Service</th>
+        <th width="10%">#</th>
+        <th width="30%">Name</th>
+        <th width="30%">Phone</th>
+        <th width="15%">Time</th>
+        <th width="15%">Service</th>
 
 
     </tr>
@@ -13,7 +13,7 @@
     <tbody>
 
     @foreach($data as $key => $row)
-        <tr>
+        <tr style="word-break: break-all">
             <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
             <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
             <td>{{ $row->mobile }}</td>

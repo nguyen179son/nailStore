@@ -1,18 +1,16 @@
 <table class="table table-striped table-hover" id="drop-in-queue-table">
     <thead>
     <tr>
-        <th>#</th>
-        <th class="max-width-300px">Name</th>
-        <th class="max-width-300px">Phone</th>
-        <th class="max-width-250px">Service</th>
-
-
+        <th width="10%">#</th>
+        <th width="50%">Name</th>
+        <th width="20%">Phone</th>
+        <th width="20%">Service</th>
     </tr>
     </thead>
     <tbody>
     @if(isset($data) && !empty($data))
     @foreach($data as $key => $row)
-        <tr>
+        <tr style="word-break: break-all">
             <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
             <td>{{ $row->name }}</td>
             <td>{{ $row->telephone }}</td>
