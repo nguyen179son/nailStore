@@ -68,8 +68,11 @@
 </nav>
 <div id="main-container" class="container bg-gray-0 border-radius-5px pv-20px mv-20px mt-200px">
     <div class="row">
-        <div class="col-xl-12">
+        <div class="col-xl-4">
             <h2 style="font-size:2rem;"><b>User Management</b></h2>
+        </div>
+        <div class="col-xl-6" id="flash-message">
+
         </div>
     </div>
     <div class="row">
@@ -163,7 +166,8 @@
                                             <input class="form-control" type="email" id="email-add-customer"
                                                    name="email" placeholder="Email"
                                                    value="">
-                                            <div style="height: 30px">
+                                            <div style="height: 30px" id="email-error">
+
                                             </div>
                                         </div>
 
@@ -171,7 +175,7 @@
                                             <span class="form-label">Name</span>
                                             <input class="form-control" type="text" id="name-add-customer" name="name"
                                                    placeholder="Name" value="">
-                                            <div style="height: 30px">
+                                            <div style="height: 30px" id="name-error">
                                             </div>
                                         </div>
 

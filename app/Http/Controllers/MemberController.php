@@ -33,14 +33,21 @@ class MemberController extends Controller
     }
 
     public function addMember(Request $request) {
+        $input = $request->all();
+        $validation = Validator::make($input, [
+            'email' => 'required|email',
+            'name' => 'required|string'
+        ]);
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->messages()]);
+        }
         $email = $request->email;
         $name = $request->name;
 //        dd($email, $name);
         $check = DB::table("customers")->where("email", "=",$email)->first();
         if ($check != null) {
             return response()->json([
-                "success" => false,
-                "message" => "Customer already existed !"
+                "errors" => ['email'=>["Duplicated email"]]
             ]);
         }
         DB::table("customers")->insert([
