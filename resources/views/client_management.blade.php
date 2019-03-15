@@ -39,6 +39,11 @@
 <body>
     <div id="main-container" class="container bg-gray-0 border-radius-5px pv-20px mv-20px">
         <div class="row">
+            <div class="col-xl-12">
+                <h2 style="font-size:16pt;"><b>User Management</b></h2>
+            </div>
+        </div>
+        <div class="row">
             <div id="right-panel" class="col-xl-12 col-lg-12 col-md-12">
                 <div class="">
                     <div class="table-wrapper">
@@ -46,7 +51,9 @@
                             <div class="row">
                                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 float-left">
                                     <div class="row">
-                                        <h2 style="font-size:16pt;"><b>User Management</b></h2>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-customer-modal">
+                                            Add
+                                        </button>
                                     </div>
                                 </div>
 
@@ -88,6 +95,61 @@
 
                                     </div>
                                     <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Modal -->
+            <div class="modal fade" id="add-customer-modal" tabindex="-1" role="dialog" aria-labelledby="add-customer-modal"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-xs-6 col-lg-6 col-md-6 col-sm-8 col-10">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-primary" id="exampleModalLabel">
+                                            <span>Add a new customer</span>
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="history-member">
+                                    <div class="booking-form">
+                                        <form id="form-add-customer" action="" method="post">
+                                            @csrf
+                                            
+                                            <div class="form-group" style="margin-bottom: 0">
+                                                <span class="form-label">Email</span>
+                                                <input class="form-control" type="email" name="email" placeholder="Email"
+                                                    value="">
+                                                <div style="height: 30px">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" style="margin-bottom: 0">
+                                                <span class="form-label">Name</span>
+                                                <input class="form-control" type="text" name="name" placeholder="Name" value="">
+                                                <div style="height: 30px">
+                                                </div>
+                                            </div>
+                                            
+                                            <div id="alert-text" class="alert" style="padding-top: 0;color: red; display: none;"></div>
+                                        
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="submit-add-customer" class="btn btn-primary">Add</button>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
