@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover" id="drop-in-queue-table">
+<table class="table table-striped table-hover" id="drop-in-table">
     <thead>
     <tr>
         <th>#</th>
@@ -18,7 +18,7 @@
                 <td>{{ $row->telephone }}</td>
                 <td><span class="badge badge-secondary">{{ $row->type }}</span></td>
                 <td>
-                    <select class="form-control form-control-lg">
+                    <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}">
                         <option value="wating" {{$row->status=='wating'?'selected':''}}>
                             waiting
                         </option>

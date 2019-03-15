@@ -1,4 +1,4 @@
-<table class="table table-striped table-hover" id="drop-in-queue-table">
+<table class="table table-striped table-hover" id="booking-table">
     <thead>
     <tr>
         <th>#</th>
@@ -20,9 +20,9 @@
                 <td>{{ $row->telephone }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>
                 <td>{{ $row->notice }}</td>
-                <td>{{ explode(' ',$row->reservations_time)[1] }}</td>
+                <td>{{ explode(' ',$row->reservation_time)[1] }}</td>
                 <td>
-                    <select class="form-control form-control-lg">
+                    <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}">
                         <option value="waiting" {{$row->status=='waiting'?'selected':''}}>
                             waiting
                         </option>
