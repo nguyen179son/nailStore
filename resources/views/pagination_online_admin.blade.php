@@ -16,7 +16,7 @@
         @foreach($data as $key => $row)
             <tr>
                 <td>{{ $row->id }}</td>
-                <td><a href="#">{{ $row->customer_name }}</a></td>
+                <td><a href="#">{{ json_decode($row->customer_name) }}</a></td>
                 <td>{{ $row->mobile }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>
                 <td>{{ $row->notice }}</td>

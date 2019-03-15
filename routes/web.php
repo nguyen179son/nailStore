@@ -17,41 +17,47 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dropinBooking','BookController@index');
-Route::post('/dropinBooking','BookController@store');
-Route::get('/dropinBooking/count','BookController@count');
-Route::delete('/dropinBooking/{id}','BookController@destroy');
-Route::post('/dropinBooking/updateStatus','BookController@update');
+Route::get('/dropin-booking', 'BookController@index');
+Route::post('/dropin-booking', 'BookController@store');
+Route::get('/dropin-booking/count', 'BookController@count');
+Route::delete('/dropin-booking/{id}', 'BookController@destroy');
+Route::post('/dropin-booking/update-status', 'BookController@update');
 
-Route::get('/dropinQueue', 'BookController@show');
-Route::get('/dropinQueue/fetch_data', 'BookController@fetch_data');
+Route::get('/dropin-queue', 'BookController@show');
+Route::get('/dropin-queue/fetch-data', 'BookController@fetch_data');
 
 
 Route::get('/reservations', 'ReservationController@getReservations');
-Route::post('/reservations/updateStatus','ReservationController@update');
+Route::post('/reservations/update-status', 'ReservationController@update');
 
 
-Route::get('/reservations/list','ReservationController@show');
-Route::get('/reservations/count','ReservationController@count');
-Route::get('/reservations/fetch_data','ReservationController@fetch_data');
-Route::delete('/reservations/{id}','ReservationController@destroy');
-
-Route::get('/customer-management', 'ClientManagerController@index');
-
-Route::post('/member','MemberController@store');
-Route::get('/customer-management/show','MemberController@show');
-
-Route::post('/member/addPoint','MemberController@addPoint');
-Route::post('/member/minusPoint','MemberController@minusPoint');
-Route::get('/member/{id}','MemberController@history');
-
-Route::get('/admin/login','AdminLoginController@getLogin')->name('getAdminLogin');
-Route::post('/admin/login','AdminLoginController@postLogin');
-
-Route::get('/admin','HomeController@getIndex');
-
-Route::get('/admin/fetch_dropin','AdminController@fetch_data_dropin');
-Route::get('/admin/fetch_onl','AdminController@fetch_data_online');
+Route::get('/reservations/list', 'ReservationController@show');
+Route::get('/reservations/count', 'ReservationController@count');
+Route::get('/reservations/fetch-data', 'ReservationController@fetch_data');
+Route::delete('/reservations/{id}', 'ReservationController@destroy');
 
 
-Route::get('/admin/logout','HomeController@logout')->name("adminLogout");
+Route::post('/member/addPoint', 'MemberController@addPoint');
+Route::post('/member/minusPoint', 'MemberController@minusPoint');
+Route::get('/member/{id}', 'MemberController@history');
+Route::group(['prefix' => '/admin'], function () {
+    Route::get('/login', 'AdminLoginController@getLogin')->name('getAdminLogin');
+    Route::post('/login', 'AdminLoginController@postLogin');
+
+    Route::get('', 'HomeController@getIndex');
+
+    Route::get('/fetch-dropin', 'AdminController@fetch_data_dropin');
+    Route::get('/fetch-onl', 'AdminController@fetch_data_online');
+
+
+    Route::get('/logout', 'HomeController@logout')->name("adminLogout");
+
+    Route::get('/customer-management', 'ClientManagerController@index');
+
+    Route::get('/customer-management/show', 'MemberController@show');
+
+    Route::post('/member/addPoint', 'MemberController@addPoint');
+    Route::get('/member/{id}', 'MemberController@history');
+
+    Route::post('/member', 'MemberController@addMember');
+});

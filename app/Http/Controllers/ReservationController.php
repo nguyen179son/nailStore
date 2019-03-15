@@ -130,8 +130,8 @@ class ReservationController extends Controller
             'service_type' => $customer_service,
             'notice' => $customer_notice,
             'mail_number' => $email_number,
-            'reservation_time' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
     }
 
@@ -219,8 +219,11 @@ class ReservationController extends Controller
                 $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservation_time', date('Y-m-d', strtotime($input['day'])))->orderBy('reservation_time', 'asc');
 
             } else {
-                $today = Carbon::now()->subDay()->format('Y-m-d');
-                $data = DB::table("online_reservations")->whereNull('deleted_at')->whereDate('reservation_time', $today)->orderBy('reservation_time', 'asc');
+                $today = date('Y-m-d');
+                $data = DB::table("online_reservations")
+                    ->whereNull('deleted_at')
+                    ->whereDate('reservation_time', $today)
+                    ->orderBy('reservation_time', 'asc');
 
             }
             $data = $data->paginate(10);

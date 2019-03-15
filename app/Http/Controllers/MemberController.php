@@ -11,6 +11,10 @@ use Validator;
 
 class MemberController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function store(Request $request)
     {
         $input = $request->all();
@@ -26,6 +30,31 @@ class MemberController extends Controller
         $member->save();
 
         return response()->json(['success' => 'Record is successfully added']);
+    }
+
+    public function addMember(Request $request) {
+        $email = $request->email;
+        $name = $request->name;
+//        dd($email, $name);
+        $check = DB::table("customers")->where("email", "=",$email)->first();
+        if ($check != null) {
+            return response()->json([
+                "success" => false,
+                "message" => "Customer already existed !"
+            ]);
+        }
+        DB::table("customers")->insert([
+            'email' => $email,
+            'name' => $name,
+            'point' => 0,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return response()->json([
+            "success" => true,
+            "message" => "Customer successfully added !"
+        ]);
     }
 
     public function show(Request $request)
