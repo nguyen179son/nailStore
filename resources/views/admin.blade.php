@@ -58,19 +58,8 @@
 
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                            aria-haspopup="true" aria-expanded="false">Home</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Introduction</a>
-                            <a class="dropdown-item" href="#">Gallery</a>
-                            <a class="dropdown-item" href="#">Contact</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Online booking</a>
-                        </div>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#portfolio">Today's Queue</a>
+                        <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}" style="color: purple; opacity: 0.8;">LOGOUT</a>
                     </li>
                 </ul>
             </div>

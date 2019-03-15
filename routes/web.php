@@ -50,3 +50,4 @@ Route::get('/admin','HomeController@getIndex');
 Route::get('/admin/fetch_dropin','AdminController@fetch_data_dropin');
 Route::get('/admin/fetch_onl','AdminController@fetch_data_online');
 
+Route::get('/admin/logout','HomeController@logout')->name("adminLogout");
