@@ -110,6 +110,10 @@ class ReservationController extends Controller
                     $customer_service = "Manikyr";
                     continue;
                 }
+                if (strpos($line, 'Pedikyr') !== false) {
+                    $customer_service = "Pedikyr";
+                    continue;
+                }
             }
             if (strpos($line, 'meddelande') !== false) {
                 $customer_notice = trim(str_replace("Ev. meddelande: ", "", $line), "\t ");
