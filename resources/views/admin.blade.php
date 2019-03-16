@@ -116,27 +116,9 @@
                                     <div class="row mb-10px">
 
                                         <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" class="checkbox-type" value="Eyelashes"/>
+                                            <input type="checkbox" class="checkbox-type" value="Pedikyr"/>
                                             <div class="state p-primary">
-                                                <label style="padding-top: 1px;">Eyelashes</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-10px">
-
-                                        <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" class="checkbox-type" value="Finger nail art"/>
-                                            <div class="state p-primary">
-                                                <label style="padding-top: 1px;">Finger nail</label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-10px">
-                                        <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" class="checkbox-type" value="Toe nail art"/>
-                                            <div class="state p-primary">
-                                                <label style="padding-top: 1px;">Toe nail</label>
+                                                <label style="padding-top: 1px;">Pedikyr</label>
                                             </div>
                                         </div>
                                     </div>
