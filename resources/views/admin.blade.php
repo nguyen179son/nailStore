@@ -74,12 +74,12 @@
             </div>
         </div>
     </nav>
-    <div class="container main-container bg-gray-0 border-radius-5px pv-20px mv-20px mt-100px">
+    <div class="container-fluid main-container bg-gray-0 border-radius-5px pv-20px mv-20px mt-100px">
         <div class="row">
             <div class="col-xl-3 col-lg-3 col-md-4 border-right-1 left-panel">
 
                 <div class="table-wrapper" style="padding-bottom: 0;">
-                    <div class="filter-title">
+                    <div class="table-title filter-title">
                         <div class="row d-flex justify-content-center">
 
                             {{--<div class="dropdown">--}}
@@ -94,8 +94,8 @@
                                 {{--</div>--}}
                             {{--</div>--}}
 
-                                <a id="btn-show-dropin" class="btn btn-light" style="color: purple; margin-right: 10px;" onclick="showDropinTable(this);">Drop-in</a>
-                                <a id="btn-show-booking-online" class="btn btn-light" style="color: purple;" onclick="showBookingTable(this);">Book</a>
+                                <a id="btn-show-dropin" class="btn btn-light btn-lg" style="margin-right: 10px;" onclick="showDropinTable(this);">Drop-in</a>
+                                <a id="btn-show-booking-online" class="btn btn-light btn-lg" onclick="showBookingTable(this);">Book</a>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                                     <div class="row mb-10px">
 
                                         <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" class="checkbox-type" value="Pedikyr"/>
+                                            <input type="checkbox" class="checkbox-type" value="Pedikyr" checked/>
                                             <div class="state p-primary">
                                                 <label style="padding-top: 1px;">Pedikyr</label>
                                             </div>
@@ -125,7 +125,7 @@
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" class="checkbox-type" value="Naglar"/>
+                                            <input type="checkbox" class="checkbox-type" value="Naglar" checked/>
                                             <div class="state p-primary">
                                                 <label style="padding-top: 1px;">Naglar</label>
                                             </div>
@@ -135,7 +135,7 @@
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" class="checkbox-type" value="Manikyr"/>
+                                            <input type="checkbox" class="checkbox-type" value="Manikyr" checked/>
                                             <div class="state p-primary">
                                                 <label style="padding-top: 1px;">Manikyr</label>
                                             </div>
@@ -179,9 +179,9 @@
                 <div class="">
                     <div class="table-wrapper">
                         <div class="table-title">
-                            <div class="row">
+                            {{--<div class="row">--}}
                                 <h4>Admin Management</h4>
-                            </div>
+                            {{--</div>--}}
                         </div>
                         <div id="drop-in-queue-table">
 

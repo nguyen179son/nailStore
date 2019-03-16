@@ -125,9 +125,9 @@
                                         <!-- <input class="form-control" type="date" required> -->
 
                                         <select class="form-control" name="type" id="">
-                                            <option {{ old('type') == "Finger nail art" ? 'selected' : '' }}>Finger nail art</option>
-                                            <option {{ old('type') == "Toe nail art" ? 'selected' : '' }}>Toe nail art</option>
-                                            <option {{ old('type') == "Eyelashes" ? 'selected' : '' }}>Eyelashes</option>
+                                            <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
+                                            <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
+                                            <option {{ old('type') == "Manikyr" ? 'selected' : '' }}>Manikyr</option>
                                         </select>
                                     </div>
                                 </div>
