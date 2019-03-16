@@ -212,6 +212,7 @@ class ReservationController extends Controller
 
     function fetch_data(Request $request)
     {
+
         if ($request->ajax()) {
             $input = $request->all();
             if (isset($input['day']) && $input['day'] != null) {
@@ -222,7 +223,7 @@ class ReservationController extends Controller
                     return $validation->messages();
                 }
                 $data = DB::table("online_reservations")->whereNull('deleted_at')
-                    ->where('reservation_time','>',date('H:i:s'))
+                    ->where('reservation_time','>',date('Y-m-d H:i:s'))
                     ->whereIn('status',['waiting','doing'])
                     ->whereDate('reservation_time', date('Y-m-d', strtotime($input['day'])))
                     ->orderBy('reservation_time', 'asc');
@@ -233,7 +234,7 @@ class ReservationController extends Controller
                     ->whereIn('status',['waiting','doing'])
                     ->whereNull('deleted_at')
                     ->whereDate('reservation_time', $today)
-                    ->where('reservation_time','>',date('H:i:s'))
+                    ->where('reservation_time','>',date('Y-m-d H:i:s'))
                     ->orderBy('reservation_time', 'asc');
 
             }
@@ -265,7 +266,7 @@ class ReservationController extends Controller
         } else {
             $today = date('Y-m-d');
             $reservations = DB::table("online_reservations")
-                ->where('reservation_time','>',date('H:i:s'))
+                ->where('reservation_time','>',date('Y-m-d H:i:s'))
                 ->whereIn('status',['waiting','doing'])
                 ->whereNull('deleted_at')->get();
             foreach ($reservations as $key => $reservation) {
