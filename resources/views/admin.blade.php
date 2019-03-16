@@ -80,20 +80,22 @@
 
                 <div class="table-wrapper" style="padding-bottom: 0;">
                     <div class="filter-title">
-                        <div class="row">
+                        <div class="row d-flex justify-content-center">
 
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle float-left" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Drop-in
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" onclick="showDropinTable(this);">Drop-in</a>
-                                    <a class="dropdown-item" onclick="showBookingTable(this);">Online booking</a>
-                                </div>
-                            </div>
+                            {{--<div class="dropdown">--}}
+                                {{--<button class="btn btn-secondary dropdown-toggle float-left" type="button"--}}
+                                    {{--id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"--}}
+                                    {{--aria-expanded="false">--}}
+                                    {{--Drop-in--}}
+                                {{--</button>--}}
+                                {{--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+                                    {{--<a class="dropdown-item" onclick="showDropinTable(this);">Drop-in</a>--}}
+                                    {{--<a class="dropdown-item" onclick="showBookingTable(this);">Online booking</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
+                                <a id="btn-show-dropin" class="btn btn-light" style="color: purple; margin-right: 10px;" onclick="showDropinTable(this);">Drop-in</a>
+                                <a id="btn-show-booking-online" class="btn btn-light" style="color: purple;" onclick="showBookingTable(this);">Book</a>
                         </div>
                     </div>
                 </div>
@@ -224,6 +226,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="row">
                                         <h2 style="font-size:16pt;" class="selected-date">2019/03/08</h2>
+                                        ksdjasdjas
                                     </div>
                                 </div>
                             </div>
@@ -240,11 +243,7 @@
                     <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <div class="row">
-                                        <h2 style="font-size:16pt;" class="selected-date">2019/03/08</h2>
-                                    </div>
-                                </div>
+                                <h4>Admin Management</h4>
                             </div>
                         </div>
                         <div id="booking-queue-table">
@@ -266,7 +265,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-danger btn-ok" id="confirm-delete">Delete</button>
+                <button class="btn btn-danger btn-ok" id="confirm-delete-button">Delete</button>
             </div>
         </div>
     </div>

@@ -89,10 +89,7 @@ class MemberController extends Controller
             Member::where('email', $input['email'])->increment('point', 1);
             return response()->json(['success' => 'Successfully added point']);
         } else {
-            $input['point'] = 1;
-            $member = new Member($input);
-            $member->save();
-            return response()->json(['success' => 'Successfully added point']);
+            return response()->json(['errors' => 'Error']);
         }
     }
 
@@ -111,10 +108,7 @@ class MemberController extends Controller
             Member::where('email', $input['email'])->decrement('point', 1);
             return response()->json(['success' => 'Successfully decreased point']);
         } else {
-            $input['point'] = 0;
-            $member = new Member($input);
-            $member->save();
-            return response()->json(['success' => 'Successfully decreased point']);
+            return response()->json(['errors' => '']);
         }
     }
 
