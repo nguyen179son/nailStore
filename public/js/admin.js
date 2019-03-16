@@ -159,11 +159,11 @@ $('body').on('click', "input[class='checkbox-type']", function () {
 });
 
 $('body').on('click', '.delete', function () {
-    $("#confirm-delete").attr('book-id', $(this).attr("id"));
+    $("#confirm-delete-button").attr('book-id', $(this).attr("id"));
 
 });
 
-$('body').on('click', '#confirm-delete', function () {
+$('body').on('click', '#confirm-delete-button', function () {
     if (check == 1) {
         $.ajax({
             url: "/reservations/" + $(this).attr("book-id"),

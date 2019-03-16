@@ -266,7 +266,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-danger btn-ok" id="confirm-delete">Delete</button>
+                <button class="btn btn-danger btn-ok" id="confirm-delete-button">Delete</button>
             </div>
         </div>
     </div>

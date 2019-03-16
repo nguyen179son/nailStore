@@ -49,7 +49,8 @@ class AdminController extends Controller
 
             }
 
-            $data = $data->orderBy('created_at', 'asc')->paginate(10);
+
+            $data = $data->orderBy('reservation_time', 'asc')->paginate(10);
 
 
             return view('pagination_online_admin', compact('data'))->render();
