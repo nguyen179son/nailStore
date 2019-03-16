@@ -13,7 +13,7 @@
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr style="word-break: break-all">
-                <td>{{ $row->id }}</td>
+                <td>{{ ($data->currentPage()-1)*10+$row->id }}</td>
                 <td>{{ $row->name }}</td>
                 <td>{{ $row->telephone }}</td>
                 <td><span class="badge badge-secondary" data-email="{{$row->email}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
