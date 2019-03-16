@@ -102,16 +102,12 @@ class ReservationController extends Controller
             }
             if (preg_match("/(\d+) min/", $line, $m)) {
                 $customer_duration = $m[1];
-                if (strpos($line, 'Nagel') !== false) {
-                    $customer_service = "Nagel";
+                if (strpos($line, 'Nagel') !== false || strpos($line, 'Manikyr') !== false) {
+                    $customer_service = "Naglar";
                     continue;
                 }
-                if (strpos($line, 'Singel') !== false) {
-                    $customer_service = "Singel";
-                    continue;
-                }
-                if (strpos($line, 'Manikyr') !== false) {
-                    $customer_service = "Manikyr";
+                if (strpos($line, 'fransar') !== false) {
+                    $customer_service = "Fransar";
                     continue;
                 }
                 if (strpos($line, 'Pedikyr') !== false) {
@@ -168,16 +164,16 @@ class ReservationController extends Controller
             }
             if (strpos($line, 'har avbokats') !== false) {
                 $customer_booking_time = substr(explode("fyllning, ", $line)[1], 0, 16) . ":00";
-                if (strpos($line, 'Nagel') !== false) {
-                    $customer_service = "Nagel";
+                if (strpos($line, 'Nagel') !== false || strpos($line, 'Manikyr') !== false) {
+                    $customer_service = "Naglar";
                     continue;
                 }
-                if (strpos($line, 'Singel') !== false) {
-                    $customer_service = "Singel";
+                if (strpos($line, 'fransar') !== false) {
+                    $customer_service = "Fransar";
                     continue;
                 }
-                if (strpos($line, 'Manikyr') !== false) {
-                    $customer_service = "Manikyr";
+                if (strpos($line, 'Pedikyr') !== false) {
+                    $customer_service = "Pedikyr";
                     continue;
                 }
 

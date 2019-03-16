@@ -125,21 +125,13 @@
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" class="checkbox-type" value="Nagel"/>
+                                            <input type="checkbox" class="checkbox-type" value="Naglar"/>
                                             <div class="state p-primary">
-                                                <label style="padding-top: 1px;">Nagel</label>
+                                                <label style="padding-top: 1px;">Naglar</label>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row mb-10px">
-                                        <div class="pretty p-default p-curve p-bigger">
-                                            <input type="checkbox" class="checkbox-type" value="Singel"/>
-                                            <div class="state p-primary">
-                                                <label style="padding-top: 1px;">Singel</label>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-curve p-bigger">
