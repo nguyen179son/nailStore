@@ -26,14 +26,8 @@
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="waiting" {{$row->status=='waiting'?'selected':''}}>
                             waiting
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="doing" {{$row->status=='doing'?'selected':''}}>
-                            doing
-                        </option>
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
-                        </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="removed" {{$row->status=='removed'?'selected':''}}>
-                            removed
                         </option>
                     </select>
                 </td>
