@@ -41,7 +41,7 @@ class BookController extends Controller
     {
         $data = DB::table('drop_in_reservations')
             ->whereNull('deleted_at')
-            ->whereIn('status',['waiting','doing'])
+            ->whereIn('status',['waiting'])
             ->orderBy('created_at', 'asc')->paginate(10);
 
         return view('dropinQueue', compact('data'));
@@ -51,7 +51,7 @@ class BookController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('drop_in_reservations')
-                ->whereNull('deleted_at')->whereIn('status',['waiting','doing'])
+                ->whereNull('deleted_at')->whereIn('status',['waiting'])
                 ->orderBy('created_at', 'asc')->paginate(10);
             return view('pagination_data', compact('data'))->render();
         }
@@ -68,7 +68,7 @@ class BookController extends Controller
     {
         return DB::table('drop_in_reservations')
             ->whereNull('deleted_at')
-            ->whereIn('status',['waiting','doing'])
+            ->whereIn('status',['waiting'])
             ->count();
     }
 

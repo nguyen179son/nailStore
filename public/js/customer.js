@@ -1,7 +1,8 @@
+window.page = 1;
 $(document).ready(function () {
     $(document).on('click', '.page-link', function (event) {
         event.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
+        window.page = $(this).attr('href').split('page=')[1];
         fetch_data(page);
     });
     window.check = 0;
@@ -40,7 +41,7 @@ $(document).ready(function () {
     });
     fetch_data(1);
 
-    $('body').on("change", "#keyword", function () {
+    $('body').on("keyup", "#keyword", function () {
         $.ajax({
             url: "/admin/customer-management/show?page=1",
             data: {
@@ -94,6 +95,16 @@ $(document).ready(function () {
                         text: 'Customer successfully added!',
                         how: 'append'
                     });
+                    if ($(".table-hover td").closest("tr").length == 10) {
+                        if (window.page == 0) {
+                            window.page = window.page + 1;
+                        } else {
+                            if ($(".page-link").length == window.page) {
+                                window.page = window.page + 1;
+                            }
+                        }
+                    }
+                    fetch_data(window.page);
                 } else {
                     if (data.errors.email[0]) {
                         $("#email-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.email[0] + "</div>")
