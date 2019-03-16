@@ -16,7 +16,11 @@ class ReservationController extends Controller
 {
     public function getReservations()
     {
-        $mbox = imap_open(env("IMAP_MAILBOX"), env("IMAP_EMAIL"), env("IMAP_PASSWORD"));
+        try {
+            $mbox = imap_open(env("IMAP_MAILBOX"), env("IMAP_EMAIL"), env("IMAP_PASSWORD"));
+        } catch (\Exception $e) {
+            return abort(500);
+        }
         if ($mbox === false) {
             return "Error opening mailbox";
         }
@@ -59,13 +63,14 @@ class ReservationController extends Controller
                     continue;
                 } else continue;
 
-                array_push($email_list, $message);
+//                array_push($email_list, $message);
 
 
             }
         }
         imap_close($mbox);
-        dd($email_list);
+        return response("", 200);
+//        dd($email_list);
 
     }
 
@@ -77,7 +82,6 @@ class ReservationController extends Controller
         foreach ($lines as $line) {
             if (strpos($line, 'Kundens namn') !== false) {
                 $customer_name = json_encode(mb_strtolower(trim(str_replace("Kundens namn: ", "", $line), "\t ")));
-                echo $customer_name . "<br>";
                 continue;
             }
             if (strpos($line, 'Mobil') !== false) {
@@ -148,7 +152,6 @@ class ReservationController extends Controller
         foreach ($lines as $line) {
             if (strpos($line, 'Kundens namn') !== false) {
                 $customer_name = json_encode(mb_strtolower(trim(str_replace("Kundens namn: ", "", $line), "\t ")));
-                echo $customer_name . "<br>";
                 continue;
             }
             if (strpos($line, 'Mobil') !== false) {
