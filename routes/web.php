@@ -27,7 +27,7 @@ Route::get('/dropin-queue', 'BookController@show');
 Route::get('/dropin-queue/fetch-data', 'BookController@fetch_data');
 
 
-Route::get('/reservations', 'ReservationController@getReservations');
+Route::get('/update-online-reservation-emails', 'ReservationController@getReservations')->name('updateOnlineReservationEmails');
 Route::post('/reservations/update-status','ReservationController@update');
 
 

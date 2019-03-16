@@ -150,5 +150,30 @@ $(document).ready(function () {
 
         });
     };
+
+    function sendRequestToUpdateEmail() {
+        $.ajax({
+            type: "get",
+            url: '/update-online-reservation-emails',
+            success:function(data)
+            {
+                //console.log the response
+                console.log("sent");
+                //Send another request in 10 seconds.
+                setTimeout(function(){
+                    sendRequestToUpdateEmail();
+                }, 60000);
+            },
+
+            error:function() {
+                console.log("error");
+                setTimeout(function(){
+                    sendRequestToUpdateEmail();
+                }, 60000);
+            }
+        });
+    }
+
+    sendRequestToUpdateEmail();
 });
 
