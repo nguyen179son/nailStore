@@ -22,20 +22,14 @@
                         <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="wating" {{$row->status=='wating'?'selected':''}}>
                             waiting
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="doing" {{$row->status=='doing'?'selected':''}}>
-                            doing
-                        </option>
                         <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
-                        </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="removed" {{$row->status=='removed'?'selected':''}}>
-                            removed
                         </option>
                     </select>
                 </td>
                 <td>
-                    <a href="sms:{{$row->mobile}}&body=Hej {{ucwords(json_decode($row->customer_name))}}, please be back to Labella within 10 minutes !" class="settings" title="Send a message" data-toggle="tooltip"
-                       data-telephone="{{$row->mobile}}">
+                    <a href="sms:{{$row->telephone}}&body=Hej {{ucwords(json_decode($row->name))}}, please be back to Labella within 10 minutes !" class="settings" title="Send a message" data-toggle="tooltip"
+                       data-telephone="{{$row->telephone}}">
                         <i class="material-icons">textsms</i>
                     </a>
                     <a href="#" class="delete" title="Remove" data-toggle="modal" data-target="#confirm-delete" id="{{$row->id}}">

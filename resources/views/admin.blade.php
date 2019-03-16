@@ -158,15 +158,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-10px">
-
-                                        <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" class="checkbox-status" value="doing" checked/>
-                                            <div class="state p-success">
-                                                <label style="padding-top: 1px;">Doing</label>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="row mb-10px">
                                         <div class="pretty p-default p-round p-bigger">
@@ -177,14 +168,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="row mb-10px">
-                                        <div class="pretty p-default p-round p-bigger">
-                                            <input type="checkbox" class="checkbox-status" value="removed" checked/>
-                                            <div class="state p-danger">
-                                                <label style="padding-top: 1px;">Removed</label>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -197,11 +180,7 @@
                     <div class="table-wrapper">
                         <div class="table-title">
                             <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <div class="row">
-                                        <h2 style="font-size:16pt;" class="selected-date">2019/03/08</h2>
-                                    </div>
-                                </div>
+                                <h4>Admin Management</h4>
                             </div>
                         </div>
                         <div id="drop-in-queue-table">
