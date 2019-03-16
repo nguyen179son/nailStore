@@ -13,7 +13,10 @@
             <tr style="word-break: break-all">
                 <td>{{ ($members->currentPage()-1)*10+$key+1 }}</td>
                 <td ><a href="#" data-toggle="modal" data-target="#history-modal" data-id="{{$member->id}}"
-                                          class="member-name">{{ ucwords(trim($member->name, "\"")) }}</a></td>
+                                          class="member-name" style="text-decoration: underline;">
+                        {{ ucwords(trim($member->name, "\"")) }}
+                    </a>
+                </td>
                 <td>{{$member->email}}
                 </td>
                 <td>{{$member->point}}</td>

@@ -149,7 +149,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
-                        <div class="col-xs-6 col-lg-6 col-md-6 col-sm-8 col-10">
+                        <div class="col-xs-6 col-lg-6 col-md-9 col-sm-10 col-12">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title text-primary" id="exampleModalLabel">

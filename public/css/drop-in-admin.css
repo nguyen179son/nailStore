@@ -1,5 +1,5 @@
 .main-container {
-    min-width: 1000px;
+    min-width: 1400px;
 }
 
 body {
@@ -7,31 +7,31 @@ body {
 }
 
 .filter-title {
-    padding-bottom: 15px;
-    background: #299be4;
-    color: #fff;
-    padding: 15px 30px;
-    margin: -20px -25px 10px;
+    /*padding-bottom: 15px;*/
+    /*background: #299be4;*/
+    /*color: #fff;*/
+    /*padding: 15px 30px;*/
+    /*margin: -20px -25px 10px;*/
     border-radius: 3px 3px 0 0;
 }
 
-.filter-title .row {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-}
+/*.filter-title .row {*/
+    /*width: 100%;*/
+    /*margin-left: 0;*/
+    /*margin-right: 0;*/
+/*}*/
 
-.filter-title .dropdown {
-    width: 100%;
-}
+/*.filter-title .dropdown {*/
+    /*width: 100%;*/
+/*}*/
 
-.filter-title .dropdown .btn {
-    width: 100%;
-    background-color: rgb(41, 155, 228);
-    border-color: #fff;
-    font-size: 16pt;
-    font-weight: 600;
-}
+/*.filter-title .dropdown .btn {*/
+    /*width: 100%;*/
+    /*background-color: rgb(41, 155, 228);*/
+    /*border-color: #fff;*/
+    /*font-size: 16pt;*/
+    /*font-weight: 600;*/
+/*}*/
 
 .right-panel .dropdown .btn {
     background-color: inherit;
@@ -83,3 +83,26 @@ body {
 .bootstrap-select {
     background-color: inherit !important;
 }
+
+#btn-show-dropin, #btn-show-booking-online {
+    color: #6648b1;
+    box-shadow: 0px 3px 1px #bdc3c7;
+    -moz-box-shadow: 0px 3px 1px #bdc3c7;
+    -webkit-box-shadow: 0px 3px 1px #bdc3c7;
+}
+
+#btn-show-dropin:hover, #btn-show-booking-online:hover {
+    box-shadow: 0px 3px 1px #42729B;
+    -moz-box-shadow: 0px 3px 1px #42729B;
+    -webkit-box-shadow: 0px 3px 1px #42729B;
+}
+
+#btn-show-dropin.active, #btn-show-booking-online.active {
+    background-color: #ecf0f1;
+    color:  #bdc3c7;
+    box-shadow: 0px 0px 1px #42729B;
+    -moz-box-shadow: 0px 0px 1px #42729B;
+    -webkit-box-shadow: 0px 0px 1px #42729B;
+
+}
+

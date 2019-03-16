@@ -16,7 +16,7 @@
         <tr style="word-break: break-all">
             <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
             <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
-            <td>{{ $row->mobile }}</td>
+            <td>{{ substr($row->mobile, 0, 4) . '****' . substr($row->mobile,  -4)}}</td>
             <td>{{ explode(' ',$row->reservation_time)[1] }}</td>
             <td>{{ $row->service_type }}</td>
         </tr>

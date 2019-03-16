@@ -10,7 +10,8 @@ a:hover {
 
 .carousel-inner img {
     width: 100%;
-    max-height: 90%;
+    /*height: 100px;*/
+    /*max-height: 60%;*/
 }
 
 .carousel-caption {
@@ -20,6 +21,7 @@ a:hover {
 }
 
 .carousel-caption h3 {
+    font-family: 'Dancing Script', cursive;
     font-size: 450%;
     font-weight: 500;
     text-shadow: 1px 1px 30px rgba(0,0,0,0.9);
@@ -27,8 +29,8 @@ a:hover {
     padding-bottom: 1rem;
 }
 
-.carousel-caption .btn {
-    padding: 15px 30px;
+.carousel-caption .btn-lg {
+    padding: 15px 50px;
     margin-left: 5px;
     margin-right: 5px;
     font-weight: 600;
@@ -257,10 +259,20 @@ footer a {
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-    
+    .carousel-caption h3 {
+        font-size: 550%;
+    }
+
+    .carousel-caption .btn-lg {
+        padding: 15px 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-    
+    .carousel-caption h3 {
+        font-size: 550%;
+    }
 }

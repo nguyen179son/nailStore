@@ -13,7 +13,7 @@
         <tr style="word-break: break-all">
             <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
             <td>{{ $row->name }}</td>
-            <td>{{ $row->telephone }}</td>
+            <td>{{ substr($row->telephone, 0, 4) . '****' . substr($row->telephone,  -4)}}</td>
             <td>{{ $row->type }}</td>
         </tr>
     @endforeach
