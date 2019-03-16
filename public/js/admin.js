@@ -10,6 +10,9 @@ $(document).ready(function () {
     });
     $("#booking-container").hide();
 
+    $("#btn-show-dropin").removeClass("active");
+    $("#btn-show-booking-online").addClass("active");
+
     function fetch_data(page) {
 
         if (window.check == 0) {
@@ -58,6 +61,10 @@ window.service_type = [];
 function showDropinTable(element) {
     $("#booking-table").hide();
     $("#dropin-table").show();
+
+    $("#btn-show-dropin").addClass("active");
+    $("#btn-show-booking-online").removeClass("active");
+
     window.check = 0;
     $.ajax({
         url: "/admin/fetch-dropin?page=" + 1,
@@ -76,6 +83,10 @@ function showDropinTable(element) {
 function showBookingTable(element) {
     $("#dropin-table").hide();
     $("#booking-table").show();
+
+    $("#btn-show-dropin").removeClass("active");
+    $("#btn-show-booking-online").addClass("active");
+
     window.check = 1;
     $.ajax({
         url: "/admin/fetch-onl?page=1",

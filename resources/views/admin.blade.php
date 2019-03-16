@@ -80,20 +80,22 @@
 
                 <div class="table-wrapper" style="padding-bottom: 0;">
                     <div class="filter-title">
-                        <div class="row">
+                        <div class="row d-flex justify-content-center">
 
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle float-left" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Drop-in
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" onclick="showDropinTable(this);">Drop-in</a>
-                                    <a class="dropdown-item" onclick="showBookingTable(this);">Online booking</a>
-                                </div>
-                            </div>
+                            {{--<div class="dropdown">--}}
+                                {{--<button class="btn btn-secondary dropdown-toggle float-left" type="button"--}}
+                                    {{--id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"--}}
+                                    {{--aria-expanded="false">--}}
+                                    {{--Drop-in--}}
+                                {{--</button>--}}
+                                {{--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+                                    {{--<a class="dropdown-item" onclick="showDropinTable(this);">Drop-in</a>--}}
+                                    {{--<a class="dropdown-item" onclick="showBookingTable(this);">Online booking</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
+                                <a id="btn-show-dropin" class="btn btn-light" style="color: purple; margin-right: 10px;" onclick="showDropinTable(this);">Drop-in</a>
+                                <a id="btn-show-booking-online" class="btn btn-light" style="color: purple;" onclick="showBookingTable(this);">Book</a>
                         </div>
                     </div>
                 </div>
