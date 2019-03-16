@@ -75,9 +75,9 @@
     </ul>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ URL::asset('/images/background1.jpg') }}">
+            <img src="{{ URL::asset('/images/background_2.jpg') }}">
             <div class="carousel-caption">
-                <h3>Nail Service</h3>
+                {{--<h3>Labella Nails</h3>--}}
                 <a class="btn btn-default btn-outline-light btn-lg" style="color: #6648b1;"
                    href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679">Book</a>
                 <a class="btn btn-primary btn-lg" href="#contact">Contact</a>
@@ -148,61 +148,43 @@
     <div class="row">
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
             <figure>
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg"
-                   data-size="1600x1067">
-                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
-                         class="img-fluid">
-                </a>
+                <img alt="picture" src="{{ URL::asset('/images/img_gallery_1.jpg') }}"
+                     class="img-fluid">
             </figure>
         </div>
 
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
             <figure>
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg"
-                   data-size="1600x1067">
-                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
-                         class="img-fluid">
-                </a>
+                <img alt="picture" src="{{ URL::asset('/images/img_gallery_2.jpg') }}"
+                     class="img-fluid">
             </figure>
         </div>
 
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
             <figure>
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg"
-                   data-size="1600x1067">
-                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
-                         class="img-fluid">
-                </a>
+                <img alt="picture" src="{{ URL::asset('/images/img_gallery_3.jpg') }}"
+                     class="img-fluid">
             </figure>
         </div>
 
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
             <figure>
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg"
-                   data-size="1600x1067">
-                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
-                         class="img-fluid">
-                </a>
+                <img alt="picture" src="{{ URL::asset('/images/img_gallery_4.jpg') }}"
+                     class="img-fluid">
             </figure>
         </div>
 
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
             <figure>
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg"
-                   data-size="1600x1067">
-                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
-                         class="img-fluid">
-                </a>
+                <img alt="picture" src="{{ URL::asset('/images/img_gallery_5.jpg') }}"
+                     class="img-fluid">
             </figure>
         </div>
 
         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
             <figure>
-                <a href="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(145).jpg"
-                   data-size="1600x1067">
-                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(145).jpg"
-                         class="img-fluid">
-                </a>
+                <img alt="picture" src="{{ URL::asset('/images/img_gallery_6.jpg') }}"
+                     class="img-fluid">
             </figure>
         </div>
 
@@ -243,15 +225,18 @@
             <h4 class="text-left">Address</h4>
             <p class="text-left">Svartbäcksgatan 7, 753 20 Uppsala, Sverige</p>
             <hr>
-            <h4 class="text-left">Email</h4>
-            <p class="text-left">labella_not_an_official_email@gmail.com</p>
+            <h4 class="text-left">Email & Phone</h4>
+            <p class="text-left">labellaspa2016@gmail.com</p>
+            <p class="text-left">076-897 35 88</p>
             <hr class="d-none d-md-block">
         </div>
 
         <div class="col-xl-2 col-lg-3 col-md-6 col-sm-12 col-12">
             <hr>
             <h4 class="text-left">Opening hours</h4>
-            <p class="text-left">8a.m - 10p.m</p>
+            <p class="text-left">Mon-Fri: 9.00 - 19.00</p>
+            <p class="text-left">Sat: 10.00 - 17.00</p>
+            <p class="text-left">Sun: 11.00 - 17.00</p>
 
             <div class="text-left">
                 <a class="btn btn-primary" href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679"

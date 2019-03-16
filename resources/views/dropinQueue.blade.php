@@ -85,21 +85,15 @@
                 <div class="table-title">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle float-left" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        Drop-in
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" onclick="showDropinTable();">Drop-in</a>
-                                        <a class="dropdown-item" onclick="showBookingTable();">Online booking</a>
-                                    </div>
-                                </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <a id="btn-show-dropin-1" class="btn btn-light btn-lg" style="margin-right: 10px;" onclick="showDropinTable();">Drop-in</a>
                             </div>
 
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <a id="btn-show-booking-online-1" class="btn btn-light btn-lg" onclick="showBookingTable();">Online booking</a>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div href="#" class="btn btn-primary"><i class="material-icons">person</i>
                                     <span id="drop-in-res-num">20</span></div>
                             </div>
@@ -145,21 +139,15 @@
                 <div class="table-title">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle float-left" type="button"
-                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                        Booking
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" onclick="showDropinTable();">Drop-in</a>
-                                        <a class="dropdown-item" onclick="showBookingTable();">Online booking</a>
-                                    </div>
-                                </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <a id="btn-show-dropin-2" class="btn btn-light btn-lg" style="margin-right: 10px;" onclick="showDropinTable();">Drop-in</a>
                             </div>
 
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <a id="btn-show-booking-online-2" class="btn btn-light btn-lg" onclick="showBookingTable();">Online booking</a>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                                 <div href="#" class="btn btn-primary"><i class="material-icons">person</i>
                                     <span id="onl-res-num">20</span></div>
                             </div>
@@ -174,74 +162,7 @@
         </div>
     </div>
 </div>
+    <script src="{{ URL::asset('/js/dropin-queue.js') }}"></script>
 </body>
 
 </html>
-<script>
-    $(document).ready(function () {
-        $("#table-booking").hide();
-        window.check = 0;
-        $(document).on('click', '.page-link', function (event) {
-            event.preventDefault();
-            var page = $(this).attr('href').split('page=')[1];
-            fetch_data(page);
-        });
-
-        function fetch_data(page) {
-            console.log(window.check);
-            if (window.check == 0) {
-                $.ajax({
-                    url: "/dropin-queue/fetch-data?page=" + page,
-                    success: function (data) {
-                        $('#drop-in-queue-table').html(data);
-                    }
-                });
-            } else {
-                $.ajax({
-                    url: "/reservations/fetch-data?page=" + page,
-                    success: function (data) {
-                        $('#booking-table').html(data);
-                    }
-                });
-            }
-        }
-
-        $.ajax({
-            url: "/dropin-booking/count",
-            success: function (data) {
-                $('#drop-in-res-num').text(data);
-            }
-        });
-        $.ajax({
-            url: "/reservations/count",
-            success: function (data) {
-                $('#onl-res-num').text(data);
-            }
-        })
-    });
-
-
-    function showDropinTable() {
-        window.check = 0;
-        $("#table-booking").hide();
-        $("#table-drop-in").show();
-        $.ajax({
-            url: "/dropin-queue/fetch-data?page=" + 1,
-            success: function (data) {
-                $('#drop-in-queue-table').html(data);
-            }
-        });
-    }
-
-    function showBookingTable() {
-        window.check = 1;
-        $("#table-drop-in").hide();
-        $("#table-booking").show();
-        $.ajax({
-            url: "/reservations/fetch-data?page=" + 1,
-            success: function (data) {
-                $('#booking-table').html(data);
-            }
-        });
-    }
-</script>
