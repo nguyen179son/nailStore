@@ -15,7 +15,7 @@
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr style="word-break: break-all">
-                <td>{{ $row->id }}</td>
+                <td>{{ ($data->currentPage()-1)*10+$row->id }}</td>
                 <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
                 <td>{{ $row->mobile }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>
