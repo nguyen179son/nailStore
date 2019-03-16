@@ -67,14 +67,14 @@ $(document).ready(function () {
                 //Send another request in 10 seconds.
                 setTimeout(function(){
                     sendRequestToUpdateEmail();
-                }, 10000);
+                }, 60000);
             },
 
             error:function() {
                 console.log("error");
                 setTimeout(function(){
                     sendRequestToUpdateEmail();
-                }, 10000);
+                }, 60000);
             }
         });
     }
