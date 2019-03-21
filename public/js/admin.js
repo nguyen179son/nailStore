@@ -138,11 +138,6 @@ function showBookingTable(element) {
     $(element).parents('div.dropdown').find('button').text('Booking');
 }
 
-window.onbeforeunload = function () {
-    if (($("#receipt-modal").data('bs.modal') || {})._isShown)
-        return "Do you want to reload page withoud enter the receipt";
-};
-
 $('body').on('change', "#date", function () {
     var date = $('#date').val();
     $.ajax({
@@ -312,13 +307,22 @@ $('body').on('click', '#submit-receipt', function () {
                         $("#note-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.note[0] + "</div>")
                     }
                 } else {
-                    $("#staff-error").html("");
-                    $("#receipt-error").html("");
-                    $("#note-error").html("");
-                    $("#staff").val("");
-                    $("#note").val("");
-                    $("#receipt").val("");
-                    $("#receipt-modal").modal('hide');
+                    $.ajax({
+                        url: "/member/addPoint",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $("input[name=_token]").val()
+                        },
+                        data: {
+                            email: $("#" + window.choosing).children(":first").attr("data-email"),
+                            name: $("#" + window.choosing).children(":first").attr("data-name")
+                        },
+                        success: function (data) {
+                            $("#" + window.choosing).val('done');
+                            window.checkdone = 1;
+                            $("#receipt-modal").modal('hide');
+                        }
+                    });
                 }
             }
         });
@@ -348,19 +352,33 @@ $('body').on('click', '#submit-receipt', function () {
                         $("#note-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.note[0] + "</div>")
                     }
                 } else {
-                    $("#staff-error").html("");
-                    $("#receipt-error").html("");
-                    $("#note-error").html("");
-                    $("#staff").val("");
-                    $("#note").val("");
-                    $("#receipt").val("");
+                    $.ajax({
+                        url: "/member/addPoint",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $("input[name=_token]").val()
+                        },
+                        data: {
+                            email: $("#" + window.choosing).children(":first").attr("data-email"),
+                            name: $("#" + window.choosing).children(":first").attr("data-name")
+                        },
+                        success: function (data) {
+                            location.reload(true);
+                        }
+                    });
+                    // $("#staff-error").html("");
+                    // $("#receipt-error").html("");
+                    // $("#note-error").html("");
+                    // $("#staff").val("");
+                    // $("#note").val("");
+                    // $("#receipt").val("");
                 }
             }
         });
     }
 });
 
-$('body').on('change', '.dropdown-status', function () {
+$('body').on('change', '.dropdown-status', function (e) {
     console.log($(this).val());
     if (window.check == 0) {
         $.ajax({
@@ -418,23 +436,9 @@ $('body').on('change', '.dropdown-status', function () {
         });
     }
     if ($(this).val() == 'done' && window.oldVal != 'done') {
-        $.ajax({
-            url: "/member/addPoint",
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $("input[name=_token]").val()
-            },
-            data: {
-                email: $(this).children(":first").attr("data-email"),
-                name: $(this).children(":first").attr("data-name")
-            },
-            success: function (data) {
-            }
-        });
-        $('#receipt-modal').modal({
-            backdrop: 'static',
-            keyboard: false
-        });
+        window.choosing = $(this).attr('id');
+        window.checkdone=0;
+        $('#receipt-modal').modal('show');
     }
     if ($(this).val() != 'done' && window.oldVal == 'done') {
         $.ajax({
@@ -452,6 +456,16 @@ $('body').on('change', '.dropdown-status', function () {
             }
         });
     }
+});
+$('#receipt-modal').on('hidden.bs.modal', function () {
+    if (window.checkdone != 1)
+        $("#" + window.choosing).val(window.oldVal);
+    $("#staff-error").html("");
+    $("#note-error").html("");
+    $("#receipt-error").html("");
+    $("#receipt").val("");
+    $("#staff").val("");
+    $("#note").val("");
 });
 $('body').on('click', "input[class='checkbox-status']", function () {
     window.data = [];
