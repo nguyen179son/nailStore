@@ -289,7 +289,6 @@
                                             </div>
                                         </div>
 
-
                                         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="id" id="cus-id" value="">
                                         <input type="hidden" name="name" id="cus-name" value="">

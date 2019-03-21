@@ -248,6 +248,9 @@
                         <h5 class="modal-title text-primary" id="exampleModalLabel">
                             <span>Add a new customer</span>
                         </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body" id="history-member">
                         <div class="booking-form">
@@ -283,6 +286,8 @@
                         </div>
                         <div class="modal-footer">
                             <button id="submit-receipt" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                            </button>
                         </div>
                     </div>
                 </div>
