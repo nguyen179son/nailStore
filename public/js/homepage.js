@@ -57,9 +57,13 @@ $(document).ready(function () {
                 content: content
             },
 
+            beforeSend: function() {
+                $('#close-btn').prop('disabled', true);
+                $('#send-complaint').prop('disabled', true);
+            },
+
             success:function(data)
             {
-                console.log(data);
                 if (data.success === true) {
                     $('#message').removeClass("text-danger");
                     $('#message').addClass("text-success");
@@ -69,9 +73,14 @@ $(document).ready(function () {
                 }
                 $('#message').text(data.message);
                 $('#message').removeAttr('hidden');
+
+                $('#complaint-content').val("");
+
                 setTimeout(function () {
                     $('#message').text("");
                     $('#message').attr("hidden", "hidden");
+                    $('#close-btn').prop('disabled', false);
+                    $('#send-complaint').prop('disabled', false);
                     if (data.success === true) {
                         $('#complaint-modal').modal('hide');
                     }
@@ -79,7 +88,8 @@ $(document).ready(function () {
             },
 
             error:function(e) {
-
+                $('#close-btn').prop('disabled', false);
+                $('#send-complaint').prop('disabled', false);
             }
         });
     });

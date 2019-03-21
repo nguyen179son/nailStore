@@ -7,8 +7,8 @@
         <th width="10%">Service</th>
         <th width="15%">Notice</th>
         <th width="13%">Time</th>
-        <th width="12%">Status</th>
-        <th width="13%">Action</th>
+        <th width="10%">Status</th>
+        <th width="15%">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -26,7 +26,7 @@
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="waiting" {{$row->status=='waiting'?'selected':''}}>
                             waiting
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
                             checked-in
                         </option>
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="done" {{$row->status=='done'?'selected':''}}>

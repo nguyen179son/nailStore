@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth']], function()
 {
     Route::post('dropin-booking/{id}/checkout', 'BookController@checkout');
-    Route::post('reservaions/{id}/checkout', 'ReservationController@checkout');
+    Route::post('reservations/{id}/checkout', 'ReservationController@checkout');
     Route::get('/income','BookController@income');
 });
 

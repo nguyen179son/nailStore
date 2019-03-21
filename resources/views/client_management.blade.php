@@ -70,7 +70,7 @@
         </div>
     </div>
 </nav>
-<div id="main-container" class="container bg-gray-0 border-radius-5px pv-20px mv-20px mt-200px">
+<div id="main-container" class="container bg-gray-0 border-radius-5px pv-20px mv-20px mt-100px">
     <div class="row">
         <div class="col-xl-12">
             <h2 style="font-size:2rem;"><b>Customer Management</b></h2>
