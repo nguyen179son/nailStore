@@ -308,14 +308,19 @@ class ReservationController extends Controller
         $validation = Validator::make($input, [
             'receipt' => 'required|numeric|max:100000',
             'note' => 'max:100',
-            'staff' => 'max:100',
+            'staff' => 'required|max:100',
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);
         }
 
         $reservation = OnlineReservations::find($id);
-        $reservation->update($input);
+        if ($reservation) {
+            foreach ($input as $key => $value) {
+                $reservation->$key = $value;
+            }
+        }
+        $reservation->save();
         return response()->json(['success' => '']);
     }
 }
