@@ -233,7 +233,58 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="receipt-modal" tabindex="-1" role="dialog" aria-labelledby="add-customer-modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-primary" id="exampleModalLabel">
+                            <span>Add a new customer</span>
+                        </h5>
+                    </div>
+                    <div class="modal-body" id="history-member">
+                        <div class="booking-form">
 
+                            <div class="form-group" style="margin-bottom: 0">
+                                <span class="form-label">Staff</span>
+                                <input class="form-control" type="text" id="staff" name="staff"
+                                       placeholder="Staff" value="">
+                                <div style="height: 30px" id="staff-error">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 0">
+                                <span class="form-label">Note</span>
+                                <input class="form-control" type="text" id="note" name="note"
+                                       placeholder="Note" value="">
+                                <div style="height: 30px" id="note-error">
+                                </div>
+                            </div>
+                            <input type="hidden" id="book-id" name="bookId">
+                            <div class="form-group" style="margin-bottom: 0">
+                                <span class="form-label">Receipt</span>
+                                <input class="form-control" type="text" id="receipt" name="receipt"
+                                       placeholder="Receipt" value="">
+                                <div style="height: 30px" id="receipt-error">
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
+                            <div id="alert-text" style="padding-top: 0; display: none;"></div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button id="submit-receipt" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="{{ URL::asset('/js/admin.js') }}"></script>
 </body>

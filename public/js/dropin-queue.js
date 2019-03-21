@@ -57,7 +57,7 @@ $('body').on('click', '#submit-add-customer', function () {
             code: $("#code").val()
         },
         success: function (data) {
-            if (data.hasOwnProperty('email') ) {
+            if (data.hasOwnProperty('errors') ) {
                 $("#error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.code[0] + "</div>")
             } else {
                 $("#error").html("");

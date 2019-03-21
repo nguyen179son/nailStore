@@ -298,4 +298,20 @@ class ReservationController extends Controller
         DB::table('online_reservations')->where('id', '=', $input['id'])->update(array('status'=> $input['status']));
         return Response::make("", 204);
     }
+
+    public function checkout($id,Request $request) {
+        $input = $request->all();
+        $validation = Validator::make($input, [
+            'receipt' => 'required|numeric|max:100000',
+            'note' => 'max:100',
+            'staff' => 'max:100',
+        ]);
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->messages()]);
+        }
+
+        $reservation = OnlineReservations::find($id);
+        $reservation->update($input);
+        return response()->json(['success' => '']);
+    }
 }
