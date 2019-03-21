@@ -150,13 +150,34 @@ class BookController extends Controller
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);
         }
-        $id=$input['id'];
+        $id = $input['id'];
         unset($input['id']);
-        $input['status'] = 'waiting';
         $dropInBooking = new DropInReservations($input);
         $dropInBooking->save();
         Member::find($id)->increment('point', 1);
 
         return response()->json(['success' => '']);
+    }
+
+    public function income(Request $request)
+    {
+        $today = date('Y-m-d');
+        $input = $request->all();
+        if (isset($input['date']) && $input['date'] != null) {
+            $today = date('Y-m-d', strtotime($input['date']));
+        }
+        $sum1 = DB::table('drop_in_reservations')
+            ->whereNull('deleted_at')
+            ->whereDate('created_at', $today)
+            ->whereIn('status', ['done'])
+            ->whereNotNull('receipt')
+            ->sum('receipt');
+        $sum2 = DB::table('online_reservations')
+            ->whereNull('deleted_at')
+            ->whereDate('created_at', $today)
+            ->whereIn('status', ['done'])
+            ->whereNotNull('receipt')
+            ->sum('receipt');
+        return $sum1 + $sum2;
     }
 }

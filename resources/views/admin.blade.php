@@ -192,9 +192,10 @@
             <div class="">
                 <div class="table-wrapper">
                     <div class="table-title">
-                        {{--<div class="row">--}}
-                        <h4>Admin Management</h4>
-                        {{--</div>--}}
+                        <div class="row">
+                            <h4 class="col-sm-6">Admin Management</h4>
+                            <h4 class="col-sm-4 income">Total income:</h4>
+                        </div>
                     </div>
                     <div id="drop-in-queue-table">
 
@@ -208,7 +209,8 @@
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
-                            <h4>Admin Management</h4>
+                            <h4 class="col-sm-6">Admin Management</h4>
+                            <h4 class="col-sm-4 income">Total income:</h4>
                         </div>
                     </div>
                     <div id="booking-queue-table">
@@ -267,9 +269,9 @@
                             </div>
                             <input type="hidden" id="book-id" name="bookId">
                             <div class="form-group" style="margin-bottom: 0">
-                                <span class="form-label">Receipt</span>
+                                <span class="form-label">Payment</span>
                                 <input class="form-control" type="text" id="receipt" name="receipt"
-                                       placeholder="Receipt" value="">
+                                       placeholder="Payment" value="">
                                 <div style="height: 30px" id="receipt-error">
                                 </div>
                             </div>
