@@ -20,7 +20,8 @@ class MemberController extends Controller
         $input = $request->all();
         $validation = Validator::make($input, [
             'email' => 'required|email',
-            'name' => 'required|string'
+            'name' => 'required|string',
+            'customer_code' => 'required|'
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()->all()]);
@@ -35,15 +36,16 @@ class MemberController extends Controller
     public function addMember(Request $request) {
         $input = $request->all();
         $validation = Validator::make($input, [
-            'email' => 'required|email|max: 100',
-            'name' => 'required|string|max: 100'
+            'email' => 'required|email|unique:customers|max: 100',
+            'name' => 'required|string|max: 100',
+            'customer_code' => 'required|unique:customers'
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);
         }
         $email = $request->email;
         $name = $request->name;
-//        dd($email, $name);
+        $customer_code = $request->customer_code;
         $check = DB::table("customers")->where("email", "=",$email)->first();
         if ($check != null) {
             return response()->json([
@@ -54,6 +56,7 @@ class MemberController extends Controller
             'email' => $email,
             'name' => $name,
             'point' => 0,
+            'customer_code' => $customer_code,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);
@@ -120,8 +123,8 @@ class MemberController extends Controller
     public function history($id)
     {
         $email = Member::find($id)->email;
-        $dropIn=DB::table('drop_in_reservations')->where('email','=',$email)->select(['updated_at','status','type as service_type'])->get()->toArray();
-        $online = DB::table('online_reservations')->where('email','=',$email)->select(['updated_at','status','service_type'])->get()->toArray();
+        $dropIn=DB::table('drop_in_reservations')->where('email','=',$email)->select(['updated_at','status','type as service_type','staff','note','receipt'])->get()->toArray();
+        $online = DB::table('online_reservations')->where('email','=',$email)->select(['updated_at','status','service_type','staff','note','receipt'])->get()->toArray();
         $return_array = array_merge($dropIn,$online);
         usort($return_array, array($this,'comparator'));
 
@@ -132,7 +135,6 @@ class MemberController extends Controller
         $entries = new LengthAwarePaginator($currentPageSearchResult, count($col), $perPage);
 
 //        $return_array = Collection::make($return_array);
-
         return view("pagination_member_history", compact("entries"))->render();
     }
 

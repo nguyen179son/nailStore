@@ -1,7 +1,7 @@
 <table class="table table-striped table-hover">
     <thead>
     <tr>
-        <th width="10%">#</th>
+        <th width="10%">Code</th>
         <th width="40%">Name</th>
         <th width="40%">Email</th>
         <th width="10%">Times</th>
@@ -11,7 +11,7 @@
     @if (isset($members) && !empty($members))
         @foreach ($members as $key => $member)
             <tr style="word-break: break-all">
-                <td>{{ ($members->currentPage()-1)*10+$key+1 }}</td>
+                <td>{{ $member->customer_code }}</td>
                 <td ><a href="#" data-toggle="modal" data-target="#history-modal" data-id="{{$member->id}}"
                                           class="member-name" style="text-decoration: underline;">
                         {{ ucwords(trim($member->name, "\"")) }}
