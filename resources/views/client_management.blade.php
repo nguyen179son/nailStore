@@ -180,6 +180,15 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Code</span>
+                                            <input class="form-control" type="text" id="customer-code"
+                                                   name="customer_code"
+                                                   placeholder="Code" value="">
+                                            <div style="height: 30px" id="code-error">
+                                            </div>
+                                        </div>
+
                                         <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
                                         <div id="alert-text" style="padding-top: 0; display: none;"></div>

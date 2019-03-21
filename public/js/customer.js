@@ -56,7 +56,7 @@ $(document).ready(function () {
     $('body').on('click', '#submit-add-customer', function (e) {
         var email = $('#email-add-customer').val();
         var name = $('#name-add-customer').val();
-
+        var customer_code = $('#customer-code').val();
         $.ajax({
             url: "/admin/member",
             method: "post",
@@ -66,6 +66,7 @@ $(document).ready(function () {
             data: {
                 email: email,
                 name: name,
+                customer_code: customer_code
             },
 
 
@@ -73,9 +74,10 @@ $(document).ready(function () {
                 if (data.success) {
                     $('#email-add-customer').val("");
                     $('#name-add-customer').val("");
-
+                    $('#code').val('');
                     $("#email-error").html('');
                     $("#name-error").html('');
+                    $("#code-error").html('');
                     $("#add-customer-modal").modal("hide");
                     $('#flash-message').flash_message({
                         text: 'Customer successfully added!',
@@ -92,11 +94,18 @@ $(document).ready(function () {
                     }
                     fetch_data(window.page);
                 } else {
-                    if (data.errors.email[0]) {
-                        $("#email-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.email[0] + "</div>")
+                    var errors = data.errors;
+                    $("#email-error").html("");
+                    $("#name-error").html("");
+                    $("#code-error").html("");
+                    if (errors.hasOwnProperty('email')) {
+                        $("#email-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.email[0] + "</div>")
                     }
-                    if (data.errors.name[0]) {
-                        $("#name-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.name[0] + "</div>")
+                    if (errors.hasOwnProperty('name')) {
+                        $("#name-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.name[0] + "</div>")
+                    }
+                    if (errors.hasOwnProperty('customer_code')) {
+                        $("#code-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.customer_code[0] + "</div>")
                     }
                     $("#alert-text").removeClass("text-danger text-success").addClass("text-danger");
                     $("#alert-text").text(data.message);
