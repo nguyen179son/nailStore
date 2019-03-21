@@ -45,6 +45,7 @@ Route::delete('/reservations/{id}','ReservationController@destroy');
 Route::post('/member/addPoint','MemberController@addPoint');
 Route::post('/member/minusPoint','MemberController@minusPoint');
 Route::get('/member/check','BookController@checkCustomerCode');
+Route::post('/send-complaint', 'AddComplaintController@addComplaint');
 
 Route::get('/member/{id}','MemberController@history');
 Route::group(['prefix' => '/admin'], function () {
@@ -67,4 +68,6 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/member/{id}','MemberController@history');
 
     Route::post('/member', 'MemberController@addMember');
+
+    Route::get('/complaints', 'ComplaintController@index');
 });
