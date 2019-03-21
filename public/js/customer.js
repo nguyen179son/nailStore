@@ -74,23 +74,9 @@ $(document).ready(function () {
                     $('#email-add-customer').val("");
                     $('#name-add-customer').val("");
 
-                    // $("#alert-text").removeClass("text-danger text-success").addClass("text-success");
-                    // $("#alert-text").text(data.message);
-                    // $("#alert-text").show();
                     $("#email-error").html('');
                     $("#name-error").html('');
-                    // setTimeout(function() {
-                    //     $("#alert-text").hide();
                     $("#add-customer-modal").modal("hide");
-                    //
-                    // }, 1000);
-                    // $("#add-customer-modal").modal("hide");
-                    // $("#flash-message").html("<div class='alert alert-info'>Successfully created</div>")
-                    // $("#flash-message").slideDown(function() {
-                    //     setTimeout(function() {
-                    //         $("#flash-message").slideUp();
-                    //     }, 5000);
-                    // });
                     $('#flash-message').flash_message({
                         text: 'Customer successfully added!',
                         how: 'append'

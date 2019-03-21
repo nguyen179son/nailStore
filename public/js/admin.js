@@ -62,9 +62,7 @@ $(document).ready(function () {
             url: '/update-online-reservation-emails',
             success:function(data)
             {
-                //console.log the response
                 console.log("sent");
-                //Send another request in 10 seconds.
                 setTimeout(function(){
                     sendRequestToUpdateEmail();
                 }, 60000);
@@ -199,7 +197,6 @@ $('body').on('click', '.delete', function () {
     $("#confirm-delete-button").attr('book-id', $(this).attr("id"));
 
 });
-
 $('body').on('click', '#confirm-delete-button', function () {
     if (check == 1) {
         $.ajax({
@@ -252,9 +249,88 @@ $('body').on('click', '#confirm-delete-button', function () {
 window.oldVal='';
 $('body').on('focusin', '.dropdown-status',function(){
     window.oldVal = $(this).val();
+    $("#book-id").val($(this).attr("id"));
 });
+
+$('body').on('click','#submit-receipt',function () {
+    if (window.check == 0) {
+        $.ajax({
+            url: "/dropin-booking/"+$("#book-id").val()+"/checkout",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                staff: $("#staff").val(),
+                note: $("#note").val(),
+                receipt: $("#receipt").val(),
+            },
+            success: function (data) {
+                if (data.hasOwnProperty('errors') ) {
+                    var errors = data.errors;
+                    $("#staff-error").html("");
+                    $("#receipt-error").html("");
+                    $("#note-error").html("");
+                    if (errors.hasOwnProperty('staff')) {
+                        $("#staff-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.staff[0] + "</div>")
+                    }
+                    if (errors.hasOwnProperty('receipt')) {
+                        $("#receipt-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.receipt[0] + "</div>")
+                    }
+                    if (errors.hasOwnProperty('note')) {
+                        $("#note-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.note[0] + "</div>")
+                    }
+                } else {
+                    $("#staff-error").html("");
+                    $("#receipt-error").html("");
+                    $("#note-error").html("");
+                    $("#staff").val("");
+                    $("#note").val("");
+                    $("#receipt").val("");
+                    $("#receipt-modal").modal('hide');
+                }
+            }
+        });
+
+    } else {
+        $.ajax({
+            url: "/reservations/"+$("#book-id").val()+"/checkout",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                staff: $("#staff").val(),
+                note: $("#note").val(),
+                receipt: $("#receipt").val(),
+            },
+            success: function (data) {
+                if (data.hasOwnProperty('errors') ) {
+                    var errors = data.errors;
+                    if (errors.hasOwnProperty('staff')) {
+                        $("#staff-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.staff[0] + "</div>")
+                    }
+                    if (errors.hasOwnProperty('receipt')) {
+                        $("#receipt-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.receipt[0] + "</div>")
+                    }
+                    if (errors.hasOwnProperty('note')) {
+                        $("#note-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.note[0] + "</div>")
+                    }
+                } else {
+                    $("#staff-error").html("");
+                    $("#receipt-error").html("");
+                    $("#note-error").html("");
+                    $("#staff").val("");
+                    $("#note").val("");
+                    $("#receipt").val("");
+                }
+            }
+        });
+    }
+});
+
 $('body').on('change', '.dropdown-status', function () {
-    console.log($(this).val(), $(this).attr("id"));
+    console.log($(this).val());
     if (window.check == 0) {
         $.ajax({
             url: "/dropin-booking/update-status",
@@ -276,6 +352,7 @@ $('body').on('change', '.dropdown-status', function () {
                         day: $("#date").val()
                     },
                     success: function (data) {
+
                         $('#drop-in-queue-table').html(data);
                     }
                 });
@@ -308,7 +385,6 @@ $('body').on('change', '.dropdown-status', function () {
                 });
             }
         });
-
     }
     if ($(this).val() == 'done' && window.oldVal != 'done') {
         $.ajax({
@@ -322,8 +398,11 @@ $('body').on('change', '.dropdown-status', function () {
                 name: $(this).children(":first").attr("data-name")
             },
             success: function (data) {
-                console.log(data);
             }
+        });
+        $('#receipt-modal').modal({
+            backdrop: 'static',
+            keyboard: false
         });
     }
     if ($(this).val() != 'done' && window.oldVal == 'done') {
@@ -338,7 +417,6 @@ $('body').on('change', '.dropdown-status', function () {
                 name: $(this).children(":first").attr("data-name")
             },
             success: function (data) {
-                console.log(data);
             }
         });
     }
@@ -346,7 +424,6 @@ $('body').on('change', '.dropdown-status', function () {
 $('body').on('click', "input[class='checkbox-status']", function () {
     window.data = [];
     $.each($("input[class='checkbox-status']:checked"), function () {
-        // console.log($(this).attr('name'));
         window.data.push($(this).val());
     });
     if (window.check == 0) {

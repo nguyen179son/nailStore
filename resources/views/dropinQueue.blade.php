@@ -25,10 +25,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Pretty Checkbox -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet">
@@ -86,11 +86,13 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <a id="btn-show-dropin-1" class="btn btn-light btn-lg" style="margin-right: 10px;" onclick="showDropinTable();">Drop-in</a>
+                                <a id="btn-show-dropin-1" class="btn btn-light btn-lg" style="margin-right: 10px;"
+                                   onclick="showDropinTable();">Drop-in</a>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <a id="btn-show-booking-online-1" class="btn btn-light btn-lg" onclick="showBookingTable();">Online booking</a>
+                                <a id="btn-show-booking-online-1" class="btn btn-light btn-lg"
+                                   onclick="showBookingTable();">Online booking</a>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
@@ -104,17 +106,17 @@
 
                     <table class="table table-striped table-hover">
                         <thead>
-                            <tr>
-                                <th width="10%">#</th>
-                                <th width="50%">Name</th>
-                                <th width="20%">Phone</th>
-                                <th width="20%">Service</th>
-                            </tr>
+                        <tr>
+                            <th width="10%">#</th>
+                            <th width="50%">Name</th>
+                            <th width="20%">Phone</th>
+                            <th width="20%">Service</th>
+                        </tr>
                         </thead>
                         <tbody>
 
                         @foreach($data as $key => $row)
-                            <tr style="word-break: break-all">
+                            <tr style="word-break: break-all" data-email="{{$row->email}}" data-toggle="modal" data-target="#fill-in-code" data-id="{{$row->id}}">
                                 <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ substr($row->telephone, 0, 4) . '****' . substr($row->telephone,  -4)}}</td>
@@ -140,11 +142,13 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <a id="btn-show-dropin-2" class="btn btn-light btn-lg" style="margin-right: 10px;" onclick="showDropinTable();">Drop-in</a>
+                                <a id="btn-show-dropin-2" class="btn btn-light btn-lg" style="margin-right: 10px;"
+                                   onclick="showDropinTable();">Drop-in</a>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <a id="btn-show-booking-online-2" class="btn btn-light btn-lg" onclick="showBookingTable();">Online booking</a>
+                                <a id="btn-show-booking-online-2" class="btn btn-light btn-lg"
+                                   onclick="showBookingTable();">Online booking</a>
                             </div>
 
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
@@ -162,7 +166,51 @@
         </div>
     </div>
 </div>
-    <script src="{{ URL::asset('/js/dropin-queue.js') }}"></script>
+<div class="modal fade" id="fill-in-code" tabindex="-1" role="dialog" aria-labelledby="fill-in-code"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-primary" id="exampleModalLabel">
+                                <span>Fill in your code</span>
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="history-member">
+                            <div class="booking-form">
+
+                                <div class="form-group" style="margin-bottom: 0">
+                                    <span class="form-label">Code</span>
+                                    <input class="form-control" type="text" id="code"
+                                           name="code" placeholder="Code"
+                                           value="">
+                                    <div style="height: 30px" id="error">
+
+                                    </div>
+                                </div>
+                                <input type="hidden" name="email" id="email" value="">
+                                <input type="hidden" name="id" id="book-id" value="">
+                                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
+                                <div id="alert-text" style="padding-top: 0; display: none;"></div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button id="submit-add-customer" class="btn btn-primary">Done</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="{{ URL::asset('/js/dropin-queue.js') }}"></script>
 </body>
 
 </html>

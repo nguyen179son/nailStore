@@ -15,7 +15,7 @@
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr style="word-break: break-all">
-                <td>{{ ($data->currentPage()-1)*10+$row->id }}</td>
+                <td>{{ ($data->currentPage()-1)*10+$row->id  }}</td>
                 <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
                 <td>{{ $row->mobile }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>
@@ -25,6 +25,9 @@
                     <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}" data-email="{{$row->email}}" data-name="{{$row->customer_name}}">
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="waiting" {{$row->status=='waiting'?'selected':''}}>
                             waiting
+                        </option>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
+                            checked-in
                         </option>
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
