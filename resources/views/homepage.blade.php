@@ -263,7 +263,7 @@
                                 <text id="message" hidden="hidden"></text>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-btn">Close</button>
                                 <button type="button" class="btn btn-primary" id="send-complaint">Send us</button>
                             </div>
                         </div>
