@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{URL::asset('/images/labella_logo.png')}}">
-    <title>Customer Management</title>
+    <title>Customer Complaints</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -37,7 +37,7 @@
 
     <link rel="stylesheet" href="{{ URL::asset('/css/navbar.css') }}">
 
-    <script src="{{ URL::asset('/js/customer.js') }}"></script>
+    {{--<script src="{{ URL::asset('/js/customer.js') }}"></script>--}}
 </head>
 
 <body>
@@ -56,11 +56,11 @@
                 <li class="nav-item mr-20px">
                     <a class="nav-link" href="/admin">Admin page</a>
                 </li>
-                <li class="nav-item active mr-20px">
-                    <a class="nav-link" href="#">Customer Management</a>
-                </li>
                 <li class="nav-item mr-20px">
-                    <a class="nav-link" href="/admin/complaints">Customer Complaints</a>
+                    <a class="nav-link" href="/admin/customer-management">Customer Management</a>
+                </li>
+                <li class="nav-item active mr-20px">
+                    <a class="nav-link" href="#">Customer Complaints</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
@@ -73,7 +73,7 @@
 <div id="main-container" class="container bg-gray-0 border-radius-5px pv-20px mv-20px mt-200px">
     <div class="row">
         <div class="col-xl-12">
-            <h2 style="font-size:2rem;"><b>Customer Management</b></h2>
+
         </div>
         <div class="col-xl-6" id="flash-message">
 
@@ -85,23 +85,35 @@
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
-                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 float-left">
-                                <div class="row">
-                                    <button type="button" class="btn btn-primary btn-lg" style="width: 100px;"
-                                            data-toggle="modal" data-target="#add-customer-modal">
-                                        Add
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <input class="form-control" type="text" placeholder="Search" aria-label="Search"
-                                       id="keyword">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 float-left">
+                                <h2 style="font-size:2rem;"><b>Customer Complaints</b></h2>
                             </div>
                         </div>
                     </div>
                     <div id="customer-table">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th width="10%">ID</th>
+                                <th width="40%">Content</th>
+                                <th width="40%">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if (isset($complaints) && !empty($complaints))
+                                @foreach ($complaints as $key => $complaint)
+                                    <tr style="word-break: break-all">
+                                        <td width="10%">{{ $complaint->id }}</td>
+                                        <td width="70%">{{ $complaint->content}}</td>
+                                        <td width="20%">{{ $complaint->created_at}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
 
+                            </tbody>
+                        </table>
+
+                        {!! $complaints->links() !!}
                     </div>
 
 
@@ -128,9 +140,6 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                </div>
-                                <div class="modal-body" id="history-member">
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

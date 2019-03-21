@@ -67,6 +67,9 @@
                 <li class="nav-item  mr-20px">
                     <a class="nav-link" href="/admin/customer-management">Customer Management</a>
                 </li>
+                <li class="nav-item mr-20px">
+                    <a class="nav-link" href="/admin/complaints">Customer Complaints</a>
+                </li>
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
                        style="color: purple; opacity: 0.8;">LOGOUT</a>
@@ -137,9 +140,9 @@
 
                                 <div class="row mb-10px">
                                     <div class="pretty p-default p-curve p-bigger">
-                                        <input type="checkbox" class="checkbox-type" value="Manikyr" checked/>
+                                        <input type="checkbox" class="checkbox-type" value="Fransar" checked/>
                                         <div class="state p-primary">
-                                            <label style="padding-top: 1px;">Manikyr</label>
+                                            <label style="padding-top: 1px;">Fransar</label>
                                         </div>
                                     </div>
                                 </div>

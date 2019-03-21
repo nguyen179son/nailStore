@@ -239,8 +239,36 @@
             <p class="text-left">Sun: 11.00 - 17.00</p>
 
             <div class="text-left">
-                <a class="btn btn-primary" href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679"
-                   id="footer-booking-btn">Booking</a>
+                <a class="btn btn-primary footer-booking-btn" href="https://www.bokadirekt.se/places/nail-art-of-sweden-15679"
+                   >Booking</a>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary footer-booking-btn" data-toggle="modal" data-target="#complaint-modal">
+                    Complaint
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="complaint-modal" tabindex="-1" role="dialog" aria-labelledby="complaint-modal" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Complaint</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <textarea class="form-control" rows="6" placeholder="Say something" id="complaint-content"></textarea>
+                                <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                                <text id="message" hidden="hidden"></text>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="send-complaint">Send us</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <hr>

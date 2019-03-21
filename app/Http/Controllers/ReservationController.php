@@ -97,7 +97,9 @@ class ReservationController extends Controller
                 continue;
             }
             if (strpos($line, 'Tidpunkt') !== false) {
-                $customer_booking_time = trim(str_replace("Tidpunkt: ", "", $line), "\t ") . ":00";
+                if (preg_match("/[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/", $line, $m)) {
+                    $customer_booking_time = $m[0]. ":00";
+                };
                 continue;
             }
             if (preg_match("/(\d+) min/", $line, $m)) {
@@ -163,7 +165,9 @@ class ReservationController extends Controller
                 continue;
             }
             if (strpos($line, 'har avbokats') !== false) {
-                $customer_booking_time = substr(explode("fyllning, ", $line)[1], 0, 16) . ":00";
+                if (preg_match("/[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]/", $line, $m)) {
+                    $customer_booking_time = $m[0]. ":00";
+                };
                 if (strpos($line, 'Nagel') !== false || strpos($line, 'Manikyr') !== false) {
                     $customer_service = "Naglar";
                     continue;

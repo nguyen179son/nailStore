@@ -35,10 +35,17 @@
                     </select>
                 </td>
                 <td>
-                    <a href="sms:{{$row->mobile}}&body=Hej {{ucwords(json_decode($row->customer_name))}}, please be back to Labella within 10 minutes !" class="settings" title="Send a message" data-toggle="tooltip"
-                       data-telephone="{{$row->mobile}}">
-                        <i class="material-icons">textsms</i>
-                    </a>
+                    @if($row->status != "done")
+                        <a href="sms:{{$row->mobile}}?body=Hej%20{{ucwords(json_decode($row->customer_name))}},%20please%20be%20back%20to%20Labella%20within%2010%20minutes%20!" class="settings" title="Send a message" data-toggle="tooltip"
+                           data-telephone="{{$row->mobile}}">
+                            <i class="material-icons">textsms</i>
+                        </a>
+
+                        <a href="tel:{{$row->mobile}}" class="settings" title="Make a phone call">
+                            <i class="material-icons">phone</i>
+                        </a>
+
+                    @endif
                     <a href="#" class="delete" title="Remove" data-toggle="modal" data-target="#confirm-delete" id="{{$row->id}}">
                         <i class="material-icons">&#xE5C9;</i>
                     </a>

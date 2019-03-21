@@ -31,13 +31,22 @@
                     </select>
                 </td>
                 <td>
-                    <a href="sms:{{$row->telephone}}&body=Hej {{ucwords(json_decode($row->name))}}, please be back to Labella within 10 minutes !" class="settings" title="Send a message" data-toggle="tooltip"
+                    @if($row->status != "done")
+                    <a href="sms:{{$row->telephone}}?body=Hej%20{{$row->name}},%20please%20be%20back%20to%20Labella%20within%2010%20minutes%20!" class="settings" title="Send a message" data-toggle="tooltip"
                        data-telephone="{{$row->telephone}}">
                         <i class="material-icons">textsms</i>
                     </a>
+
+                    <a href="tel:{{$row->telephone}}" class="settings" title="Make a phone call" data-telephone="{{$row->telephone}}">
+                        <i class="material-icons">phone</i>
+                    </a>
+                    @endif
+
                     <a href="#" class="delete" title="Remove" data-toggle="modal" data-target="#confirm-delete" id="{{$row->id}}">
                         <i class="material-icons">&#xE5C9;</i>
                     </a>
+
+
                 </td>
             </tr>
         @endforeach

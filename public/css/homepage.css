@@ -208,15 +208,25 @@ footer a {
         display: none;
     }
 
-    .footer-booking-btn {
-        width: 80%;
-    }
+    /*.footer-booking-btn {*/
+        /*width: 80%;*/
+    /*}*/
 
-    #footer-booking-btn {
-        padding: 10px 80px;
+    /*#footer-booking-btn {*/
+        /*padding: 10px 80px;*/
+        /*margin-left: auto;*/
+        /*margin-right: auto;*/
+    /*}*/
+
+    .footer-booking-btn {
+        width: 200px;
+        padding: 10px auto;
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 5px;
     }
+
+
 
     .pv-5px, .pv-15px {
         padding-top: 15px;

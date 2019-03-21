@@ -127,7 +127,7 @@
                                         <select class="form-control" name="type" id="">
                                             <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
                                             <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
-                                            <option {{ old('type') == "Manikyr" ? 'selected' : '' }}>Manikyr</option>
+                                            <option {{ old('type') == "Fransar" ? 'selected' : '' }}>Fransar</option>
                                         </select>
                                     </div>
                                 </div>
