@@ -1,7 +1,6 @@
 $(document).ready(function () {
     window.check = 1;
     setDefaultValue();
-
     $("#dropin-table").hide();
     $(document).on('click', '.page-link', function (event) {
         event.preventDefault();
@@ -14,7 +13,6 @@ $(document).ready(function () {
     $("#btn-show-booking-online").addClass("active");
 
     function fetch_data(page) {
-
         if (window.check == 0) {
             $.ajax({
                 url: "/admin/fetch-dropin?page=" + page,
@@ -42,6 +40,20 @@ $(document).ready(function () {
         }
     }
 
+    var date = $('#date').val();
+    $.ajax({
+        url: "/income",
+        headers: {
+            'X-CSRF-TOKEN': $("input[name=_token]").val()
+        },
+        data: {
+            date: date
+        },
+        type: "GET",
+        success: function (data) {
+            $(".income").text('Total income: ' + data);
+        }
+    });
     $.ajax({
         url: "/admin/fetch-onl?page=1",
         data: {
@@ -60,17 +72,16 @@ $(document).ready(function () {
         $.ajax({
             type: "get",
             url: '/update-online-reservation-emails',
-            success:function(data)
-            {
+            success: function (data) {
                 console.log("sent");
-                setTimeout(function(){
+                setTimeout(function () {
                     sendRequestToUpdateEmail();
                 }, 60000);
             },
 
-            error:function() {
+            error: function () {
                 console.log("error");
-                setTimeout(function(){
+                setTimeout(function () {
                     sendRequestToUpdateEmail();
                 }, 60000);
             }
@@ -79,6 +90,7 @@ $(document).ready(function () {
 
     sendRequestToUpdateEmail();
 });
+
 window.data = [];
 window.service_type = [];
 
@@ -126,8 +138,27 @@ function showBookingTable(element) {
     $(element).parents('div.dropdown').find('button').text('Booking');
 }
 
+window.onbeforeunload = function () {
+    if (($("#receipt-modal").data('bs.modal') || {})._isShown)
+        return "Do you want to reload page withoud enter the receipt";
+};
+
 $('body').on('change', "#date", function () {
     var date = $('#date').val();
+    $.ajax({
+        url: "/income",
+        headers: {
+            'X-CSRF-TOKEN': $("input[name=_token]").val()
+        },
+        data: {
+            date: date
+        },
+        type: "GET",
+        success: function (data) {
+            // console.log(data);
+            $(".income").text('Total income: ' + data);
+        }
+    });
     if (window.check == 0) {
         $.ajax({
             url: "/admin/fetch-dropin?page=" + 1,
@@ -195,8 +226,8 @@ $('body').on('click', "input[class='checkbox-type']", function () {
 
 $('body').on('click', '.delete', function () {
     $("#confirm-delete-button").attr('book-id', $(this).attr("id"));
-
 });
+
 $('body').on('click', '#confirm-delete-button', function () {
     if (check == 1) {
         $.ajax({
@@ -222,7 +253,7 @@ $('body').on('click', '#confirm-delete-button', function () {
         });
     } else {
         $.ajax({
-            url: "/dropin-booking/"+$(this).attr("book-id"),
+            url: "/dropin-booking/" + $(this).attr("book-id"),
             type: "DELETE",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
@@ -246,16 +277,16 @@ $('body').on('click', '#confirm-delete-button', function () {
 
     $(".modal").modal('hide');
 });
-window.oldVal='';
-$('body').on('focusin', '.dropdown-status',function(){
+window.oldVal = '';
+$('body').on('focusin', '.dropdown-status', function () {
     window.oldVal = $(this).val();
     $("#book-id").val($(this).attr("id"));
 });
 
-$('body').on('click','#submit-receipt',function () {
+$('body').on('click', '#submit-receipt', function () {
     if (window.check == 0) {
         $.ajax({
-            url: "/dropin-booking/"+$("#book-id").val()+"/checkout",
+            url: "/dropin-booking/" + $("#book-id").val() + "/checkout",
             type: "POST",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
@@ -266,7 +297,7 @@ $('body').on('click','#submit-receipt',function () {
                 receipt: $("#receipt").val(),
             },
             success: function (data) {
-                if (data.hasOwnProperty('errors') ) {
+                if (data.hasOwnProperty('errors')) {
                     var errors = data.errors;
                     $("#staff-error").html("");
                     $("#receipt-error").html("");
@@ -294,7 +325,7 @@ $('body').on('click','#submit-receipt',function () {
 
     } else {
         $.ajax({
-            url: "/reservations/"+$("#book-id").val()+"/checkout",
+            url: "/reservations/" + $("#book-id").val() + "/checkout",
             type: "POST",
             headers: {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
@@ -305,7 +336,7 @@ $('body').on('click','#submit-receipt',function () {
                 receipt: $("#receipt").val(),
             },
             success: function (data) {
-                if (data.hasOwnProperty('errors') ) {
+                if (data.hasOwnProperty('errors')) {
                     var errors = data.errors;
                     if (errors.hasOwnProperty('staff')) {
                         $("#staff-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.staff[0] + "</div>")
@@ -413,6 +444,7 @@ $('body').on('change', '.dropdown-status', function () {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
             },
             data: {
+                id: $(this).attr('id'),
                 email: $(this).children(":first").attr("data-email"),
                 name: $(this).children(":first").attr("data-name")
             },
@@ -462,7 +494,7 @@ function setDefaultValue() {
         $(this).val(getToday());
         $(".selected-date").text($(this).val());
 
-        $(this).on('change', function() {
+        $(this).on('change', function () {
             $(".selected-date").text($(this).val());
         });
     });

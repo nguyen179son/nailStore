@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DropInReservations;
 use App\Member;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -102,12 +103,14 @@ class MemberController extends Controller
         $validation = Validator::make($input, [
             'email' => 'required|email',
             'name' => 'required|string',
+            'id' => 'required'
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()->all()]);
         }
         $member = Member::where('email', $input['email'])->get();
         if (!$member->isEmpty()) {
+            DropInReservations::find($input['id'])->update(array('staff'=>'','note'=>'','receipt'=>''));
             Member::where('email', $input['email'])->decrement('point', 1);
             return response()->json(['success' => 'Successfully decreased point']);
         } else {
