@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{URL::asset('/images/labella_logo.png')}}">
-    <title>Customer Management</title>
+    <title>Customer Complaints</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -37,7 +37,7 @@
 
     <link rel="stylesheet" href="{{ URL::asset('/css/navbar.css') }}">
 
-    <script src="{{ URL::asset('/js/customer.js') }}"></script>
+    {{--<script src="{{ URL::asset('/js/customer.js') }}"></script>--}}
 </head>
 
 <body>
@@ -56,11 +56,11 @@
                 <li class="nav-item mr-20px">
                     <a class="nav-link" href="/admin">Admin page</a>
                 </li>
-                <li class="nav-item active mr-20px">
-                    <a class="nav-link" href="#">Customer Management</a>
-                </li>
                 <li class="nav-item mr-20px">
-                    <a class="nav-link" href="/admin/complaints">Customer Complaints</a>
+                    <a class="nav-link" href="/admin/customer-management">Customer Management</a>
+                </li>
+                <li class="nav-item active mr-20px">
+                    <a class="nav-link" href="#">Customer Complaints</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
@@ -73,7 +73,7 @@
 <div id="main-container" class="container bg-gray-0 border-radius-5px pv-20px mv-20px mt-200px">
     <div class="row">
         <div class="col-xl-12">
-            <h2 style="font-size:2rem;"><b>Customer Management</b></h2>
+
         </div>
         <div class="col-xl-6" id="flash-message">
 
@@ -85,23 +85,35 @@
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
-                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 float-left">
-                                <div class="row">
-                                    <button type="button" class="btn btn-primary btn-lg" style="width: 100px;"
-                                            data-toggle="modal" data-target="#add-customer-modal" id="add-button">
-                                        Add
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-                                <input class="form-control" type="text" placeholder="Search" aria-label="Search"
-                                       id="keyword">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 float-left">
+                                <h2 style="font-size:2rem;"><b>Customer Complaints</b></h2>
                             </div>
                         </div>
                     </div>
                     <div id="customer-table">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th width="10%">ID</th>
+                                <th width="40%">Content</th>
+                                <th width="40%">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if (isset($complaints) && !empty($complaints))
+                                @foreach ($complaints as $key => $complaint)
+                                    <tr style="word-break: break-all">
+                                        <td width="10%">{{ $complaint->id }}</td>
+                                        <td width="70%">{{ $complaint->content}}</td>
+                                        <td width="20%">{{ $complaint->created_at}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
 
+                            </tbody>
+                        </table>
+
+                        {!! $complaints->links() !!}
                     </div>
 
 
@@ -128,9 +140,6 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                </div>
-                                <div class="modal-body" id="history-member">
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -211,128 +220,6 @@
         </div>
     </div>
 </div>
-
-<div class="container">
-    <div class="row">
-        <!-- Modal -->
-        <div class="modal fade" id="add-history-modal" tabindex="-1" role="dialog" aria-labelledby="add-customer-modal"
-             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="container">
-                    <div class="row d-flex justify-content-center">
-                        <div class="col-xs-6 col-lg-6 col-md-9 col-sm-10 col-12">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title text-primary" id="exampleModalLabel">
-                                        <span>Add new record to history</span>
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body" id="history-member">
-                                    <div class="booking-form">
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <div class="form-group">
-                                                <span class="form-label">Date</span>
-                                                <input id="date-picker" class="form-control" type="text" disabled>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Service</span>
-                                            <select class="form-control" name="service" id="service">
-                                                <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
-                                                <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
-                                                <option {{ old('type') == "Manikyr" ? 'selected' : '' }}>Manikyr</option>
-                                            </select>
-                                            <div style="height: 30px" id="service-error">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Status</span>
-                                            <input class="form-control" type="text" id="status"
-                                                   name="status"
-                                                   placeholder="Code" value="Done" disabled>
-                                            <div style="height: 30px" id="status-error">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Staff</span>
-                                            <input class="form-control" type="text" id="staff"
-                                                   name="staff"
-                                                   placeholder="Staff" value="">
-                                            <div style="height: 30px" id="staff-error">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Note</span>
-                                            <input class="form-control" type="text" id="note"
-                                                   name="note"
-                                                   placeholder="Note" value="">
-                                            <div style="height: 30px" id="note-error">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Payment</span>
-                                            <input class="form-control" type="text" id="receipt"
-                                                   name="receipt"
-                                                   placeholder="Payment" value="">
-                                            <div style="height: 30px" id="receipt-error">
-                                            </div>
-                                        </div>
-
-
-                                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="id" id="cus-id" value="">
-                                        <input type="hidden" name="name" id="cus-name" value="">
-                                        <input type="hidden" name="email" id="cus-email" value="">
-
-                                        <div id="alert-text" style="padding-top: 0; display: none;"></div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button id="submit-add-history" class="btn btn-primary">Add</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 </body>
 
-<script>
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-
-    today = yyyy + '/' + mm + '/' + dd;
-    console.log(today);
-
-    var datePicker = document.getElementById("date-picker");
-    datePicker.value = today;
-</script>
 </html>
