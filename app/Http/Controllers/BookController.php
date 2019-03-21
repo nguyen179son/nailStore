@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Response;
 use Symfony\Component\Console\Helper\Table;
 use Validator;
 use App\DropInReservations;
-
+use App\Member;
 class BookController extends Controller
 {
     public function index()
@@ -84,5 +84,25 @@ class BookController extends Controller
         }
         DB::table('drop_in_reservations')->where('id', '=', $input['id'])->update(array('status'=> $input['status']));
         return Response::make("", 204);
+    }
+
+
+    public function checkCustomerCode(Request $request) {
+        $input = $request->query();
+        $validation = Validator::make($input, [
+            'code' => 'required'
+        ]);
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->messages()]);
+        }
+        $member = Member::where('email', $input['email'])->get();
+        if (!$member->isEmpty()) {
+            if ($member[0]->customer_code!=$input['code']) {
+                return response()->json(['errors' => array('code' => ['Incorrect code'])]);
+            }
+            return response()->json(['success' => '']);
+        } else {
+            return response()->json(['errors' => array('code' => ['Member not found, please contact staff for member registration'])]);
+        }
     }
 }

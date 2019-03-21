@@ -22,6 +22,9 @@
                         <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="wating" {{$row->status=='wating'?'selected':''}}>
                             waiting
                         </option>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="wating" {{$row->status=='checked-in'?'selected':''}}>
+                            checked-in
+                        </option>
                         <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
                         </option>

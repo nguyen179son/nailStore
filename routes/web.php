@@ -40,6 +40,8 @@ Route::delete('/reservations/{id}','ReservationController@destroy');
 
 Route::post('/member/addPoint','MemberController@addPoint');
 Route::post('/member/minusPoint','MemberController@minusPoint');
+Route::get('/member/check','BookController@checkCustomerCode');
+
 Route::get('/member/{id}','MemberController@history');
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/login','AdminLoginController@getLogin')->name('getAdminLogin');
