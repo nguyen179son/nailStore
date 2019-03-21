@@ -134,4 +134,29 @@ class BookController extends Controller
         $reservation->save();
         return response()->json(['success' => '']);
     }
+
+    public function addHistory(Request $request)
+    {
+        $input = $request->all();
+        $validation = Validator::make($input, [
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:100',
+            'type' => 'required|string',
+            'status' => 'required|string',
+            'staff' => 'required|string|max:100',
+            'note' => 'max:100',
+            'receipt' => 'required|integer|max:100000',
+        ]);
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->messages()]);
+        }
+        $id=$input['id'];
+        unset($input['id']);
+        $input['status'] = 'waiting';
+        $dropInBooking = new DropInReservations($input);
+        $dropInBooking->save();
+        Member::find($id)->increment('point', 1);
+
+        return response()->json(['success' => '']);
+    }
 }

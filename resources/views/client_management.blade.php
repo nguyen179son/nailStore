@@ -88,7 +88,7 @@
                             <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8 float-left">
                                 <div class="row">
                                     <button type="button" class="btn btn-primary btn-lg" style="width: 100px;"
-                                            data-toggle="modal" data-target="#add-customer-modal">
+                                            data-toggle="modal" data-target="#add-customer-modal" id="add-button">
                                         Add
                                     </button>
                                 </div>
@@ -211,6 +211,128 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <!-- Modal -->
+        <div class="modal fade" id="add-history-modal" tabindex="-1" role="dialog" aria-labelledby="add-customer-modal"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-xs-6 col-lg-6 col-md-9 col-sm-10 col-12">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-primary" id="exampleModalLabel">
+                                        <span>Add new record to history</span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="history-member">
+                                    <div class="booking-form">
+
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <div class="form-group">
+                                                <span class="form-label">Date</span>
+                                                <input id="date-picker" class="form-control" type="text" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Service</span>
+                                            <select class="form-control" name="service" id="service">
+                                                <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
+                                                <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
+                                                <option {{ old('type') == "Manikyr" ? 'selected' : '' }}>Manikyr</option>
+                                            </select>
+                                            <div style="height: 30px" id="service-error">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Status</span>
+                                            <input class="form-control" type="text" id="status"
+                                                   name="status"
+                                                   placeholder="Code" value="Done" disabled>
+                                            <div style="height: 30px" id="status-error">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Staff</span>
+                                            <input class="form-control" type="text" id="staff"
+                                                   name="staff"
+                                                   placeholder="Staff" value="">
+                                            <div style="height: 30px" id="staff-error">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Note</span>
+                                            <input class="form-control" type="text" id="note"
+                                                   name="note"
+                                                   placeholder="Note" value="">
+                                            <div style="height: 30px" id="note-error">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Receipt</span>
+                                            <input class="form-control" type="text" id="receipt"
+                                                   name="receipt"
+                                                   placeholder="Receipt" value="">
+                                            <div style="height: 30px" id="receipt-error">
+                                            </div>
+                                        </div>
+
+
+                                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="id" id="cus-id" value="">
+                                        <input type="hidden" name="name" id="cus-name" value="">
+                                        <input type="hidden" name="email" id="cus-email" value="">
+
+                                        <div id="alert-text" style="padding-top: 0; display: none;"></div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button id="submit-add-history" class="btn btn-primary">Add</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 
+<script>
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = yyyy + '/' + mm + '/' + dd;
+    console.log(today);
+
+    var datePicker = document.getElementById("date-picker");
+    datePicker.value = today;
+</script>
 </html>
