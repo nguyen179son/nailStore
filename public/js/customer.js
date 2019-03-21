@@ -41,6 +41,75 @@ $(document).ready(function () {
     });
     fetch_data(1);
 
+    $("body").on('click','#add-button',function () {
+        $("#email-add-customer").val('');
+        $("#name-add-customer").val('');
+        $("#customer-code").val('');
+    });
+
+    $("body").on('click', '.add-history', function () {
+        $("#cus-id").val($(this).data("id"));
+        $("#cus-name").val($(this).data("name"));
+        $("#cus-email").val($(this).data("email"));
+        $("#service").val('Pedikyr');
+        $("#staff").val('');
+        $("#note").val('');
+        $("#receipt").val('');
+        $("#service-error").html("");
+        $("#staff-error").html("");
+        $("#note-error").html("");
+        $("#receipt-error").html("");
+    });
+
+    $("body").on('click', '#submit-add-history', function () {
+        $.ajax({
+            url: '/dropin-booking/add-history',
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                id: $("#cus-id").val(),
+                name: $("#cus-name").val(),
+                email: $("#cus-email").val(),
+                type: $("#service").val(),
+                status: 'done',
+                staff: $("#staff").val(),
+                receipt: $("#receipt").val(),
+                note: $("#note").val()
+            },
+            success: function (data) {
+                console.log(data);
+                $("#service-error").html("");
+                $("#staff-error").html("");
+                $("#note-error").html("");
+                $("#receipt-error").html("");
+                if (data.hasOwnProperty('errors')) {
+                    var errors = data.errors;
+                    if (errors.hasOwnProperty('type')) {
+                        $("#service-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.type[0] + "</div>");
+                    }
+                    if (errors.hasOwnProperty('staff')) {
+                        $("#staff-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.staff[0] + "</div>");
+                    }
+                    if (errors.hasOwnProperty('note')) {
+                        $("#note-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.note[0] + "</div>");
+                    }
+                    if (errors.hasOwnProperty('receipt')) {
+                        $("#receipt-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.receipt[0] + "</div>");
+                    }
+                } else {
+                    $('#flash-message').flash_message({
+                        text: 'Added record to customer history!',
+                        how: 'append'
+                    });
+                    $("#add-history-modal").modal('hide');
+                    fetch_data(window.page);
+                }
+            }
+        })
+    });
+
     $('body').on("keyup", "#keyword", function () {
         $.ajax({
             url: "/admin/customer-management/show?page=1",
@@ -150,19 +219,18 @@ $(document).ready(function () {
         $.ajax({
             type: "get",
             url: '/update-online-reservation-emails',
-            success:function(data)
-            {
+            success: function (data) {
                 //console.log the response
                 console.log("sent");
                 //Send another request in 10 seconds.
-                setTimeout(function(){
+                setTimeout(function () {
                     sendRequestToUpdateEmail();
                 }, 60000);
             },
 
-            error:function() {
+            error: function () {
                 console.log("error");
-                setTimeout(function(){
+                setTimeout(function () {
                     sendRequestToUpdateEmail();
                 }, 60000);
             }

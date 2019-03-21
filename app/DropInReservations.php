@@ -22,6 +22,9 @@ class DropInReservations extends Model
         'telephone',
         'type',
         'status',
+        'note',
+        'staff',
+        'receipt'
     ];
 
     protected $casts = [

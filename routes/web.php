@@ -25,8 +25,8 @@ Route::get('/dropin-booking','BookController@index');
 Route::post('/dropin-booking','BookController@store');
 Route::get('/dropin-booking/count','BookController@count');
 Route::delete('/dropin-booking/{id}','BookController@destroy');
+Route::post('/dropin-booking/add-history','BookController@addHistory');
 Route::post('/dropin-booking/update-status','BookController@update');
-
 Route::get('/dropin-queue', 'BookController@show');
 Route::get('/dropin-queue/fetch-data', 'BookController@fetch_data');
 
