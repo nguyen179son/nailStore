@@ -104,6 +104,11 @@ class BookController extends Controller
             return $validation->messages();
         }
         DB::table('drop_in_reservations')->where('id', '=', $input['id'])->update(array('status' => $input['status']));
+        $res = DB::table('drop_in_reservations')->where('id',$input['id'])->get()[0];
+        $member = DB::table('customers')->where('email',$res->email)->get()[0];
+        if (($member->point + 1) % 5 == 0) {
+            return response()->json(['discount'=>true]);
+        }
         return Response::make("", 204);
     }
 

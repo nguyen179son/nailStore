@@ -45,6 +45,32 @@ $(document).ready(function () {
         }
     })
 });
+$.fn.flash_message = function (options) {
+
+    options = $.extend({
+        text: 'Done',
+        time: 3000,
+        how: 'before',
+        class_name: ''
+    }, options);
+
+    return $(this).each(function () {
+        if ($(this).parent().find('.flash_message').get(0))
+            return;
+
+        var message = $('<span />', {
+            'class': 'alert alert-info flash_message ' + options.class_name,
+            text: options.text
+        }).hide().fadeIn('fast');
+
+        $(this)[options.how](message);
+
+        message.delay(options.time).fadeOut('normal', function () {
+            $(this).remove();
+        });
+
+    });
+};
 $('body').on('click', '#submit-add-customer', function () {
     $.ajax({
         url: "member/check",
@@ -73,8 +99,14 @@ $('body').on('click', '#submit-add-customer', function () {
                             id: $("#book-id").val()
                         },
                         success: function (data) {
+                            if (data.hasOwnProperty('discount')) {
+                                $('#flash-message').flash_message({
+                                    text: 'Congratulation, you will have 50% discount today',
+                                    how: 'append'
+                                });
+                            }
                             $.ajax({
-                                url: "/admin/fetch-dropin?page=" + 1,
+                                url: "/dropin-queue/fetch-data?page=" + 1,
                                 type: "GET",
                                 data: {
                                     status: window.data,
@@ -83,6 +115,7 @@ $('body').on('click', '#submit-add-customer', function () {
                                 },
                                 success: function (data) {
                                     $('#drop-in-queue-table').html(data);
+                                    $("#fill-in-code").modal('hide');
                                 }
                             });
                         }
@@ -100,6 +133,12 @@ $('body').on('click', '#submit-add-customer', function () {
                             id: $("#book-id").val()
                         },
                         success: function (data) {
+                            if (data.hasOwnProperty('discount')) {
+                                $('#flash-message').flash_message({
+                                    text: 'Congratulation, you will have 50% discount today',
+                                    how: 'append'
+                                });
+                            }
                             $.ajax({
                                 url: "/admin/fetch-onl?page=" + 1,
                                 type: "GET",
@@ -110,6 +149,7 @@ $('body').on('click', '#submit-add-customer', function () {
                                 },
                                 success: function (data) {
                                     $('#booking-queue-table').html(data);
+                                    $("#fill-in-code").modal('hide');
                                 }
                             });
                         }

@@ -20,6 +20,14 @@ class AddComplaintController extends Controller
         $name = $request["name"];
         $email = $request["email"];
         $content = $request["content"];
+        if ($email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return response()->json([
+                    "success" => false,
+                    "message" => "You need to input valid email"
+                ], 200);
+            }
+        }
         if (!$content) {
             return response()->json([
                 "success" => false,

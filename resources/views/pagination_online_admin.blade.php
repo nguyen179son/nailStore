@@ -15,8 +15,17 @@
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr style="word-break: break-all">
-                <td>{{ $row->id  }}</td>
-                <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
+                <td>{{ $row->code  }}</td>
+                @if($row->discount && $row->status!='done')
+                    <td class="red-text">
+                        {{ ucwords(json_decode($row->customer_name)) }}<i class='material-icons'>card_giftcard</i>
+                    </td>
+                @else
+                    <td>
+                        {{ ucwords(json_decode($row->customer_name)) }}
+                    </td>
+                @endif
+{{--                <td>{{ ucwords(json_decode($row->customer_name)) }}</td>--}}
                 <td>{{ $row->mobile }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>
                 <td>{{ $row->notice }}</td>
@@ -31,6 +40,9 @@
                         </option>
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
+                        </option>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="not come" {{$row->status=='not come'?'selected':''}}>
+                            not come
                         </option>
                     </select>
                 </td>
