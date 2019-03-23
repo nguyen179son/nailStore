@@ -46,6 +46,8 @@ $(document).ready(function () {
 
     $('body').on('click', '#send-complaint', function () {
         var content = $('#complaint-content').val();
+        var name = $('#name').val();
+        var email = $('#email').val();
         console.log("content: "+ content);
         $.ajax({
             type: "post",
@@ -54,7 +56,9 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
             },
             data: {
-                content: content
+                content: content,
+                name: name,
+                email: email,
             },
 
             beforeSend: function() {
@@ -75,6 +79,8 @@ $(document).ready(function () {
                 $('#message').removeAttr('hidden');
 
                 $('#complaint-content').val("");
+                $('#email').val("");
+                $('#name').val("");
 
                 setTimeout(function () {
                     $('#message').text("");
