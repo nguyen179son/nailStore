@@ -78,9 +78,6 @@ $(document).ready(function () {
                 $('#message').text(data.message);
                 $('#message').removeAttr('hidden');
 
-                $('#complaint-content').val("");
-                $('#email').val("");
-                $('#name').val("");
 
                 setTimeout(function () {
                     $('#message').text("");
@@ -89,6 +86,9 @@ $(document).ready(function () {
                     $('#send-complaint').prop('disabled', false);
                     if (data.success === true) {
                         $('#complaint-modal').modal('hide');
+                        $('#complaint-content').val("");
+                        $('#email').val("");
+                        $('#name').val("");
                     }
                 }, 1500);
             },
