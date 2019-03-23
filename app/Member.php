@@ -18,12 +18,14 @@ class Member extends Model
     public $fillable = [
         'email',
         'point',
-        'name'
+        'name',
+        'customer_code'
     ];
 
     protected $casts = [
         'email'=>'string',
         'point'=>'integer',
-        'name' => 'string'
+        'name' => 'string',
+        'customer_code' => 'string'
     ];
 }
