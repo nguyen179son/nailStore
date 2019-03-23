@@ -17,6 +17,8 @@ class AddComplaintController extends Controller
 //        if ($validation->fails()) {
 //            return $validation->messages();
 //        }
+        $name = $request["name"];
+        $email = $request["email"];
         $content = $request["content"];
         if (!$content) {
             return response()->json([
@@ -32,6 +34,8 @@ class AddComplaintController extends Controller
         }
         DB::table("complaints")->insert([
             'content' => $content,
+            'email' => $email,
+            'name' => $name,
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s'),
         ]);

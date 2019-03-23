@@ -244,7 +244,7 @@
 
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary footer-booking-btn" data-toggle="modal" data-target="#complaint-modal">
-                    Complaint
+                    Complain
                 </button>
 
                 <!-- Modal -->
@@ -258,6 +258,8 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                <input class="form-control mb-10px" maxlength="100" id="name" name="name" placeholder="Name">
+                                <input class="form-control mb-10px" maxlength="100" id="email" name="email" placeholder="Email">
                                 <textarea class="form-control" rows="6" placeholder="Say something" id="complaint-content"></textarea>
                                 <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                                 <text id="message" hidden="hidden"></text>
