@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
@@ -12,7 +15,8 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
@@ -51,7 +55,21 @@ class AdminController extends Controller
 
 
             $data = $data->orderBy('reservation_time', 'asc')->paginate(10);
-
+            $data = $data->get()->toArray();
+            foreach ($data as $value) {
+                $code = DB::table('customers')
+                    ->where('email', $value->email)->get();
+                if (!empty($code)) {
+                    $value->code = $code[0]->customer_code;
+                } else {
+                    $value->code = '';
+                }
+            }
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $col = new Collection($data);
+            $perPage = 10;
+            $currentPageSearchResult = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            $data = new LengthAwarePaginator($currentPageSearchResult, count($col), $perPage);
 
             return view('pagination_online_admin', compact('data'))->render();
         }
@@ -87,8 +105,22 @@ class AdminController extends Controller
                 $today = Carbon::now()->subDay()->format('Y-m-d');
                 $data = $data->whereDate('created_at', $today);
             }
-
-            $data = $data->orderBy('created_at', 'asc')->paginate(10);
+//            $data = $data->orderBy('created_at', 'asc')->paginate(10);
+            $data = $data->get()->toArray();
+            foreach ($data as $value) {
+                $code = DB::table('customers')
+                    ->where('email', $value->email)->get();
+                if (!empty($code)) {
+                    $value->code = $code[0]->customer_code;
+                } else {
+                    $value->code = '';
+                }
+            }
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $col = new Collection($data);
+            $perPage = 10;
+            $currentPageSearchResult = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
+            $data = new LengthAwarePaginator($currentPageSearchResult, count($col), $perPage);
 
 
             return view('pagination_dropin_admin', compact('data'))->render();

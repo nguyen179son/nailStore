@@ -1,7 +1,7 @@
 <table class="table table-striped table-hover" id="booking-table">
     <thead>
     <tr>
-        <th width="5%">#</th>
+        <th width="5%">Code</th>
         <th width="17%">Name</th>
         <th width="15%">Phone</th>
         <th width="10%">Service</th>
@@ -15,7 +15,7 @@
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr style="word-break: break-all">
-                <td>{{ ($data->currentPage()-1)*10+$row->id  }}</td>
+                <td>{{ $row->id  }}</td>
                 <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
                 <td>{{ $row->mobile }}</td>
                 <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td>

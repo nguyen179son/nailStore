@@ -1,7 +1,7 @@
 <table class="table table-striped table-hover" id="drop-in-table">
     <thead>
     <tr>
-        <th width="7%">#</th>
+        <th width="7%">Code</th>
         <th width="25%">Name</th>
         <th width="20%">Phone</th>
         <th width="20%">Service</th>
@@ -13,7 +13,7 @@
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr style="word-break: break-all">
-                <td>{{ ($data->currentPage()-1)*10+$row->id }}</td>
+                <td>{{ $row->code }}</td>
                 <td>{{ $row->name }}</td>
                 <td>{{ $row->telephone }}</td>
                 <td><span class="badge badge-secondary" data-email="{{$row->email}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
