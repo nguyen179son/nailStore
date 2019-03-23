@@ -183,7 +183,7 @@
                                 <div class="row mb-10px">
                                     <div class="pretty p-default p-round p-bigger">
                                         <input type="checkbox" class="checkbox-status" value="not come" checked/>
-                                        <div class="state p-warning">
+                                        <div class="state p-danger">
                                             <label style="padding-top: 1px;">Not come</label>
                                         </div>
                                     </div>
