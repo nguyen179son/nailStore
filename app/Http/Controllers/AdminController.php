@@ -50,19 +50,19 @@ class AdminController extends Controller
             } else {
                 $today = Carbon::now()->subDay()->format('Y-m-d');
                 $data = $data->whereDate('reservation_time', $today);
-
             }
 
 
             $data = $data->orderBy('reservation_time', 'asc');
             $data = $data->get()->toArray();
+
             foreach ($data as $value) {
                 $code = DB::table('customers')
                     ->where('email', $value->email)->get();
-                if (!empty($code)) {
-                    $value->code = $code[0]->customer_code;
-                } else {
+                if ($code->isEmpty()) {
                     $value->code = '';
+                } else {
+                    $value->code = $code[0]->customer_code;
                 }
             }
 
@@ -111,7 +111,7 @@ class AdminController extends Controller
             foreach ($data as $value) {
                 $code = DB::table('customers')
                     ->where('email', $value->email)->get();
-                if (!empty($code)) {
+                if ($code->isEmpty()) {
                     $value->code = $code[0]->customer_code;
                 } else {
                     $value->code = '';
