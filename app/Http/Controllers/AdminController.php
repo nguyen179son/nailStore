@@ -50,7 +50,6 @@ class AdminController extends Controller
             } else {
                 $today = Carbon::now()->subDay()->format('Y-m-d');
                 $data = $data->whereDate('reservation_time', $today);
-
             }
 
 
@@ -61,8 +60,14 @@ class AdminController extends Controller
                     ->where('email', $value->email)->get();
                 if (!empty($code)) {
                     $value->code = $code[0]->customer_code;
+                    if (($code[0]->point + 1) % 5 == 0) {
+                        $value->discount = true;
+                    } else {
+                        $value->discount = false;
+                    }
                 } else {
                     $value->code = '';
+                    $value->discount = false;
                 }
             }
 
@@ -71,7 +76,6 @@ class AdminController extends Controller
             $perPage = 10;
             $currentPageSearchResult = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
             $data = new LengthAwarePaginator($currentPageSearchResult, count($col), $perPage);
-
             return view('pagination_online_admin', compact('data'))->render();
         }
     }
@@ -113,8 +117,14 @@ class AdminController extends Controller
                     ->where('email', $value->email)->get();
                 if (!empty($code)) {
                     $value->code = $code[0]->customer_code;
+                    if (($code[0]->point + 1) % 5 == 0) {
+                        $value->discount = true;
+                    } else {
+                        $value->discount = false;
+                    }
                 } else {
                     $value->code = '';
+                    $value->discount = false;
                 }
             }
             $currentPage = LengthAwarePaginator::resolveCurrentPage();

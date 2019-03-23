@@ -116,6 +116,7 @@ return [
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
     'phone_number' => 'Invalid :attribute number',
+    'code' => ':attribute not exist',
 
     /*
     |--------------------------------------------------------------------------

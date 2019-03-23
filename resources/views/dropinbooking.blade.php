@@ -86,7 +86,20 @@
                         <div class="booking-form">
                         <form action="/dropin-booking" method="post">
                             @csrf
-                            
+                            <div class="form-group" style="margin-bottom: 0">
+                                <span class="form-label">Customer code</span>
+                                <input class="form-control" type="text" name="code" placeholder="Enter your code" value="{{old('code')}}">
+                                <div style="height: 30px">
+                                    @if ($errors->has('code'))
+                                        <div class="alert" style="padding-top: 0;color: red;font-size: 12px;">{{ $errors->first('code') }}</div>
+                                    @endif
+                                </div>
+                                <h6 style="width:100%; text-align:center; border-bottom: 1px solid #000; line-height:0.1em; margin:10px 0 20px;">
+                                    <span style="background:#fff; padding:0 10px;">
+                                        OR
+                                    </span>
+                                </h6>
+                            </div>
                             <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Your name</span>
                                 <input class="form-control" type="text" name="name" placeholder="Enter your fullname"

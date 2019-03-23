@@ -13,16 +13,24 @@
     @if(isset($data) && !empty($data))
         @foreach($data as $key => $row)
             <tr style="word-break: break-all">
-                <td>{{ $row->code }}</td>
-                <td>{{ $row->name }}</td>
+                <td>{{ $row->code }} </td>
+                @if($row->discount && $row->status!='done')
+                <td class="red-text">
+                    {{ $row->name }}<i class='material-icons'>card_giftcard</i>
+                </td>
+                @else
+                    <td>
+                        {{ $row->name }}
+                    </td>
+                @endif
                 <td>{{ $row->telephone }}</td>
                 <td><span class="badge badge-secondary" data-email="{{$row->email}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
                 <td>
                     <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}">
-                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="wating" {{$row->status=='wating'?'selected':''}}>
+                        <option data-email="{{$row->email}}" data-name="{{$row->name}}" value="wating" {{$row->status=='wating'?'selected':''}}>
                             waiting
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
+                        <option data-email="{{$row->email}}" data-name="{{$row->name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
                             checked-in
                         </option>
                         <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="done" {{$row->status=='done'?'selected':''}}>
