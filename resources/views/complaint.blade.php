@@ -94,8 +94,8 @@
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th width="10%">Name</th>
-                                <th width="30%">Email</th>
+                                <th width="15%">Name</th>
+                                <th width="25%">Email</th>
                                 <th width="40%">Content</th>
                                 <th width="20%">Date</th>
                             </tr>
@@ -104,8 +104,8 @@
                             @if (isset($complaints) && !empty($complaints))
                                 @foreach ($complaints as $key => $complaint)
                                     <tr style="word-break: break-all">
-                                        <td width="10%">{{ $complaint->name }}</td>
-                                        <td width="30%">{{ $complaint->email }}</td>
+                                        <td width="15%">{{ $complaint->name }}</td>
+                                        <td width="25%">{{ $complaint->email }}</td>
                                         <td width="40%">{{ $complaint->content}}</td>
                                         <td width="20%">{{ $complaint->created_at}}</td>
                                     </tr>
