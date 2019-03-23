@@ -111,7 +111,7 @@ class AdminController extends Controller
             foreach ($data as $value) {
                 $code = DB::table('customers')
                     ->where('email', $value->email)->get();
-                if ($code->isEmpty()) {
+                if (!$code->isEmpty()) {
                     $value->code = $code[0]->customer_code;
                 } else {
                     $value->code = '';
