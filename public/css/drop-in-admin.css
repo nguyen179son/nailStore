@@ -110,3 +110,7 @@ body {
     min-width: 1400px;
     min-height: 1400px;
 }
+
+.red-text{
+    color: red;
+}

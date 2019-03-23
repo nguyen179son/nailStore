@@ -128,6 +128,9 @@
                     </table>
                     {!! $data->links() !!}
                 </div>
+                <div class="col-xl-12" style="text-align: center" id="flash-message">
+
+                </div>
             </div>
         </div>
     </div>
@@ -162,8 +165,12 @@
 
 
                 </div>
+                <div class="col-xl-12" style="text-align: center" id="flash-message">
+
+                </div>
             </div>
         </div>
+
     </div>
 </div>
 <div class="modal fade" id="fill-in-code" tabindex="-1" role="dialog" aria-labelledby="fill-in-code"

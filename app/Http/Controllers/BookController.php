@@ -23,6 +23,22 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        if (isset($input['code']) && $input['code']!=null) {
+            $validation = Validator::make($input, [
+                'code' => 'code'
+            ]);
+            if ($validation->fails()) {
+                return Redirect::back()->withInput()->withErrors($validation);
+            }
+            $member = DB::table('customers')->where('customer_code', $input['code'])->get();
+            $dropin['status']='waiting';
+            $dropin['name'] = $member[0]->name;
+            $dropin['email'] = $member[0]->email;
+            $dropin['type'] = $input['type'];
+            $dropInBooking = new DropInReservations($dropin);
+            $dropInBooking->save();
+            return redirect('/dropin-queue');
+        }
         $validation = Validator::make($input, [
             'name' => 'required|string|max:100',
             'telephone' => 'required|phone_number|max:20',
@@ -46,7 +62,6 @@ class BookController extends Controller
             ->whereDate('created_at', $today)
             ->whereIn('status', ['waiting'])
             ->orderBy('created_at', 'asc')->paginate(10);
-
         return view('dropinQueue', compact('data'));
     }
 
@@ -89,6 +104,11 @@ class BookController extends Controller
             return $validation->messages();
         }
         DB::table('drop_in_reservations')->where('id', '=', $input['id'])->update(array('status' => $input['status']));
+        $res = DB::table('drop_in_reservations')->where('id',$input['id'])->get()[0];
+        $member = DB::table('customers')->where('email',$res->email)->get()[0];
+        if (($member->point + 1) % 5 == 0) {
+            return response()->json(['discount'=>true]);
+        }
         return Response::make("", 204);
     }
 

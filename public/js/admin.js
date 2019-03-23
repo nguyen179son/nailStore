@@ -321,6 +321,32 @@ $('body').on('click', '#submit-receipt', function () {
                             $("#" + window.choosing).val('done');
                             window.checkdone = 1;
                             $("#receipt-modal").modal('hide');
+                            $.ajax({
+                                url: "/dropin-booking/update-status",
+                                type: "POST",
+                                headers: {
+                                    'X-CSRF-TOKEN': $("input[name=_token]").val()
+                                },
+                                data: {
+                                    status: 'done',
+                                    id: window.choosing
+                                },
+                                success: function (data) {
+                                    $.ajax({
+                                        url: "/admin/fetch-dropin?page=" + 1,
+                                        type: "GET",
+                                        data: {
+                                            status: window.data,
+                                            service_type: window.service_type,
+                                            day: $("#date").val()
+                                        },
+                                        success: function (data) {
+                                            $('#drop-in-queue-table').html(data);
+                                        }
+                                    });
+                                }
+                            });
+
                         }
                     });
                 }
@@ -363,7 +389,32 @@ $('body').on('click', '#submit-receipt', function () {
                             name: $("#" + window.choosing).children(":first").attr("data-name")
                         },
                         success: function (data) {
-                            location.reload(true);
+                            $.ajax({
+                                url: "/reservations/update-status",
+                                type: "POST",
+                                headers: {
+                                    'X-CSRF-TOKEN': $("input[name=_token]").val()
+                                },
+                                data: {
+                                    status: 'done',
+                                    id: window.choosing
+                                },
+                                success: function (data) {
+                                    $.ajax({
+                                        url: "/admin/fetch-onl?page=" + 1,
+                                        type: "GET",
+                                        data: {
+                                            status: window.data,
+                                            service_type: window.service_type,
+                                            day: $("#date").val()
+                                        },
+                                        success: function (data) {
+                                            console.log(3);
+                                            $('#booking-queue-table').html(data);
+                                        }
+                                    });
+                                }
+                            });
                         }
                     });
                     // $("#staff-error").html("");
@@ -378,69 +429,15 @@ $('body').on('click', '#submit-receipt', function () {
     }
 });
 
-$('body').on('change', '.dropdown-status', function (e) {
+$('body').on('change', '.dropdown-status', async function (e) {
     console.log($(this).val());
-    if (window.check == 0) {
-        $.ajax({
-            url: "/dropin-booking/update-status",
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $("input[name=_token]").val()
-            },
-            data: {
-                status: $(this).val(),
-                id: $(this).attr("id")
-            },
-            success: function (data) {
-                $.ajax({
-                    url: "/admin/fetch-dropin?page=" + 1,
-                    type: "GET",
-                    data: {
-                        status: window.data,
-                        service_type: window.service_type,
-                        day: $("#date").val()
-                    },
-                    success: function (data) {
-
-                        $('#drop-in-queue-table').html(data);
-                    }
-                });
-            }
-        });
-
-    } else {
-        $.ajax({
-            url: "/reservations/update-status",
-            type: "POST",
-            headers: {
-                'X-CSRF-TOKEN': $("input[name=_token]").val()
-            },
-            data: {
-                status: $(this).val(),
-                id: $(this).attr("id")
-            },
-            success: function (data) {
-                $.ajax({
-                    url: "/admin/fetch-onl?page=" + 1,
-                    type: "GET",
-                    data: {
-                        status: window.data,
-                        service_type: window.service_type,
-                        day: $("#date").val()
-                    },
-                    success: function (data) {
-                        $('#booking-queue-table').html(data);
-                    }
-                });
-            }
-        });
-    }
     if ($(this).val() == 'done' && window.oldVal != 'done') {
         window.choosing = $(this).attr('id');
-        window.checkdone=0;
+        window.checkdone = 0;
         $('#receipt-modal').modal('show');
-    }
-    if ($(this).val() != 'done' && window.oldVal == 'done') {
+    } else if ($(this).val() != 'done' && window.oldVal == 'done') {
+        var val = $(this).val();
+        window.choosing = $(this).attr('id');
         $.ajax({
             url: "/member/minusPoint",
             type: "POST",
@@ -453,13 +450,146 @@ $('body').on('change', '.dropdown-status', function (e) {
                 name: $(this).children(":first").attr("data-name")
             },
             success: function (data) {
+
+                if (window.check == 0) {
+                    $.ajax({
+                        url: "/dropin-booking/update-status",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $("input[name=_token]").val()
+                        },
+                        data: {
+                            status: val,
+                            id: window.choosing
+                        },
+                        success: function (data) {
+                            $.ajax({
+                                url: "/admin/fetch-dropin?page=" + 1,
+                                type: "GET",
+                                data: {
+                                    status: window.data,
+                                    service_type: window.service_type,
+                                    day: $("#date").val()
+                                },
+                                success: function (data) {
+                                    console.log(1);
+                                    $('#drop-in-queue-table').html(data);
+                                }
+                            });
+                        }
+                    });
+
+                } else {
+                    $.ajax({
+                        url: "/reservations/update-status",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $("input[name=_token]").val()
+                        },
+                        data: {
+                            status: $(this).val(),
+                            id: $(this).attr("id")
+                        },
+                        success: function (data) {
+                            $.ajax({
+                                url: "/admin/fetch-onl?page=" + 1,
+                                type: "GET",
+                                data: {
+                                    status: window.data,
+                                    service_type: window.service_type,
+                                    day: $("#date").val()
+                                },
+                                success: function (data) {
+                                    console.log(3);
+                                    $('#booking-queue-table').html(data);
+                                }
+                            });
+                        }
+                    });
+                }
             }
         });
+    } else {
+        if (window.check == 0) {
+            await $.ajax({
+                url: "/dropin-booking/update-status",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $("input[name=_token]").val()
+                },
+                data: {
+                    status: $(this).val(),
+                    id: $(this).attr("id")
+                },
+                success: function (data) {
+                    $.ajax({
+                        url: "/admin/fetch-dropin?page=" + 1,
+                        type: "GET",
+                        data: {
+                            status: window.data,
+                            service_type: window.service_type,
+                            day: $("#date").val()
+                        },
+                        success: function (data) {
+                            console.log(1);
+                            $('#drop-in-queue-table').html(data);
+                        }
+                    });
+                }
+            });
+
+        } else {
+            await $.ajax({
+                url: "/reservations/update-status",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $("input[name=_token]").val()
+                },
+                data: {
+                    status: $(this).val(),
+                    id: $(this).attr("id")
+                },
+                success: function (data) {
+                    $.ajax({
+                        url: "/admin/fetch-onl?page=" + 1,
+                        type: "GET",
+                        data: {
+                            status: window.data,
+                            service_type: window.service_type,
+                            day: $("#date").val()
+                        },
+                        success: function (data) {
+                            console.log(3);
+                            $('#booking-queue-table').html(data);
+                        }
+                    });
+                }
+            });
+        }
     }
+
 });
 $('#receipt-modal').on('hidden.bs.modal', function () {
-    if (window.checkdone != 1)
-        $("#" + window.choosing).val(window.oldVal);
+
+    if (window.checkdone != 1) {
+        var tmpVal = window.oldVal;
+        window.oldVal = 'done';
+        $.ajax({
+            url: "/member/addPoint",
+            type: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            data: {
+                email: $("#" + window.choosing).children(":first").attr("data-email"),
+                name: $("#" + window.choosing).children(":first").attr("data-name")
+            },
+            success: function (data) {
+                $("#" + window.choosing).val(tmpVal).trigger('change');
+            }
+        });
+
+    }
     $("#staff-error").html("");
     $("#note-error").html("");
     $("#receipt-error").html("");

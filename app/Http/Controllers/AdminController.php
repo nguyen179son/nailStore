@@ -75,8 +75,14 @@ class AdminController extends Controller
                     ->where('email', $value->email)->get();
                 if ($code->isEmpty()) {
                     $value->code = '';
+                    $value->discount = false;
                 } else {
                     $value->code = $code[0]->customer_code;
+                    if (($code[0]->point + 1) % 5 == 0) {
+                        $value->discount = true;
+                    } else {
+                        $value->discount = false;
+                    }
                 }
             }
 
@@ -85,7 +91,6 @@ class AdminController extends Controller
             $perPage = 10;
             $currentPageSearchResult = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
             $data = new LengthAwarePaginator($currentPageSearchResult, count($col), $perPage);
-
             return view('pagination_online_admin', compact('data'))->render();
         }
     }
@@ -126,10 +131,16 @@ class AdminController extends Controller
             foreach ($data as $value) {
                 $code = DB::table('customers')
                     ->where('email', $value->email)->get();
-                if (!$code->isEmpty()) {
-                    $value->code = $code[0]->customer_code;
-                } else {
+                if ($code->isEmpty()) {
                     $value->code = '';
+                    $value->discount = false;
+                } else {
+                    $value->code = $code[0]->customer_code;
+                    if (($code[0]->point + 1) % 5 == 0) {
+                        $value->discount = true;
+                    } else {
+                        $value->discount = false;
+                    }
                 }
             }
             $currentPage = LengthAwarePaginator::resolveCurrentPage();
