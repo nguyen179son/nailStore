@@ -32,6 +32,9 @@
                         <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
                         </option>
+                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="not come" {{$row->status=='not come'?'selected':''}}>
+                            not come
+                        </option>
                     </select>
                 </td>
                 <td>

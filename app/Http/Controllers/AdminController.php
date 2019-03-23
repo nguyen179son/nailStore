@@ -20,9 +20,23 @@ class AdminController extends Controller
         $this->middleware('auth');
     }
 
+    public function update_online_data() {
+        $now = date('Y-m-d H:i:s');
+        $next_time = date('Y-m-d H:i:s',strtotime('+1 hour',strtotime($now)));
+        DB::table('online_reservations')->where('reservation_time', '<', $next_time)
+            ->update(['status' => 'not come']);
+    }
+
+    public function update_dropin_data() {
+        $now = date('Y-m-d');
+        $next_time = date('Y-m-d H:i:s',strtotime('+0 day',strtotime($now)));
+        DB::table('drop_in_reservations')->where('created_at', '<', $next_time)
+            ->update(['status' => 'not come']);
+    }
 
     function fetch_data_online(Request $request)
     {
+        $this->update_online_data();
         if ($request->ajax()) {
             $input = $request->all();
             $data = DB::table('online_reservations')->whereNull('deleted_at');
@@ -78,6 +92,7 @@ class AdminController extends Controller
 
     function fetch_data_dropin(Request $request)
     {
+        $this->update_dropin_data();
         if ($request->ajax()) {
             $input = $request->all();
             $data = DB::table('drop_in_reservations')->whereNull('deleted_at');
