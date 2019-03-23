@@ -245,7 +245,7 @@
                                             <select class="form-control" name="service" id="service">
                                                 <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
                                                 <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
-                                                <option {{ old('type') == "Manikyr" ? 'selected' : '' }}>Manikyr</option>
+                                                <option {{ old('type') == "Fransar" ? 'selected' : '' }}>Fransar</option>
                                             </select>
                                             <div style="height: 30px" id="service-error">
                                             </div>
