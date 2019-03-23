@@ -54,7 +54,7 @@ class AdminController extends Controller
             }
 
 
-            $data = $data->orderBy('reservation_time', 'asc')->paginate(10);
+            $data = $data->orderBy('reservation_time', 'asc');
             $data = $data->get()->toArray();
             foreach ($data as $value) {
                 $code = DB::table('customers')
@@ -65,6 +65,7 @@ class AdminController extends Controller
                     $value->code = '';
                 }
             }
+
             $currentPage = LengthAwarePaginator::resolveCurrentPage();
             $col = new Collection($data);
             $perPage = 10;
@@ -105,7 +106,7 @@ class AdminController extends Controller
                 $today = Carbon::now()->subDay()->format('Y-m-d');
                 $data = $data->whereDate('created_at', $today);
             }
-//            $data = $data->orderBy('created_at', 'asc')->paginate(10);
+            $data = $data->orderBy('created_at', 'asc');
             $data = $data->get()->toArray();
             foreach ($data as $value) {
                 $code = DB::table('customers')
