@@ -22,7 +22,7 @@ class AdminController extends Controller
 
     public function update_online_data() {
         $now = date('Y-m-d H:i:s');
-        $next_time = date('Y-m-d H:i:s',strtotime('+1 hour',strtotime($now)));
+        $next_time = date('Y-m-d H:i:s',strtotime('-30 minutes',strtotime($now)));
         DB::table('online_reservations')->where('reservation_time', '<', $next_time)
             ->update(['status' => 'not come']);
     }

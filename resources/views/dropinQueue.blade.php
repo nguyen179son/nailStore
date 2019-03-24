@@ -116,7 +116,11 @@
                         <tbody>
 
                         @foreach($data as $key => $row)
-                            <tr style="word-break: break-all" data-email="{{$row->email}}" data-toggle="modal" data-target="#fill-in-code" data-id="{{$row->id}}">
+                            <tr style="word-break: break-all" data-email="{{$row->email}}"
+                                {{--data-toggle="modal"--}}
+                                {{--data-target="#fill-in-code"--}}
+                                onclick=showModalEnterCode(this)
+                                data-id="{{$row->id}}">
                                 <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ substr($row->telephone, 0, 4) . '****' . substr($row->telephone,  -4)}}</td>

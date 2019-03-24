@@ -83,7 +83,10 @@ $('body').on('click', '#submit-add-customer', function () {
             code: $("#code").val()
         },
         success: function (data) {
-            if (data.hasOwnProperty('errors') ) {
+
+            // console.log(data.errors);
+
+            if (data.errors !== undefined) {
                 $("#error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.code[0] + "</div>")
             } else {
                 $("#error").html("");
@@ -99,12 +102,15 @@ $('body').on('click', '#submit-add-customer', function () {
                             id: $("#book-id").val()
                         },
                         success: function (data) {
-                            if (data.hasOwnProperty('discount')) {
-                                $('#flash-message').flash_message({
-                                    text: 'Congratulation, you will have 50% discount today',
-                                    how: 'append'
-                                });
+                            if (data !== undefined) {
+                                if (data.hasOwnProperty('discount')) {
+                                    $('#flash-message').flash_message({
+                                        text: 'Congratulation, you will have 50% discount today',
+                                        how: 'append'
+                                    });
+                                }
                             }
+
                             $.ajax({
                                 url: "/dropin-queue/fetch-data?page=" + 1,
                                 type: "GET",
@@ -133,11 +139,13 @@ $('body').on('click', '#submit-add-customer', function () {
                             id: $("#book-id").val()
                         },
                         success: function (data) {
-                            if (data.hasOwnProperty('discount')) {
-                                $('#flash-message').flash_message({
-                                    text: 'Congratulation, you will have 50% discount today',
-                                    how: 'append'
-                                });
+                            if (data !== undefined) {
+                                if (data.hasOwnProperty('discount')) {
+                                    $('#flash-message').flash_message({
+                                        text: 'Congratulation, you will have 50% discount today',
+                                        how: 'append'
+                                    });
+                                }
                             }
                             $.ajax({
                                 url: "/admin/fetch-onl?page=" + 1,
@@ -159,11 +167,19 @@ $('body').on('click', '#submit-add-customer', function () {
         }
     });
 });
-$('body').on('click','tr',function (event) {
 
-    $("#email").val($(this).data('email'));
-    $("#book-id").val($(this).data('id'));
-});
+// $('body').on('click','tr',function (event) {
+//     $("#fill-in-code").modal();
+//     $("#email").val($(this).data('email'));
+//     $("#book-id").val($(this).data('id'));
+// });
+
+function showModalEnterCode(element)
+{
+    $("#fill-in-code").modal();
+    $("#email").val($(element).data('email'));
+    $("#book-id").val($(element).data('id'));
+}
 
 function showDropinTable() {
     window.check = 0;
