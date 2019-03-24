@@ -84,9 +84,9 @@ $('body').on('click', '#submit-add-customer', function () {
         },
         success: function (data) {
 
-            console.log(data);
+            // console.log(data.errors);
 
-            if (data.hasOwnProperty('errors') ) {
+            if (data.errors !== undefined) {
                 $("#error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.code[0] + "</div>")
             } else {
                 $("#error").html("");
@@ -102,12 +102,15 @@ $('body').on('click', '#submit-add-customer', function () {
                             id: $("#book-id").val()
                         },
                         success: function (data) {
-                            if (data.hasOwnProperty('discount')) {
-                                $('#flash-message').flash_message({
-                                    text: 'Congratulation, you will have 50% discount today',
-                                    how: 'append'
-                                });
+                            if (data !== undefined) {
+                                if (data.hasOwnProperty('discount')) {
+                                    $('#flash-message').flash_message({
+                                        text: 'Congratulation, you will have 50% discount today',
+                                        how: 'append'
+                                    });
+                                }
                             }
+
                             $.ajax({
                                 url: "/dropin-queue/fetch-data?page=" + 1,
                                 type: "GET",
@@ -136,11 +139,13 @@ $('body').on('click', '#submit-add-customer', function () {
                             id: $("#book-id").val()
                         },
                         success: function (data) {
-                            if (data.hasOwnProperty('discount')) {
-                                $('#flash-message').flash_message({
-                                    text: 'Congratulation, you will have 50% discount today',
-                                    how: 'append'
-                                });
+                            if (data !== undefined) {
+                                if (data.hasOwnProperty('discount')) {
+                                    $('#flash-message').flash_message({
+                                        text: 'Congratulation, you will have 50% discount today',
+                                        how: 'append'
+                                    });
+                                }
                             }
                             $.ajax({
                                 url: "/admin/fetch-onl?page=" + 1,
