@@ -12,7 +12,7 @@ class ComplaintController extends Controller
     }
 
     public function index() {
-        $complaints = DB::table("complaints")->paginate(5);
+        $complaints = DB::table("complaints")->orderBy('created_at')->paginate(5);
         return view('complaint', ['complaints' => $complaints]);
     }
 }
