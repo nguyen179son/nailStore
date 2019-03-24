@@ -87,8 +87,10 @@ class BookController extends Controller
 
     public function count()
     {
+        $today = date('Y-m-d');
         return DB::table('drop_in_reservations')
             ->whereNull('deleted_at')
+            ->whereDate('created_at', $today)
             ->whereIn('status', ['waiting'])
             ->count();
     }
@@ -105,11 +107,14 @@ class BookController extends Controller
         }
         DB::table('drop_in_reservations')->where('id', '=', $input['id'])->update(array('status' => $input['status']));
         $res = DB::table('drop_in_reservations')->where('id',$input['id'])->get()[0];
-        $member = DB::table('customers')->where('email',$res->email)->get()[0];
-        if (($member->point + 1) % 5 == 0) {
+        $member = DB::table('customers')->where('email',$res->email)->get();
+        if ($member->isEmpty()) {
+            return response()->json([]);
+        }
+        if (($member[0]->point + 1) % 5 == 0) {
             return response()->json(['discount'=>true]);
         }
-        return Response::make("", 204);
+        return response()->json([]);
     }
 
 
@@ -121,6 +126,9 @@ class BookController extends Controller
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);
+        }
+        if($input['code'] == '0000') {
+            return response()->json(['success' => '']);
         }
         $member = Member::where('email', $input['email'])->get();
         if (!$member->isEmpty()) {

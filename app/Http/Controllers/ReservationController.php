@@ -301,11 +301,14 @@ class ReservationController extends Controller
         }
         DB::table('online_reservations')->where('id', '=', $input['id'])->update(array('status'=> $input['status']));
         $res = DB::table('online_reservations')->where('id',$input['id'])->get()[0];
-        $member = DB::table('customers')->where('email',$res->email)->get()[0];
-        if (($member->point + 1) % 5 == 0) {
+        $member = DB::table('customers')->where('email',$res->email)->get();
+        if ($member->isEmpty()) {
+            return response()->json([]);
+        }
+        if (($member[0]->point + 1) % 5 == 0) {
             return response()->json(['discount'=>true]);
         }
-        return Response::make("", 204);
+        return response()->json([]);
     }
 
     public function checkout($id,Request $request) {
