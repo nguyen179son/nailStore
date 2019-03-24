@@ -71,6 +71,10 @@ $.fn.flash_message = function (options) {
 
     });
 };
+$("body").on('hidden.bs.modal','#fill-in-code',function () {
+    $("#code").val("");
+    $("#error").html("");
+});
 $('body').on('click', '#submit-add-customer', function () {
     $.ajax({
         url: "member/check",
@@ -122,6 +126,12 @@ $('body').on('click', '#submit-add-customer', function () {
                                 success: function (data) {
                                     $('#drop-in-queue-table').html(data);
                                     $("#fill-in-code").modal('hide');
+                                    $.ajax({
+                                        url: "/dropin-booking/count",
+                                        success: function (data) {
+                                            $('#drop-in-res-num').text(data);
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -158,8 +168,15 @@ $('body').on('click', '#submit-add-customer', function () {
                                 success: function (data) {
                                     $('#booking-queue-table').html(data);
                                     $("#fill-in-code").modal('hide');
+                                    $.ajax({
+                                        url: "/reservations/count",
+                                        success: function (data) {
+                                            $('#onl-res-num').text(data);
+                                        }
+                                    });
                                 }
                             });
+
                         }
                     });
                 }

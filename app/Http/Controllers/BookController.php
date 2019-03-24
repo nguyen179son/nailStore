@@ -127,9 +127,7 @@ class BookController extends Controller
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);
         }
-        if($input['code'] == '0000') {
-            return response()->json(['success' => '']);
-        }
+
         $member = Member::where('email', $input['email'])->get();
         if (!$member->isEmpty()) {
             if ($member[0]->customer_code != $input['code']) {
@@ -137,6 +135,9 @@ class BookController extends Controller
             }
             return response()->json(['success' => '']);
         } else {
+            if($input['code'] == '0000') {
+                return response()->json(['success' => '']);
+            }
             return response()->json(['errors' => array('code' => ['Member not found, please contact staff for member registration'])]);
         }
     }
