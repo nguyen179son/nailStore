@@ -83,6 +83,9 @@ $('body').on('click', '#submit-add-customer', function () {
             code: $("#code").val()
         },
         success: function (data) {
+
+            console.log(data);
+
             if (data.hasOwnProperty('errors') ) {
                 $("#error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.code[0] + "</div>")
             } else {
@@ -159,11 +162,19 @@ $('body').on('click', '#submit-add-customer', function () {
         }
     });
 });
-$('body').on('click','tr',function (event) {
 
-    $("#email").val($(this).data('email'));
-    $("#book-id").val($(this).data('id'));
-});
+// $('body').on('click','tr',function (event) {
+//     $("#fill-in-code").modal();
+//     $("#email").val($(this).data('email'));
+//     $("#book-id").val($(this).data('id'));
+// });
+
+function showModalEnterCode(element)
+{
+    $("#fill-in-code").modal();
+    $("#email").val($(element).data('email'));
+    $("#book-id").val($(element).data('id'));
+}
 
 function showDropinTable() {
     window.check = 0;
