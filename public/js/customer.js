@@ -29,6 +29,16 @@ $(document).ready(function () {
     $('body').on('hidden.bs.modal', '#history-modal', function () {
         window.check = 0;
     });
+    $('body').on('hidden.bs.modal','#add-customer-modal',function () {
+        $('#email-add-customer').val("");
+        $('#name-add-customer').val("");
+        $('#code').val('');
+        $('#phone-number').val('');
+        $("#email-error").html('');
+        $("#name-error").html('');
+        $("#code-error").html('');
+        $("#phone-error").html('');
+    });
     $('body').on('click', '.member-name', function () {
         window.check = 1;
         window.id = $(this).attr("data-id");
@@ -126,6 +136,7 @@ $(document).ready(function () {
         var email = $('#email-add-customer').val();
         var name = $('#name-add-customer').val();
         var customer_code = $('#customer-code').val();
+        var phone_number = $('#phone-number').val();
         $.ajax({
             url: "/admin/member",
             method: "post",
@@ -135,7 +146,8 @@ $(document).ready(function () {
             data: {
                 email: email,
                 name: name,
-                customer_code: customer_code
+                customer_code: customer_code,
+                phone_number: phone_number
             },
 
 
@@ -144,9 +156,11 @@ $(document).ready(function () {
                     $('#email-add-customer').val("");
                     $('#name-add-customer').val("");
                     $('#code').val('');
+                    $('#phone-number').val('');
                     $("#email-error").html('');
                     $("#name-error").html('');
                     $("#code-error").html('');
+                    $("#phone-error").html('');
                     $("#add-customer-modal").modal("hide");
                     $('#flash-message').flash_message({
                         text: 'Customer successfully added!',
@@ -175,6 +189,9 @@ $(document).ready(function () {
                     }
                     if (errors.hasOwnProperty('customer_code')) {
                         $("#code-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.customer_code[0] + "</div>")
+                    }
+                    if (errors.hasOwnProperty('phone_number')) {
+                        $("#phone-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.phone_number[0] + "</div>")
                     }
                     $("#alert-text").removeClass("text-danger text-success").addClass("text-danger");
                     $("#alert-text").text(data.message);

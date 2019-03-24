@@ -16,31 +16,22 @@ class MemberController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Request $request)
-    {
-        $input = $request->all();
-        $validation = Validator::make($input, [
-            'email' => 'required|email',
-            'name' => 'required|string',
-            'customer_code' => 'required|'
-        ]);
-        if ($validation->fails()) {
-            return response()->json(['errors' => $validation->errors()->all()]);
-        }
-        $input['point'] = 0;
-        $member = new Member($input);
-        $member->save();
-
-        return response()->json(['success' => 'Record is successfully added']);
-    }
-
     public function addMember(Request $request) {
         $input = $request->all();
-        $validation = Validator::make($input, [
-            'email' => 'required|email|unique:customers|max: 100',
-            'name' => 'required|string|max: 100',
-            'customer_code' => 'required|unique:customers'
-        ]);
+        if (isset($input['email']) && $input['email'] != null) {
+            $validation = Validator::make($input, [
+                'email' => 'email',
+                'phone_number' => 'required|phone_number|max:20',
+                'name' => 'required|string',
+                'customer_code' => 'required|'
+            ]);
+        } else {
+            $validation = Validator::make($input, [
+                'phone_number' => 'required|phone_number|max:20',
+                'name' => 'required|string',
+                'customer_code' => 'required|'
+            ]);
+        }
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);
         }
@@ -57,6 +48,7 @@ class MemberController extends Controller
             'email' => $email,
             'name' => $name,
             'point' => 0,
+            'phone_number' => $input['phone_number'],
             'customer_code' => $customer_code,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
