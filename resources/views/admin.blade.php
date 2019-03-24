@@ -254,7 +254,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-primary" id="exampleModalLabel">
-                            <span>Add a new customer</span>
+                            <span>Check out</span>
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
