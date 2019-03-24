@@ -73,7 +73,7 @@ class MemberController extends Controller
         $members = DB::table("customers");
         $keyword = $request->keyword;
         $members = $members->where('name','like', '%' . $keyword . '%')->orWhere('customer_code', 'like', '%' . $keyword . '%');
-        $members = $members->orderBy("point", "desc")->paginate(10);
+        $members = $members->orderBy(DB::raw('point mod 5'), 'desc')->paginate(10);
         return view("pagination_customers", compact("members"))->render();
     }
 
