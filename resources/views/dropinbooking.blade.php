@@ -123,7 +123,7 @@
 
                             <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Your phone</span>
-                                <input class="form-control" type="text" name="telephone" placeholder="Enter your phone" value="{{old('telephone')}}">
+                                <input class="form-control" type="number" name="telephone" placeholder="Enter your phone" value="{{old('telephone')}}">
                                 <div style="height: 30px">
                                     @if ($errors->has('telephone'))
                                         <div class="alert" style="padding-top: 0;color: red;font-size: 12px;">{{ $errors->first('telephone') }}</div>
@@ -178,7 +178,6 @@
     }
 
     today = yyyy + '/' + mm + '/' + dd;
-    console.log(today);
 
     var datePicker = document.getElementById("date-picker");
     datePicker.value = today;

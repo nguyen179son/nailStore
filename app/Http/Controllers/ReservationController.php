@@ -301,7 +301,7 @@ class ReservationController extends Controller
         }
         DB::table('online_reservations')->where('id', '=', $input['id'])->update(array('status'=> $input['status']));
         $res = DB::table('online_reservations')->where('id',$input['id'])->get()[0];
-        $member = DB::table('customers')->where('email',$res->email)->get();
+        $member = DB::table('customers')->where('email',$res->telephone)->get();
         if ($member->isEmpty()) {
             return response()->json([]);
         }

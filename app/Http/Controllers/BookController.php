@@ -23,28 +23,39 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if (isset($input['code']) && $input['code']!=null) {
+        if (isset($input['code']) && $input['code'] != null) {
             $validation = Validator::make($input, [
                 'code' => 'code'
             ]);
             if ($validation->fails()) {
                 return Redirect::back()->withInput()->withErrors($validation);
             }
+
             $member = DB::table('customers')->where('customer_code', $input['code'])->get();
-            $dropin['status']='waiting';
+            $dropin['status'] = 'waiting';
             $dropin['name'] = $member[0]->name;
             $dropin['email'] = $member[0]->email;
+            $dropin['telephone'] = $member[0]->phone_number;
             $dropin['type'] = $input['type'];
             $dropInBooking = new DropInReservations($dropin);
             $dropInBooking->save();
             return redirect('/dropin-queue');
         }
-        $validation = Validator::make($input, [
-            'name' => 'required|string|max:100',
-            'telephone' => 'required|phone_number|max:20',
-            'email' => 'required|email|max:100',
-            'type' => 'required|string',
-        ]);
+        if (isset($input['email']) && $input['email'] != null) {
+            $validation = Validator::make($input, [
+                'email' => 'email|max:100',
+                'name' => 'required|string|max:100',
+                'telephone' => 'required|phone_number|max:20',
+                'type' => 'required|string',
+            ]);
+        } else {
+            $validation = Validator::make($input, [
+                'name' => 'required|string|max:100',
+                'telephone' => 'required|phone_number|max:20',
+                'type' => 'required|string',
+            ]);
+        }
+
         if ($validation->fails()) {
             return Redirect::back()->withInput()->withErrors($validation);
         }
@@ -106,13 +117,13 @@ class BookController extends Controller
             return $validation->messages();
         }
         DB::table('drop_in_reservations')->where('id', '=', $input['id'])->update(array('status' => $input['status']));
-        $res = DB::table('drop_in_reservations')->where('id',$input['id'])->get()[0];
-        $member = DB::table('customers')->where('email',$res->email)->get();
+        $res = DB::table('drop_in_reservations')->where('id', $input['id'])->get()[0];
+        $member = DB::table('customers')->where('phone_number', $res->telephone)->get();
         if ($member->isEmpty()) {
             return response()->json([]);
         }
         if (($member[0]->point + 1) % 5 == 0) {
-            return response()->json(['discount'=>true]);
+            return response()->json(['discount' => true]);
         }
         return response()->json([]);
     }
@@ -128,14 +139,14 @@ class BookController extends Controller
             return response()->json(['errors' => $validation->messages()]);
         }
 
-        $member = Member::where('email', $input['email'])->get();
+        $member = Member::where('phone_number', $input['phone_number'])->get();
         if (!$member->isEmpty()) {
             if ($member[0]->customer_code != $input['code']) {
                 return response()->json(['errors' => array('code' => ['Incorrect code'])]);
             }
             return response()->json(['success' => '']);
         } else {
-            if($input['code'] == '0000') {
+            if ($input['code'] == '0000') {
                 return response()->json(['success' => '']);
             }
             return response()->json(['errors' => array('code' => ['Member not found, please contact staff for member registration'])]);
@@ -167,15 +178,26 @@ class BookController extends Controller
     public function addHistory(Request $request)
     {
         $input = $request->all();
-        $validation = Validator::make($input, [
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|max:100',
-            'type' => 'required|string',
-            'status' => 'required|string',
-            'staff' => 'required|string|max:100',
-            'note' => 'max:100',
-            'receipt' => 'required|integer|max:100000',
-        ]);
+        if (isset($input['email']) && $input['email'] != null) {
+            $validation = Validator::make($input, [
+                'name' => 'required|string|max:100',
+                'email' => 'required|email|max:100',
+                'type' => 'required|string',
+                'status' => 'required|string',
+                'staff' => 'required|string|max:100',
+                'note' => 'max:100',
+                'receipt' => 'required|integer|max:100000',
+            ]);
+        } else {
+            $validation = Validator::make($input, [
+                'name' => 'required|string|max:100',
+                'type' => 'required|string',
+                'status' => 'required|string',
+                'staff' => 'required|string|max:100',
+                'note' => 'max:100',
+                'receipt' => 'required|integer|max:100000',
+            ]);
+        }
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);
         }
