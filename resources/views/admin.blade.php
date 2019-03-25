@@ -281,7 +281,7 @@
                             <input type="hidden" id="book-id" name="bookId">
                             <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Payment</span>
-                                <input class="form-control" type="text" id="receipt" name="receipt"
+                                <input class="form-control" type="number" id="receipt" name="receipt"
                                        placeholder="Payment" value="">
                                 <div style="height: 30px" id="receipt-error">
                                 </div>
