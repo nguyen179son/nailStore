@@ -174,6 +174,15 @@
 
                                             </div>
                                         </div>
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Phone number</span>
+                                            <input class="form-control" type="number" id="phone-number"
+                                                   name="phone_number" placeholder="Phone number"
+                                                   value="">
+                                            <div style="height: 30px" id="phone-error">
+
+                                            </div>
+                                        </div>
 
                                         <div class="form-group" style="margin-bottom: 0">
                                             <span class="form-label">Name</span>
@@ -329,7 +338,6 @@
     }
 
     today = yyyy + '/' + mm + '/' + dd;
-    console.log(today);
 
     var datePicker = document.getElementById("date-picker");
     datePicker.value = today;

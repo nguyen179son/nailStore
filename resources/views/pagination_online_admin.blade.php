@@ -31,17 +31,17 @@
                 <td>{{ $row->notice }}</td>
                 <td>{{ substr(explode(' ',$row->reservation_time)[1], 0, 5) }}</td>
                 <td>
-                    <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}" data-email="{{$row->email}}" data-name="{{$row->customer_name}}">
-                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="waiting" {{$row->status=='waiting'?'selected':''}}>
+                    <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}" data-email="{{$row->mobile}}" data-name="{{$row->customer_name}}">
+                        <option  data-email="{{$row->telephone}}" data-name="{{$row->customer_name}}" value="waiting" {{$row->status=='waiting'?'selected':''}}>
                             waiting
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
+                        <option  data-email="{{$row->telephone}}" data-name="{{$row->customer_name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
                             checked-in
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="done" {{$row->status=='done'?'selected':''}}>
+                        <option  data-email="{{$row->telephone}}" data-name="{{$row->customer_name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->customer_name}}" value="not come" {{$row->status=='not come'?'selected':''}}>
+                        <option  data-email="{{$row->telephone}}" data-name="{{$row->customer_name}}" value="not come" {{$row->status=='not come'?'selected':''}}>
                             not come
                         </option>
                     </select>

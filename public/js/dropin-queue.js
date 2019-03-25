@@ -11,7 +11,6 @@ $(document).ready(function () {
     });
 
     function fetch_data(page) {
-        console.log(window.check);
         if (window.check == 0) {
             $.ajax({
                 url: "/dropin-queue/fetch-data?page=" + page,
@@ -71,6 +70,10 @@ $.fn.flash_message = function (options) {
 
     });
 };
+$("body").on('hidden.bs.modal','#fill-in-code',function () {
+    $("#code").val("");
+    $("#error").html("");
+});
 $('body').on('click', '#submit-add-customer', function () {
     $.ajax({
         url: "member/check",
@@ -79,12 +82,11 @@ $('body').on('click', '#submit-add-customer', function () {
             'X-CSRF-TOKEN': $("input[name=_token]").val()
         },
         data: {
-            email: $("#email").val(),
+            phone_number: $("#email").val(),
             code: $("#code").val()
         },
         success: function (data) {
 
-            // console.log(data.errors);
 
             if (data.errors !== undefined) {
                 $("#error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + data.errors.code[0] + "</div>")
@@ -122,6 +124,12 @@ $('body').on('click', '#submit-add-customer', function () {
                                 success: function (data) {
                                     $('#drop-in-queue-table').html(data);
                                     $("#fill-in-code").modal('hide');
+                                    $.ajax({
+                                        url: "/dropin-booking/count",
+                                        success: function (data) {
+                                            $('#drop-in-res-num').text(data);
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -158,8 +166,15 @@ $('body').on('click', '#submit-add-customer', function () {
                                 success: function (data) {
                                     $('#booking-queue-table').html(data);
                                     $("#fill-in-code").modal('hide');
+                                    $.ajax({
+                                        url: "/reservations/count",
+                                        success: function (data) {
+                                            $('#onl-res-num').text(data);
+                                        }
+                                    });
                                 }
                             });
+
                         }
                     });
                 }
@@ -177,7 +192,7 @@ $('body').on('click', '#submit-add-customer', function () {
 function showModalEnterCode(element)
 {
     $("#fill-in-code").modal();
-    $("#email").val($(element).data('email'));
+    $("#email").val($(element).data('phone'));
     $("#book-id").val($(element).data('id'));
 }
 

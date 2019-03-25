@@ -24,19 +24,19 @@
                     </td>
                 @endif
                 <td>{{ $row->telephone }}</td>
-                <td><span class="badge badge-secondary" data-email="{{$row->email}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
+                <td><span class="badge badge-secondary" data-email="{{$row->telephone}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
                 <td>
                     <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}">
-                        <option data-email="{{$row->email}}" data-name="{{$row->name}}" value="waiting" {{$row->status=='wating'?'selected':''}}>
+                        <option data-email="{{$row->telephone}}" data-name="{{$row->name}}" value="waiting" {{$row->status=='wating'?'selected':''}}>
                             waiting
                         </option>
-                        <option data-email="{{$row->email}}" data-name="{{$row->name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
+                        <option data-email="{{$row->telephone}}" data-name="{{$row->name}}" value="checked-in" {{$row->status=='checked-in'?'selected':''}}>
                             checked-in
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="done" {{$row->status=='done'?'selected':''}}>
+                        <option  data-email="{{$row->telephone}}" data-name="{{$row->name}}" value="done" {{$row->status=='done'?'selected':''}}>
                             done
                         </option>
-                        <option  data-email="{{$row->email}}" data-name="{{$row->name}}" value="not come" {{$row->status=='not come'?'selected':''}}>
+                        <option  data-email="{{$row->telephone}}" data-name="{{$row->name}}" value="not come" {{$row->status=='not come'?'selected':''}}>
                             not come
                         </option>
                     </select>
