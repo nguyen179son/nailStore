@@ -79,8 +79,8 @@
                         <div id="welcome-section" class="booking-cta">
                             <h1 id="welcome" class="welcome-text">Hej,</h1>
                             <p id="guide" class="welcome-text">Please fill in the form to reserve a seat !</p>
-                            {{--<p>Waiting queue: <span style="text-decoration: underline; color: #f1c40f;">https://bit.ly/temp-queue</span></p>--}}
-                            <p><a style="text-decoration: underline; color: #f1c40f;" href="/dropin-queue">Waiting queue</a></p>
+                            <p>Waiting queue: <span style="text-decoration: underline; color: #f1c40f;">https://bit.ly/temp-queue</span></p>
+                            {{--<p><a style="text-decoration: underline; color: #f1c40f;" href="/dropin-queue">Waiting queue</a></p>--}}
                         </div>
                     </div>
                     <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
