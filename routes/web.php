@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::post('dropin-booking/{id}/checkout', 'BookController@checkout');
     Route::post('reservations/{id}/checkout', 'ReservationController@checkout');
     Route::get('/income','BookController@income');
+
 });
 
 Route::get('/dropin-booking','BookController@index');
@@ -54,6 +55,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/login','AdminLoginController@postLogin');
 
     Route::get('','HomeController@getIndex');
+
+    Route::get('/index', 'HomeController@getThreeButtonsView');
 
     Route::get('/fetch-dropin','AdminController@fetch_data_dropin');
     Route::get('/fetch-onl','AdminController@fetch_data_online');

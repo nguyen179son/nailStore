@@ -15,6 +15,11 @@ class HomeController extends Controller
         return view("admin");
     }
 
+    public function getThreeButtonsView() {
+        return view("index");
+    }
+
+
     public function logout() {
         Auth::logout();
         return redirect()->route("getAdminLogin");
