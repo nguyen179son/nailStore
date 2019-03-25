@@ -39,7 +39,8 @@ class BookController extends Controller
             $dropin['type'] = $input['type'];
             $dropInBooking = new DropInReservations($dropin);
             $dropInBooking->save();
-            return redirect('/dropin-queue');
+            \Session::flash('message', 'Successfully booked, use the link above to see the current queue!');
+            return redirect('/dropin-booking')->with('success','Successfully booked, use the link on the left site to see the current queue');
         }
         if (isset($input['email']) && $input['email'] != null) {
             $validation = Validator::make($input, [
@@ -62,7 +63,7 @@ class BookController extends Controller
         $input['status'] = 'waiting';
         $dropInBooking = new DropInReservations($input);
         $dropInBooking->save();
-        return redirect('/dropin-queue');
+        return redirect('/dropin-booking')->with('success','Successfully booked, use the link on the left site to see the current queue');
     }
 
     public function show()
