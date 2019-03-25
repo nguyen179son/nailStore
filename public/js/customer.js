@@ -89,7 +89,6 @@ $(document).ready(function () {
                 note: $("#note").val()
             },
             success: function (data) {
-                console.log(data);
                 $("#service-error").html("");
                 $("#staff-error").html("");
                 $("#note-error").html("");
@@ -237,7 +236,6 @@ $(document).ready(function () {
             type: "get",
             url: '/update-online-reservation-emails',
             success: function (data) {
-                //console.log the response
                 console.log("sent");
                 //Send another request in 10 seconds.
                 setTimeout(function () {

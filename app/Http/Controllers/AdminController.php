@@ -149,7 +149,6 @@ class AdminController extends Controller
             $currentPageSearchResult = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
             $data = new LengthAwarePaginator($currentPageSearchResult, count($col), $perPage);
 
-
             return view('pagination_dropin_admin', compact('data'))->render();
         }
     }

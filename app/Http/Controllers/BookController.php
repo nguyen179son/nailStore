@@ -35,6 +35,7 @@ class BookController extends Controller
             $dropin['status'] = 'waiting';
             $dropin['name'] = $member[0]->name;
             $dropin['email'] = $member[0]->email;
+            $dropin['telephone'] = $member[0]->phone_number;
             $dropin['type'] = $input['type'];
             $dropInBooking = new DropInReservations($dropin);
             $dropInBooking->save();
@@ -117,7 +118,7 @@ class BookController extends Controller
         }
         DB::table('drop_in_reservations')->where('id', '=', $input['id'])->update(array('status' => $input['status']));
         $res = DB::table('drop_in_reservations')->where('id', $input['id'])->get()[0];
-        $member = DB::table('customers')->where('email', $res->email)->get();
+        $member = DB::table('customers')->where('phone_number', $res->telephone)->get();
         if ($member->isEmpty()) {
             return response()->json([]);
         }
@@ -138,7 +139,7 @@ class BookController extends Controller
             return response()->json(['errors' => $validation->messages()]);
         }
 
-        $member = Member::where('email', $input['email'])->get();
+        $member = Member::where('phone_number', $input['phone_number'])->get();
         if (!$member->isEmpty()) {
             if ($member[0]->customer_code != $input['code']) {
                 return response()->json(['errors' => array('code' => ['Incorrect code'])]);

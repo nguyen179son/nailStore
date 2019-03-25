@@ -314,7 +314,7 @@ $('body').on('click', '#submit-receipt', function () {
                             'X-CSRF-TOKEN': $("input[name=_token]").val()
                         },
                         data: {
-                            email: $("#" + window.choosing).children(":first").attr("data-email"),
+                            phone_number: $("#" + window.choosing).children(":first").attr("data-email"),
                             name: $("#" + window.choosing).children(":first").attr("data-name")
                         },
                         success: function (data) {
@@ -342,6 +342,20 @@ $('body').on('click', '#submit-receipt', function () {
                                         },
                                         success: function (data) {
                                             $('#drop-in-queue-table').html(data);
+                                            var date = $('#date').val();
+                                            $.ajax({
+                                                url: "/income",
+                                                headers: {
+                                                    'X-CSRF-TOKEN': $("input[name=_token]").val()
+                                                },
+                                                data: {
+                                                    date: date
+                                                },
+                                                type: "GET",
+                                                success: function (data) {
+                                                    $(".income").text('Total income: ' + data);
+                                                }
+                                            });
                                         }
                                     });
                                 }
@@ -385,7 +399,7 @@ $('body').on('click', '#submit-receipt', function () {
                             'X-CSRF-TOKEN': $("input[name=_token]").val()
                         },
                         data: {
-                            email: $("#" + window.choosing).children(":first").attr("data-email"),
+                            phone_number: $("#" + window.choosing).children(":first").attr("data-email"),
                             name: $("#" + window.choosing).children(":first").attr("data-name")
                         },
                         success: function (data) {
@@ -409,8 +423,21 @@ $('body').on('click', '#submit-receipt', function () {
                                             day: $("#date").val()
                                         },
                                         success: function (data) {
-                                            console.log(3);
                                             $('#booking-queue-table').html(data);
+                                            var date = $('#date').val();
+                                            $.ajax({
+                                                url: "/income",
+                                                headers: {
+                                                    'X-CSRF-TOKEN': $("input[name=_token]").val()
+                                                },
+                                                data: {
+                                                    date: date
+                                                },
+                                                type: "GET",
+                                                success: function (data) {
+                                                    $(".income").text('Total income: ' + data);
+                                                }
+                                            });
                                         }
                                     });
                                 }
@@ -430,7 +457,6 @@ $('body').on('click', '#submit-receipt', function () {
 });
 
 $('body').on('change', '.dropdown-status', async function (e) {
-    console.log($(this).val());
     if ($(this).val() == 'done' && window.oldVal != 'done') {
         window.choosing = $(this).attr('id');
         window.checkdone = 0;
@@ -446,7 +472,7 @@ $('body').on('change', '.dropdown-status', async function (e) {
             },
             data: {
                 id: $(this).attr('id'),
-                email: $(this).children(":first").attr("data-email"),
+                phone_number: $(this).children(":first").attr("data-email"),
                 name: $(this).children(":first").attr("data-name")
             },
             success: function (data) {
@@ -472,8 +498,21 @@ $('body').on('change', '.dropdown-status', async function (e) {
                                     day: $("#date").val()
                                 },
                                 success: function (data) {
-                                    console.log(1);
                                     $('#drop-in-queue-table').html(data);
+                                    var date = $('#date').val();
+                                    $.ajax({
+                                        url: "/income",
+                                        headers: {
+                                            'X-CSRF-TOKEN': $("input[name=_token]").val()
+                                        },
+                                        data: {
+                                            date: date
+                                        },
+                                        type: "GET",
+                                        success: function (data) {
+                                            $(".income").text('Total income: ' + data);
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -500,8 +539,21 @@ $('body').on('change', '.dropdown-status', async function (e) {
                                     day: $("#date").val()
                                 },
                                 success: function (data) {
-                                    console.log(3);
                                     $('#booking-queue-table').html(data);
+                                    var date = $('#date').val();
+                                    $.ajax({
+                                        url: "/income",
+                                        headers: {
+                                            'X-CSRF-TOKEN': $("input[name=_token]").val()
+                                        },
+                                        data: {
+                                            date: date
+                                        },
+                                        type: "GET",
+                                        success: function (data) {
+                                            $(".income").text('Total income: ' + data);
+                                        }
+                                    });
                                 }
                             });
                         }
@@ -531,8 +583,21 @@ $('body').on('change', '.dropdown-status', async function (e) {
                             day: $("#date").val()
                         },
                         success: function (data) {
-                            console.log(1);
                             $('#drop-in-queue-table').html(data);
+                            var date = $('#date').val();
+                            $.ajax({
+                                url: "/income",
+                                headers: {
+                                    'X-CSRF-TOKEN': $("input[name=_token]").val()
+                                },
+                                data: {
+                                    date: date
+                                },
+                                type: "GET",
+                                success: function (data) {
+                                    $(".income").text('Total income: ' + data);
+                                }
+                            });
                         }
                     });
                 }
@@ -559,8 +624,21 @@ $('body').on('change', '.dropdown-status', async function (e) {
                             day: $("#date").val()
                         },
                         success: function (data) {
-                            console.log(3);
                             $('#booking-queue-table').html(data);
+                            var date = $('#date').val();
+                            $.ajax({
+                                url: "/income",
+                                headers: {
+                                    'X-CSRF-TOKEN': $("input[name=_token]").val()
+                                },
+                                data: {
+                                    date: date
+                                },
+                                type: "GET",
+                                success: function (data) {
+                                    $(".income").text('Total income: ' + data);
+                                }
+                            });
                         }
                     });
                 }
@@ -570,7 +648,6 @@ $('body').on('change', '.dropdown-status', async function (e) {
 
 });
 $('#receipt-modal').on('hidden.bs.modal', function () {
-
     if (window.checkdone != 1) {
         var tmpVal = window.oldVal;
         window.oldVal = 'done';
@@ -581,7 +658,7 @@ $('#receipt-modal').on('hidden.bs.modal', function () {
                 'X-CSRF-TOKEN': $("input[name=_token]").val()
             },
             data: {
-                email: $("#" + window.choosing).children(":first").attr("data-email"),
+                phone_number: $("#" + window.choosing).children(":first").attr("data-email"),
                 name: $("#" + window.choosing).children(":first").attr("data-name")
             },
             success: function (data) {

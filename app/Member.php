@@ -19,13 +19,15 @@ class Member extends Model
         'email',
         'point',
         'name',
-        'customer_code'
+        'customer_code',
+        'phone_number'
     ];
 
     protected $casts = [
         'email'=>'string',
         'point'=>'integer',
         'name' => 'string',
-        'customer_code' => 'string'
+        'customer_code' => 'string',
+        'phone_number' =>'string',
     ];
 }

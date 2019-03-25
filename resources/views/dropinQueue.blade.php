@@ -116,7 +116,7 @@
                         <tbody>
 
                         @foreach($data as $key => $row)
-                            <tr style="word-break: break-all" data-email="{{$row->email}}"
+                            <tr style="word-break: break-all" data-phone="{{$row->telephone}}"
                                 {{--data-toggle="modal"--}}
                                 {{--data-target="#fill-in-code"--}}
                                 onclick=showModalEnterCode(this)

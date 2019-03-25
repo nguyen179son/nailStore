@@ -338,7 +338,6 @@
     }
 
     today = yyyy + '/' + mm + '/' + dd;
-    console.log(today);
 
     var datePicker = document.getElementById("date-picker");
     datePicker.value = today;

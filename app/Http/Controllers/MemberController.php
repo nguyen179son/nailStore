@@ -35,20 +35,21 @@ class MemberController extends Controller
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->messages()]);
         }
+        $phone_number = $request->phone_number;
         $email = $request->email;
         $name = $request->name;
         $customer_code = $request->customer_code;
-        $check = DB::table("customers")->where("email", "=",$email)->first();
+        $check = DB::table("customers")->where("phone_number", "=",$phone_number)->first();
         if ($check != null) {
             return response()->json([
-                "errors" => ['email'=>["Duplicated email"]]
+                "errors" => ['phone_number'=>["Duplicated phone_number"]]
             ]);
         }
         DB::table("customers")->insert([
             'email' => $email,
+            'phone_number' => $phone_number,
             'name' => $name,
             'point' => 0,
-            'phone_number' => $input['phone_number'],
             'customer_code' => $customer_code,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
@@ -73,16 +74,16 @@ class MemberController extends Controller
     {
         $input = $request->all();
         $validation = Validator::make($input, [
-            'email' => 'required|email',
+            'phone_number' => 'required|phone_number',
             'name' => 'required|string',
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()->all()]);
         }
 
-        $member = Member::where('email', $input['email'])->get();
+        $member = Member::where('phone_number', $input['phone_number'])->get();
         if (!$member->isEmpty()) {
-            Member::where('email', $input['email'])->increment('point', 1);
+            Member::where('phone_number', $input['phone_number'])->increment('point', 1);
             return response()->json(['success' => 'Successfully added point']);
         } else {
             return response()->json(['errors' => 'Error']);
@@ -93,17 +94,17 @@ class MemberController extends Controller
     {
         $input = $request->all();
         $validation = Validator::make($input, [
-            'email' => 'required|email',
+            'phone_number' => 'required|phone_number',
             'name' => 'required|string',
             'id' => 'required'
         ]);
         if ($validation->fails()) {
             return response()->json(['errors' => $validation->errors()->all()]);
         }
-        $member = Member::where('email', $input['email'])->get();
+        $member = Member::where('phone_number', $input['phone_number'])->get();
         if (!$member->isEmpty()) {
             DropInReservations::find($input['id'])->update(array('staff'=>'','note'=>'','receipt'=>''));
-            Member::where('email', $input['email'])->decrement('point', 1);
+            Member::where('phone_number', $input['phone_number'])->decrement('point', 1);
             return response()->json(['success' => 'Successfully decreased point']);
         } else {
             return response()->json(['errors' => '']);
