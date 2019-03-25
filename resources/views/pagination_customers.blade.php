@@ -2,8 +2,9 @@
     <thead>
     <tr>
         <th width="10%">Code</th>
-        <th width="35%">Name</th>
-        <th width="35%">Email</th>
+        <th width="20%">Name</th>
+        <th width="20%">Phone</th>
+        <th width="30%">Email</th>
         <th width="10%">Times</th>
         <th width="10%">Action</th>
     </tr>
@@ -18,10 +19,16 @@
                         {{ ucwords(trim($member->name, "\"")) }}
                     </a>
                 </td>
+                <td>{{$member->phone_number}}
+                </td>
                 <td>{{$member->email}}
                 </td>
                 <td>{{$member->point}}</td>
                 <td>
+                    <a href="sms:{{$member->phone_number}}?body=" class="settings" title="Send a message" data-toggle="tooltip"
+                       data-telephone="{{$member->phone_number}}">
+                        <i class="material-icons">textsms</i>
+                    </a>
                     <a href="#" class="add-history" data-name="{{ ucwords(trim($member->name, "\"")) }}" data-email="{{$member->email}}"
                        data-id="{{$member->id}}" data-toggle="modal" data-target="#add-history-modal" style="color: #007bff">
                         <i class="material-icons">playlist_add</i>
