@@ -30,7 +30,7 @@
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/drop-in-booking.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/navbar.css') }}" />
-    
+
 
 </head>
 
@@ -87,6 +87,17 @@
                         <div class="booking-form">
                         <form action="/dropin-booking" method="post">
                             @csrf
+                            @if (Session::has('message'))
+                                <div class="alert alert-info fade-message">{{ Session::get('message') }}</div>
+                                <script>
+                                    $(function(){
+                                        setTimeout(function() {
+                                            $('.fade-message').slideUp();
+                                        }, 3000);
+                                    });
+                                </script>
+                            @endif
+
                             <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Customer code</span>
                                 <input class="form-control" type="text" name="code" placeholder="Enter your code" value="{{old('code')}}">
