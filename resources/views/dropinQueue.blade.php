@@ -198,7 +198,8 @@
                                     <span class="form-label">Code</span>
                                     <input class="form-control" type="text" id="code"
                                            name="code" placeholder="Code"
-                                           value="">
+                                           value="0000">
+                                    <span class="form-label">If you do not have a CODE, please talk to the staff and just press Done !</span>
                                     <div style="height: 30px" id="error">
 
                                     </div>
