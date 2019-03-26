@@ -1,4 +1,22 @@
 $(document).ready(function () {
+    var ref = document.referrer;
+
+    var getLocation = function(href) {
+        var l = document.createElement("a");
+        l.href = href;
+        return l;
+    };
+
+    var l = getLocation(ref);
+    console.log(l.pathname);
+
+    if(l.pathname !== "/")
+    {
+        setTimeout(function(){
+            window.location.href = document.referrer;
+        }, 30000);
+    }
+
     $("#table-booking").hide();
     $("#btn-show-dropin-1").addClass("active");
     $("#btn-show-dropin-2").addClass("active");

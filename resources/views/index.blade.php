@@ -67,9 +67,6 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mv-10px">
                                 <a href="/dropin-queue" class="btn btn-primary" style="width: 100%;">Queue</a>
                             </div>
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mv-10px">
-                                <a href="/admin" class="btn btn-primary" style="width: 100%;">Admin</a>
-                            </div>
                         </div>
                     </div>
                 </div>
