@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function()
 
 });
 
+Route::get('/index', 'AddComplaintController@getThreeButtonsView');
+
 Route::get('/dropin-booking','BookController@index');
 Route::post('/dropin-booking','BookController@store');
 Route::get('/dropin-booking/count','BookController@count');
@@ -56,7 +58,7 @@ Route::group(['prefix' => '/admin'], function () {
 
     Route::get('','HomeController@getIndex');
 
-    Route::get('/index', 'HomeController@getThreeButtonsView');
+
 
     Route::get('/fetch-dropin','AdminController@fetch_data_dropin');
     Route::get('/fetch-onl','AdminController@fetch_data_online');

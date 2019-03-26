@@ -53,7 +53,7 @@
     <div class="container">
         <a class="navbar-brand " href="/" id="logo-text">Labella</a>
 
-        <a href="/admin/index" style="color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">INDEX</a>
+        {{--<a href="/admin/index" style="color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">INDEX</a>--}}
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
@@ -196,6 +196,9 @@
                     </div>
                 </div>
             </div>
+            <a href="/index" style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">INDEX</a>
+            <a href="/dropin-booking" style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">Dropin</a>
+            <a href="/dropin-queue" style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">Dropin Queue</a>
         </div>
 
         <div id="dropin-table" class="col-xl-9 col-lg-9 col-md-8 right-panel">
@@ -204,7 +207,7 @@
                     <div class="table-title">
                         <div class="row">
                             <h4 class="col-sm-6">Admin Management</h4>
-                            <h4 class="col-sm-4 income">Total income:</h4>
+                            {{--<h4 class="col-sm-4 income">Total income:</h4>--}}
                         </div>
                     </div>
                     <div id="drop-in-queue-table">
@@ -220,7 +223,7 @@
                     <div class="table-title">
                         <div class="row">
                             <h4 class="col-sm-6">Admin Management</h4>
-                            <h4 class="col-sm-4 income">Total income:</h4>
+                            {{--<h4 class="col-sm-4 income">Total income:</h4>--}}
                         </div>
                     </div>
                     <div id="booking-queue-table">

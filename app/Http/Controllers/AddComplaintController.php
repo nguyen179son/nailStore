@@ -53,4 +53,8 @@ class AddComplaintController extends Controller
             "message" => "Your complaint has been sent"
         ], 200);
     }
+
+    public function getThreeButtonsView() {
+        return view("index");
+    }
 }
