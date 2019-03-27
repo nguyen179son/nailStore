@@ -14,7 +14,7 @@ $(document).ready(function () {
     {
         setTimeout(function(){
             window.location.href = document.referrer;
-        }, 2000);
+        }, 30000);
     }
 
     $("#table-booking").hide();

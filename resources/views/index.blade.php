@@ -62,7 +62,7 @@
                     <div class="booking-form">
                         <div class="row justify-content-center">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mv-10px">
-                                <a href="/dropin-booking" class="btn btn-primary" style="width: 100%;">Dropin</a>
+                                <a href="/dropin-booking" class="btn btn-primary" style="width: 100%;">Drop-in Booking</a>
                             </div>
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mv-10px">
                                 <a href="/dropin-queue" class="btn btn-primary" style="width: 100%;">Queue</a>
