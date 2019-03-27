@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <link rel="icon" href="{{URL::asset('/images/labella_logo.png')}}">
-    <title>Admin login</title>
+    <title>Index</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
@@ -64,6 +64,8 @@
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mv-10px">
                                 <a href="/dropin-booking" class="btn btn-primary" style="width: 100%;">Drop-in Booking</a>
                             </div>
+                        </div>
+                        <div class="row justify-content-center">
                             <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12 mv-10px">
                                 <a href="/dropin-queue" class="btn btn-primary" style="width: 100%;">Queue</a>
                             </div>
