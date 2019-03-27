@@ -20,7 +20,9 @@
                 <td>{{$entry->status}}</td>
                 <td>{{$entry->staff}}</td>
                 <td>{{$entry->note}}</td>
-                <td>{{$entry->receipt}}</td>
+                <td>
+                    {{--{{$entry->receipt}}--}}
+                </td>
             </tr>
         @endforeach
     @endif
