@@ -10,11 +10,11 @@ $(document).ready(function () {
     var l = getLocation(ref);
     console.log(l.pathname);
 
-    if(l.pathname !== "/")
+    if(l.pathname !== "/" && l.pathname !== '/admin')
     {
         setTimeout(function(){
             window.location.href = document.referrer;
-        }, 30000);
+        }, 2000);
     }
 
     $("#table-booking").hide();

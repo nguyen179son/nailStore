@@ -39,7 +39,7 @@ class AdminController extends Controller
         $this->update_online_data();
         if ($request->ajax()) {
             $input = $request->all();
-            $data = DB::table('online_reservations')->whereNull('deleted_at');
+            $data = DB::table('online_reservations')->whereNull('deleted_at')->where('type','=', 'book');
             if (isset($input['status']) && !empty($input['status'])) {
                 foreach ($input['status'] as $key => $status) {
                     $input['status'][$key] = strtolower($status);
