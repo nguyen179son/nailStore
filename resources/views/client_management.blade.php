@@ -178,8 +178,9 @@
                                         </div>
                                         <div class="form-group" style="margin-bottom: 0">
                                             <span class="form-label">Phone number</span>
-                                            <input class="form-control" type="number" id="phone-number"
+                                            <input class="form-control" type="tel" id="phone-number"
                                                    name="phone_number" placeholder="Phone number"
+                                                   {{--pattern="[0-9]*" inputmode="numeric"--}}
                                                    value="">
                                             <div style="height: 30px" id="phone-error">
 
@@ -188,7 +189,7 @@
 
                                         <div class="form-group" style="margin-bottom: 0">
                                             <span class="form-label">Name</span>
-                                            <input class="form-control" type="text" id="name-add-customer" name="name"
+                                            <input class="form-control text-capitalize" type="text" id="name-add-customer" name="name"
                                                    placeholder="Name" value="">
                                             <div style="height: 30px" id="name-error">
                                             </div>
@@ -196,9 +197,9 @@
 
                                         <div class="form-group" style="margin-bottom: 0">
                                             <span class="form-label">Code</span>
-                                            <input class="form-control" type="text" id="customer-code"
+                                            <input class="form-control" type="number" id="customer-code"
                                                    name="customer_code"
-                                                   placeholder="Code" value="">
+                                                   placeholder="Code" pattern="[0-9]*" inputmode="numeric" value="">
                                             <div style="height: 30px" id="code-error">
                                             </div>
                                         </div>

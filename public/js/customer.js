@@ -64,7 +64,7 @@ $(document).ready(function () {
         $("#service").val('Pedikyr');
         $("#staff").val('');
         $("#note").val('');
-        $("#receipt").val('');
+        $("#receipt").val('0');
         $("#service-error").html("");
         $("#staff-error").html("");
         $("#note-error").html("");

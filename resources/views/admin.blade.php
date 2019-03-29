@@ -196,9 +196,9 @@
                     </div>
                 </div>
             </div>
-            <a href="/index" style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">INDEX</a>
-            <a href="/dropin-booking" style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">Dropin</a>
-            <a href="/dropin-queue" style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">Dropin Queue</a>
+            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">nailslabella.se/index</span>
+            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">nailslabella.se/dropin-booking</span>
+            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">nailslabella.se/dropin-queue</span>
         </div>
 
         <div id="dropin-table" class="col-xl-9 col-lg-9 col-md-8 right-panel">
