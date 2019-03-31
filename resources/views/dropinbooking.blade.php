@@ -118,7 +118,7 @@
 
                             <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Customer code</span>
-                                <input class="form-control" type="text" name="code" placeholder="Enter your code" value="{{old('code')}}">
+                                <input class="form-control" type="number" name="code" placeholder="Enter your code" value="{{old('code')}}">
                                 <div style="height: 30px">
                                     @if ($errors->has('code'))
                                         <div class="alert" style="padding-top: 0;color: red;font-size: 12px;">{{ $errors->first('code') }}</div>

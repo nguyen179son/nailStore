@@ -263,7 +263,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group" style="margin-bottom: 0">
+                                        <div class="form-group" hidden style="margin-bottom: 0">
                                             <span class="form-label">Status</span>
                                             <input class="form-control" type="text" id="status"
                                                    name="status"
