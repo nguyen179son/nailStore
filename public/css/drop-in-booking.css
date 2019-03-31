@@ -5,8 +5,8 @@
 
 body
 {
-    width: 100%;
-    height: 100%;
+    /*width: 100%;*/
+    /*height: 100%;*/
     margin: 0px;
     padding: 0px;
     overflow-x: hidden; 
@@ -16,23 +16,23 @@ body
 	font-family: 'Montserrat', sans-serif;	
 }
 
-.section {
-	position: relative;
-	height: 100vh;
-}
+/*.section {*/
+	/*position: relative;*/
+	/*height: 100vh;*/
+/*}*/
 
-.section .section-center {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right: 0;
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
-}
+/*.section .section-center {*/
+	/*position: absolute;*/
+	/*top: 50%;*/
+	/*left: 0;*/
+	/*right: 0;*/
+	/*-webkit-transform: translateY(-50%);*/
+	/*transform: translateY(-50%);*/
+/*}*/
 
 #booking {
 	font-family: 'Montserrat', sans-serif;
-	background-image: url('/images/background.jpg');
+	background-image: url('/images/background11.png');
 	background-size: cover;
 	/* background-position: center;
 	width: 100%;
@@ -42,15 +42,15 @@ body
     
 }
 
-#booking::before {
-	content: '';
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0;
-	background: rgba(32, 29, 34, 0.4);
-}
+/*#booking::before {*/
+	/*content: '';*/
+	/*position: absolute;*/
+	/*left: 0;*/
+	/*right: 0;*/
+	/*bottom: 0;*/
+	/*top: 0;*/
+	/*background: rgba(32, 29, 34, 0.4);*/
+/*}*/
 
 .booking-form {
 	background-color: #fff;
@@ -62,7 +62,7 @@ body
 
 .booking-form .form-group {
 	position: relative;
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 
 .booking-form .form-control {
@@ -187,11 +187,11 @@ body
 
 
 /* Block scrolling down... */
-@media (min-width:1024px) {
-	html, body {
-		overflow-y: hidden;
-	}
-}
+/*@media (min-width:1024px) {*/
+	/*html, body {*/
+		/*overflow-y: hidden;*/
+	/*}*/
+/*}*/
 
 #service-selections::before {
     content: '➤';
@@ -221,4 +221,38 @@ body
 .pv-5px {
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+
+.mt-250px {
+	margin-top: 250px;
+}
+
+/*.mt-100px {*/
+	/*margin-top: 100px;*/
+/*}*/
+
+.show {
+	display: block;
+}
+
+.hidden {
+	display: none;
+}
+
+#btn-book-code, #btn-book-name {
+	color: #7f929b;
+	font-weight: 600;
+}
+
+#btn-book-code.active, #btn-book-name.active {
+	background-color: #341f97;
+	color:  #bdc3c7;
+	box-shadow: 0px 0px 1px #42729B;
+	-moz-box-shadow: 0px 0px 1px #42729B;
+	-webkit-box-shadow: 0px 0px 1px #42729B;
+
+}
+
+.mt-150px {
+	margin-top: 50px;
 }

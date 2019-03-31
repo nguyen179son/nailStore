@@ -27,7 +27,7 @@
             crossorigin="anonymous"></script>
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/drop-in-booking.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/login.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ URL::asset('/css/navbar.css') }}" />
 
 
