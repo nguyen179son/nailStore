@@ -71,21 +71,39 @@
     </div>
 </nav>
 
-<div id="booking" class="section mt-50px">
-        <div class="section-center">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10">
-                        <div id="welcome-section" class="booking-cta">
-                            <h1 id="welcome" class="welcome-text">Hej,</h1>
-                            <p id="guide" class="welcome-text">Please fill in the form to reserve a seat !</p>
-                            <p>Waiting queue: <span style="text-decoration: underline; color: chartreuse;">https://bit.ly/temp-queue</span></p>
-                            {{--<p><a style="text-decoration: underline; color: #f1c40f;" href="/dropin-queue">Waiting queue</a></p>--}}
-                        </div>
+<div id="booking" class="section mt-100px" style="padding-bottom: 50px;">
+    <div class="section-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-12 mt-150px">
+                    <div id="welcome-section" class="booking-cta">
+                        <h1 id="welcome" class="welcome-text">Hej,</h1>
+                        <p id="guide" class="welcome-text">Please fill in the form to reserve a seat !</p>
+                        <p>Waiting queue: <span style="text-decoration: underline; color: chartreuse;">https://bit.ly/temp-queue</span></p>
+                        {{--<p><a style="text-decoration: underline; color: #f1c40f;" href="/dropin-queue">Waiting queue</a></p>--}}
                     </div>
-                    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
-                        <div class="booking-form">
-                        <form action="/dropin-booking" method="post">
+                </div>
+            </div>
+            {{--<div class="row d-flex justify-content-center">--}}
+                {{--<div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">--}}
+                    {{--<div class="booking-form">--}}
+                        {{--<button class="btn btn-primary" style="min-width: 100px; padding: 10px 20px; margin-left: 10px; margin-right: 10px;">Code</button>--}}
+                        {{--<button class="btn btn-primary" style="min-width: 100px; padding: 10px 20px; margin-left: 10px; margin-right: 10px;">Code</button>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            <div class="row d-flex justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-8 col-sm-10">
+                    <div class="booking-form">
+
+                        <div style="margin-bottom: 30px; margin-left: auto; margin-right: auto;">
+                            <a onclick="showBookCode(this);" id="btn-book-code" class="btn btn-light" style="min-width: 100px; padding: 10px 20px; margin-left: 10px; margin-right: 10px;">Code</a>
+                            <a disabled onclick="showBookName(this);" id="btn-book-name" class="btn btn-light" style="min-width: 100px; padding: 10px 20px; margin-left: 10px; margin-right: 10px;">Name</a>
+                        </div>
+
+                        <hr>
+
+                        <form id="book-code" action="/dropin-booking" method="post">
                             @csrf
                             @if (Session::has('message'))
                                 <div class="alert alert-info fade-message">{{ Session::get('message') }}</div>
@@ -106,12 +124,51 @@
                                         <div class="alert" style="padding-top: 0;color: red;font-size: 12px;">{{ $errors->first('code') }}</div>
                                     @endif
                                 </div>
-                                <h6 style="width:100%; text-align:center; border-bottom: 1px solid #000; line-height:0.1em; margin:10px 0 20px;">
-                                    <span style="background:#fff; padding:0 10px;">
-                                        OR
-                                    </span>
-                                </h6>
+                                {{--<h6 style="width:100%; text-align:center; border-bottom: 1px solid #000; line-height:0.1em; margin:10px 0 20px;">--}}
+                                    {{--<span style="background:#fff; padding:0 10px;">--}}
+                                        {{--OR--}}
+                                    {{--</span>--}}
+                                {{--</h6>--}}
                             </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Service</span>
+                                        <!-- <input class="form-control" type="date" required> -->
+
+                                        <select class="form-control" name="type" id="">
+                                            <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
+                                            <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
+                                            <option {{ old('type') == "Fransar" ? 'selected' : '' }}>Fransar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <span class="form-label">Date</span>
+                                        <input id="date-picker-1" class="form-control" type="text" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="form-btn">
+                                <button class="submit-btn" type="submit">Book</button>
+                            </div>
+                        </form>
+                        <form id="book-name" action="/dropin-booking" method="post">
+                            @csrf
+                            @if (Session::has('message'))
+                                <div class="alert alert-info fade-message">{{ Session::get('message') }}</div>
+                                <script>
+                                    $(function(){
+                                        setTimeout(function() {
+                                            $('.fade-message').slideUp();
+                                        }, 3000);
+                                    });
+                                </script>
+                            @endif
                             <div class="form-group" style="margin-bottom: 0">
                                 <span class="form-label">Your name</span>
                                 <input class="form-control" type="text" name="name" placeholder="Enter your fullname"
@@ -157,17 +214,20 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <span class="form-label">Date</span>
-                                        <input id="date-picker" class="form-control" type="text" disabled>
-                                    </div>
+                                <div class="form-group">
+                                <span class="form-label">Date</span>
+                                <input id="date-picker-2" class="form-control" type="text" disabled>
+                                </div>
                                 </div>
                             </div>
+                            <hr>
 
                             <div class="form-btn">
                                 <button class="submit-btn" type="submit">Book</button>
                             </div>
                         </form>
+
+
                     </div>
                 </div>
             </div>
@@ -191,12 +251,33 @@
 
     today = yyyy + '/' + mm + '/' + dd;
 
-    var datePicker = document.getElementById("date-picker");
-    datePicker.value = today;
+    var datePicker1 = document.getElementById("date-picker-1");
+    datePicker1.value = today;
+
+    var datePicker2 = document.getElementById("date-picker-2");
+    datePicker2.value = today;
 
     $(document).ready(function() {
-
+        $("#book-code").show();
+        $("#book-name").hide();
+        $("#btn-book-code").addClass('active');
     })
+
+    function showBookCode(element) {
+        $("#book-code").show();
+        $("#book-name").hide();
+
+        $("#btn-book-code").addClass('active');
+        $("#btn-book-name").removeClass('active');
+    }
+
+    function showBookName(element) {
+        $("#book-name").show();
+        $("#book-code").hide();
+
+        $("#btn-book-code").removeClass('active');
+        $("#btn-book-name").addClass('active');
+    }
 </script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
