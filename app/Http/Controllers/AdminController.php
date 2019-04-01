@@ -23,15 +23,19 @@ class AdminController extends Controller
     public function update_online_data() {
         $now = date('Y-m-d H:i:s');
         $next_time = date('Y-m-d H:i:s',strtotime('-30 minutes',strtotime($now)));
-        DB::table('online_reservations')->where('reservation_time', '<', $next_time)
-            ->update(['status' => 'not come']);
+        DB::table('online_reservations')->where([
+            ['reservation_time', '<', $next_time],
+            ['status', '=', 'waiting']
+        ])->update(['status' => 'not come']);
     }
 
     public function update_dropin_data() {
         $now = date('Y-m-d');
         $next_time = date('Y-m-d H:i:s',strtotime('+0 day',strtotime($now)));
-        DB::table('drop_in_reservations')->where('created_at', '<', $next_time)
-            ->update(['status' => 'not come']);
+        DB::table('drop_in_reservations')->where([
+            ['created_at', '<', $next_time],
+            ['status', '=', 'waiting']
+        ])->update(['status' => 'not come']);
     }
 
     function fetch_data_online(Request $request)
