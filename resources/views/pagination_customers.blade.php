@@ -30,7 +30,7 @@
                         <i class="material-icons">textsms</i>
                     </a>
                     <a href="#" class="add-history" data-name="{{ ucwords(trim($member->name, "\"")) }}" data-email="{{$member->email}}"
-                       data-id="{{$member->id}}" data-toggle="modal" data-target="#add-history-modal" style="color: #007bff">
+                       data-id="{{$member->id}}" data-phone="{{$member->phone_number}}" data-toggle="modal" data-target="#add-history-modal" style="color: #007bff">
                         <i class="material-icons">playlist_add</i>
                     </a>
 

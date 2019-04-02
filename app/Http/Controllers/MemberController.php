@@ -116,11 +116,21 @@ class MemberController extends Controller
         return $object1->updated_at > $object2->updated_at;
     }
 
+    private function removePrefix($phone) {
+        if ($phone[0]=='0') {
+            return substr($phone,1);
+        }
+        else if ($phone[0]='+') {
+            return substr($phone,3);
+        }
+    }
     public function history($id)
     {
-        $email = Member::find($id)->email;
-        $dropIn=DB::table('drop_in_reservations')->where('email','=',$email)->select(['updated_at','status','type as service_type','staff','note','receipt'])->get()->toArray();
-        $online = DB::table('online_reservations')->where('email','=',$email)->select(['updated_at','status','service_type','staff','note','receipt'])->get()->toArray();
+        $phone = Member::find($id)->phone_number;
+        $phone = $this->removePrefix($phone);
+        $dropIn=DB::table('drop_in_reservations')->where('telephone','like','%'.$phone)->select(['updated_at','status','type as service_type','staff','note','receipt'])->get()->toArray();
+        $online = DB::table('online_reservations')->where('mobile','like','%'.$phone)->select(['updated_at','status','service_type','staff','note','receipt'])->get()->toArray();
+
         $return_array = array_merge($dropIn,$online);
         usort($return_array, array($this,'comparator'));
 

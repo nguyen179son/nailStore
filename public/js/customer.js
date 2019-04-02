@@ -12,6 +12,9 @@ $(document).ready(function () {
         if (window.check == 0) {
             $.ajax({
                 url: "/admin/customer-management/show?page=" + page,
+                data: {
+                    keyword: $('#keyword').val()
+                },
                 success: function (data) {
                     $('#customer-table').html(data);
                 }
@@ -29,7 +32,7 @@ $(document).ready(function () {
     $('body').on('hidden.bs.modal', '#history-modal', function () {
         window.check = 0;
     });
-    $('body').on('hidden.bs.modal','#add-customer-modal',function () {
+    $('body').on('hidden.bs.modal', '#add-customer-modal', function () {
         $('#email-add-customer').val("");
         $('#name-add-customer').val("");
         $('#code').val('');
@@ -51,7 +54,7 @@ $(document).ready(function () {
     });
     fetch_data(1);
 
-    $("body").on('click','#add-button',function () {
+    $("body").on('click', '#add-button', function () {
         $("#email-add-customer").val('');
         $("#name-add-customer").val('');
         $("#customer-code").val('');
@@ -61,6 +64,7 @@ $(document).ready(function () {
         $("#cus-id").val($(this).data("id"));
         $("#cus-name").val($(this).data("name"));
         $("#cus-email").val($(this).data("email"));
+        $("#cus-phone").val($(this).data("phone"));
         $("#service").val('Pedikyr');
         $("#staff").val('');
         $("#note").val('');
@@ -82,6 +86,7 @@ $(document).ready(function () {
                 id: $("#cus-id").val(),
                 name: $("#cus-name").val(),
                 email: $("#cus-email").val(),
+                telephone: $("#cus-phone").val(),
                 type: $("#service").val(),
                 status: 'done',
                 staff: $("#staff").val(),

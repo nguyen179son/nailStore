@@ -111,7 +111,8 @@
                                     $(function(){
                                         setTimeout(function() {
                                             $('.fade-message').slideUp();
-                                        }, 3000);
+                                        }, 3000
+                                        );
                                     });
                                 </script>
                             @endif

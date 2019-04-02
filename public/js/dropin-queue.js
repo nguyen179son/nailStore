@@ -89,7 +89,7 @@ $.fn.flash_message = function (options) {
     });
 };
 $("body").on('hidden.bs.modal','#fill-in-code',function () {
-    $("#code").val("");
+    $("#code").val("0000");
     $("#error").html("");
 });
 $('body').on('click', '#submit-add-customer', function () {

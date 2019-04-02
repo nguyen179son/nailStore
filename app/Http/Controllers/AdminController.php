@@ -66,7 +66,7 @@ class AdminController extends Controller
                 }
                 $data = $data->whereDate('reservation_time', date('Y-m-d', strtotime($input['day'])));
             } else {
-                $today = Carbon::now()->subDay()->format('Y-m-d');
+                $today = date('Y-m-d');
                 $data = $data->whereDate('reservation_time', $today);
             }
 
@@ -127,7 +127,7 @@ class AdminController extends Controller
                 }
                 $data = $data->whereDate('created_at', date('Y-m-d', strtotime($input['day'])));
             } else {
-                $today = Carbon::now()->subDay()->format('Y-m-d');
+                $today = date('Y-m-d');
                 $data = $data->whereDate('created_at', $today);
             }
             $data = $data->orderBy('created_at', 'asc');
