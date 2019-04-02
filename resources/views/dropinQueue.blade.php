@@ -121,7 +121,7 @@
                                 {{--data-target="#fill-in-code"--}}
                                 onclick=showModalEnterCode(this)
                                 data-id="{{$row->id}}">
-                                <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
+                                <td>{{ $key + 1 }}</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ substr($row->telephone, 0, 4) . '****' . substr($row->telephone,  -4)}}</td>
                                 <td>{{ $row->type }}</td>
