@@ -305,6 +305,7 @@
                                         <input type="hidden" name="id" id="cus-id" value="">
                                         <input type="hidden" name="name" id="cus-name" value="">
                                         <input type="hidden" name="email" id="cus-email" value="">
+                                        <input type="hidden" name="phone_number" id="cus-phone" value="">
 
                                         <div id="alert-text" style="padding-top: 0; display: none;"></div>
 

@@ -191,6 +191,7 @@ class BookController extends Controller
                 'status' => 'required|string',
                 'staff' => 'required|string|max:100',
                 'note' => 'max:100',
+                'telephone' => 'required|phone_number|max:20',
                 'receipt' => 'required|integer|max:100000',
             ]);
         } else {
@@ -199,6 +200,7 @@ class BookController extends Controller
                 'type' => 'required|string',
                 'status' => 'required|string',
                 'staff' => 'required|string|max:100',
+                'telephone' => 'required|phone_number|max:20',
                 'note' => 'max:100',
                 'receipt' => 'required|integer|max:100000',
             ]);
