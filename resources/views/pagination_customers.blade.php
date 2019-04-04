@@ -5,8 +5,8 @@
         <th width="20%">Name</th>
         <th width="20%">Phone</th>
         <th width="30%">Email</th>
-        <th width="10%">Times</th>
-        <th width="10%">Action</th>
+        <th width="5%">Times</th>
+        <th width="15%">Action</th>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +32,9 @@
                     <a href="#" class="add-history" data-name="{{ ucwords(trim($member->name, "\"")) }}" data-email="{{$member->email}}"
                        data-id="{{$member->id}}" data-phone="{{$member->phone_number}}" data-toggle="modal" data-target="#add-history-modal" style="color: #007bff">
                         <i class="material-icons">playlist_add</i>
+                    </a>
+                    <a href="#" class="delete" data-code="{{$member->customer_code}}" data-toggle="modal" data-target="#confirm-delete" style="color: red">
+                        <i class="material-icons">delete</i>
                     </a>
 
                     {{--<a href="sms:{{$member->telephone}}?body=Hej%20{{$row->name}},%20please%20be%20back%20to%20Labella%20within%2010%20minutes%20!" class="settings" title="Send a message" data-toggle="tooltip"--}}
