@@ -32,6 +32,42 @@ $(document).ready(function () {
     $('body').on('hidden.bs.modal', '#history-modal', function () {
         window.check = 0;
     });
+
+    $('body').on('click', '.delete', function () {
+        $("#confirm-delete-button").attr('data-code', $(this).attr("data-code"));
+    });
+
+    $('body').on('click', '#confirm-delete-button', function () {
+        $.ajax({
+            url: "/member/" + $(this).data('code'),
+            method: 'delete',
+            headers: {
+                'X-CSRF-TOKEN': $("input[name=_token]").val()
+            },
+            success: function (data) {
+                if (data.success) {
+
+                    if ($(".table-hover td").closest("tr").length == 10) {
+                        if (window.page == 0) {
+                            window.page = window.page + 1;
+                        } else {
+                            if ($(".page-link").length == window.page) {
+                                window.page = window.page + 1;
+                            }
+                        }
+                    }
+                    console.log(window.page);
+                    fetch_data(window.page);
+                    $('#flash-message').flash_message({
+                        text: 'Deleted successfully',
+                        how: 'append'
+                    });
+                    $(".modal").modal('hide');
+                }
+            }
+        })
+    });
+
     $('body').on('hidden.bs.modal', '#add-customer-modal', function () {
         $('#email-add-customer').val("");
         $('#name-add-customer').val("");

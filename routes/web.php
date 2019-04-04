@@ -52,6 +52,8 @@ Route::get('/member/check','BookController@checkCustomerCode');
 Route::post('/send-complaint', 'AddComplaintController@addComplaint');
 
 Route::get('/member/{id}','MemberController@history');
+Route::get('/updateDB','MemberController@updateDatabases');
+Route::delete('/member/{id}','MemberController@destroy');
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/login','AdminLoginController@getLogin')->name('getAdminLogin');
     Route::post('/login','AdminLoginController@postLogin');
@@ -77,3 +79,5 @@ Route::group(['prefix' => '/admin'], function () {
 
     Route::get('/complaints', 'ComplaintController@index');
 });
+
+
