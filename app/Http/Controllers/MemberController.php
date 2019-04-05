@@ -23,13 +23,13 @@ class MemberController extends Controller
         if (isset($input['email']) && $input['email'] != null) {
             $validation = Validator::make($input, [
                 'email' => 'email',
-                'phone_number' => 'required|phone_number|max:20',
+                'phone_number' => 'required|phone_number|max:20|unique:customers',
                 'name' => 'required|string',
                 'customer_code' => 'required|'
             ]);
         } else {
             $validation = Validator::make($input, [
-                'phone_number' => 'required|phone_number|max:20',
+                'phone_number' => 'required|phone_number|max:20|unique:customers',
                 'name' => 'required|string',
                 'customer_code' => 'required|'
             ]);
@@ -41,12 +41,12 @@ class MemberController extends Controller
         $email = $request->email;
         $name = $request->name;
         $customer_code = $request->customer_code;
-        $check = DB::table("customers")->where("phone_number", "=", $phone_number)->first();
-        if ($check != null) {
-            return response()->json([
-                "errors" => ['phone_number' => ["Duplicated phone_number"]]
-            ]);
-        }
+//        $check = DB::table("customers")->where("phone_number", "=", $phone_number)->first();
+//        if ($check != null) {
+//            return response()->json([
+//                "errors" => ['phone_number' => ["Duplicated phone_number"]]
+//            ]);
+//        }
         DB::table("customers")->insert([
             'email' => $email,
             'phone_number' => $phone_number,
@@ -157,7 +157,7 @@ class MemberController extends Controller
     public function destroy($id)
     {
         $member = Member::where('customer_code', $id);
-        $member->delete();
+        $member->forceDelete();
         return response()->json(['success' => true]);
     }
 
