@@ -14,7 +14,7 @@
             {{--data-toggle="modal" data-target="#fill-in-code" --}}
             onclick=showModalEnterCode(this)
             data-phone="{{$row->telephone}}" data-id="{{$row->id}}">
-            <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
+            <td>{{ ($data->currentPage()-1)*10+$key+121 }}</td>
             <td>{{ $row->name }}</td>
             <td>{{ substr($row->telephone, 0, 4) . '****' . substr($row->telephone,  -4)}}</td>
             <td>{{ $row->type }}</td>

@@ -17,7 +17,7 @@
             {{--data-toggle="modal" data-target="#fill-in-code" --}}
             onclick=showModalEnterCode(this)
             data-id="{{$row->id}}">
-            <td>{{ ($data->currentPage()-1)*10+$row->id+101 }}</td>
+            <td>{{ ($data->currentPage()-1)*10+$key+107 }}</td>
             <td>{{ ucwords(json_decode($row->customer_name)) }}</td>
             <td>{{ substr($row->mobile, 0, 4) . '****' . substr($row->mobile,  -4)}}</td>
             <td>{{ explode(' ',$row->reservation_time)[1] }}</td>
