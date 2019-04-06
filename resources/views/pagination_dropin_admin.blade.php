@@ -24,7 +24,13 @@
                     </td>
                 @endif
                 <td>{{ $row->telephone }}</td>
+
+                @if($row->type == 'Fransar')
+                <td><span class="badge badge-warning" data-email="{{$row->telephone}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
+                @else
                 <td><span class="badge badge-secondary" data-email="{{$row->telephone}}" data-name="{{$row->name}}">{{ $row->type }}</span></td>
+                @endif
+
                 <td>
                     <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}">
                         <option data-email="{{$row->telephone}}" data-name="{{$row->name}}" value="waiting" {{$row->status=='wating'?'selected':''}}>
