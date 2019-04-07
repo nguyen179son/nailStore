@@ -52,6 +52,7 @@ class ReservationController extends Controller
                 }
 
                 $message = imap_qprint($message);
+                $message = utf8_encode($message);
 
                 $lines = explode("\r\n", $message);
                 $subject = strtolower($header->subject);
@@ -188,7 +189,7 @@ class ReservationController extends Controller
             }
         }
 
-
+        dd($customer_name);
         DB::table("online_reservations")->where([
             ['customer_name', '=', $customer_name],
             ['reservation_time', '=', $customer_booking_time],

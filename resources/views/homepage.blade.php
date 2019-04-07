@@ -286,14 +286,16 @@
 <div class="modal fade" id="discount-modal" tabindex="-1" role="dialog" aria-labelledby="discount-modal" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content discount-modal-content">
-      <div class="modal-header discount-modal-header">
-        <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
-        <button type="button" class="close discount-modal-close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img alt="picture" src="{{ URL::asset('/images/discount_image_21_04_19.png') }}"
+        <div>
+            <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+            <button type="button" style="float: right; margin: 10px;" class="close discount-modal-close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+      <div class="modal-body" style="padding-top: 0;">
+        <img alt="picture" src="{{ URL::asset('/images/discount_image_21_04_19.jpg') }}"
                      class="img-fluid">
       </div>
       <!-- <div class="modal-footer">
