@@ -20,7 +20,7 @@ function collapseMenu() {
 
 $(document).ready(function () {
     var today = new Date();
-    if(Date.parse('04/06/2019 23:59:59') >= today)
+    if(Date.parse('04/21/2019 23:59:59') >= today)
     {
         $('#discount-modal').modal();
     }
