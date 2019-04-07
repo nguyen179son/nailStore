@@ -118,7 +118,7 @@ class ReservationController extends Controller
                 }
             }
             if (strpos($line, 'meddelande') !== false) {
-                $customer_notice = trim(str_replace("Ev. meddelande: ", "", $line), "\t ");
+                $customer_notice = json_encode(mb_strtolower(trim(str_replace("Ev. meddelande: ", "", $line), "\t ")));
                 continue;
             }
 
@@ -183,7 +183,7 @@ class ReservationController extends Controller
 
             }
             if (strpos($line, 'Avbokningsmeddelande') !== false) {
-                $customer_notice = trim(str_replace("Avbokningsmeddelande: ", "", $line), "\t ");
+                $customer_notice = json_encode(mb_strtolower(trim(str_replace("Avbokningsmeddelande: ", "", $line), "\t ")));
                 continue;
             }
         }
