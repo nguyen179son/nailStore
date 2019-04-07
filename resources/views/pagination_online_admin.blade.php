@@ -26,9 +26,8 @@
                     </td>
                 @endif
 {{--                <td>{{ ucwords(json_decode($row->customer_name)) }}</td>--}}
-                <td>{{ $row->mobile }}</td>
-
-                <!-- <td><span class="badge badge-secondary">{{ $row->service_type }}</span></td> -->
+                {{--<td>{{ $row->mobile }}</td>--}}
+                <td>{{ substr($row->mobile, 0, 4) . '****' . substr($row->mobile,  -4) }}</td>
 
                 @if($row->service_type == 'Fransar')
                 <td><span class="badge badge-warning">{{ $row->service_type }}</span></td>

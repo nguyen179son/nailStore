@@ -19,8 +19,9 @@
                         {{ ucwords(trim($member->name, "\"")) }}
                     </a>
                 </td>
-                <td>{{$member->phone_number}}
-                </td>
+                {{--<td>{{$member->phone_number}}</td>--}}
+                <td>{{  substr($member->phone_number, 0, 4) . '****' . substr($member->phone_number,  -4) }}</td>
+
                 <td>{{$member->email}}
                 </td>
                 <td>{{$member->point}}</td>
