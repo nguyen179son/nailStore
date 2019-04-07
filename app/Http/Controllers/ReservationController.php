@@ -17,7 +17,7 @@ class ReservationController extends Controller
     public function getReservations()
     {
         try {
-            $mbox = imap_open(env("IMAP_MAILBOX"), env("IMAP_EMAIL"), env("IMAP_PASSWORD"));
+            $mbox = imap_open("{imap.gmail.com:993/imap/ssl}INBOX", "labella.collector@gmail.com", "uppsala123");
         } catch (\Exception $e) {
             return abort(500);
         }
