@@ -37,7 +37,7 @@
                 @endif
 
 
-                <td>{{ ucwords(json_decode($row->notice) }}</td>
+                <td>{{ ucwords(json_decode($row->notice)) }}</td>
                 <td>{{ substr(explode(' ',$row->reservation_time)[1], 0, 5) }}</td>
                 <td>
                     <select class="form-control form-control-lg dropdown-status" id="{{$row->id}}" data-email="{{$row->mobile}}" data-name="{{$row->customer_name}}">
