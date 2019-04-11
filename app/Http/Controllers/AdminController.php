@@ -75,8 +75,18 @@ class AdminController extends Controller
             $data = $data->get()->toArray();
 
             foreach ($data as $value) {
-                $code = DB::table('customers')
-                    ->where('email', $value->email)->get();
+                $code = DB::table('customers');
+                if ($value->mobile) {
+                    $code = $code->where('phone_number', 'like', '%'.$this->normalizePhone($value->mobile).'%');
+                }
+                if ($value->telephone) {
+                    $code = $code->orWhere('phone_number', 'like', '%'.$this->normalizePhone($value->telephone).'%');
+                }
+                if (!$value->mobile && !$value->telephone) {
+                    $code = '';
+                } else {
+                    $code = $code->get();
+                }
                 if ($code->isEmpty()) {
                     $value->code = '';
                     $value->discount = false;
@@ -97,6 +107,15 @@ class AdminController extends Controller
             $data = new LengthAwarePaginator($currentPageSearchResult, count($col), $perPage);
             return view('pagination_online_admin', compact('data'))->render();
         }
+    }
+
+    function normalizePhone($phone) {
+        if ($phone[0] == '0') {
+            return ltrim($phone, '0');
+        } else if ($phone[0] == '+') {
+            return substr($phone, 3);
+        }
+        return $phone;
     }
 
     function fetch_data_dropin(Request $request)
@@ -133,8 +152,11 @@ class AdminController extends Controller
             $data = $data->orderBy('created_at', 'asc');
             $data = $data->get()->toArray();
             foreach ($data as $value) {
-                $code = DB::table('customers')
-                    ->where('email', $value->email)->get();
+                $code = '';
+                if ($value->telephone) {
+                    $code = DB::table('customers')
+                        ->where('phone_number', 'like', '%'.$this->normalizePhone($value->telephone).'%')->get();
+                }
                 if ($code->isEmpty()) {
                     $value->code = '';
                     $value->discount = false;
