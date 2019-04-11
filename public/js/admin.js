@@ -461,6 +461,7 @@ $('body').on('change', '.dropdown-status', async function (e) {
         window.choosing = $(this).attr('id');
         window.checkdone = 0;
         $('#receipt-modal').modal('show');
+        $('#receipt').val('0');
     } else if ($(this).val() != 'done' && window.oldVal == 'done') {
         var val = $(this).val();
         window.choosing = $(this).attr('id');
