@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="{{URL::asset('/images/labella_logo.png')}}">
-    <title>Customer Complaints</title>
+    <title>Complaints</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -56,13 +56,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ml-auto">
                 <li class="nav-item mr-20px">
-                    <a class="nav-link" href="/admin">Admin page</a>
+                    <a class="nav-link" href="/admin">Admin</a>
                 </li>
                 <li class="nav-item mr-20px">
-                    <a class="nav-link" href="/admin/customer-management">Customer Management</a>
+                    <a class="nav-link" href="/admin/customer-management">Customers</a>
                 </li>
                 <li class="nav-item active mr-20px">
-                    <a class="nav-link" href="#">Customer Complaints</a>
+                    <a class="nav-link" href="#">Complaints</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
@@ -88,7 +88,7 @@
                     <div class="table-title">
                         <div class="row">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 float-left">
-                                <h2 style="font-size:2rem;"><b>Customer Complaints</b></h2>
+                                <h2 style="font-size:2rem;"><b>Complaints</b></h2>
                             </div>
                         </div>
                     </div>
