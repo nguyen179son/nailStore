@@ -87,10 +87,9 @@ class AdminController extends Controller
                 } else {
                     $code = $code->get();
                 }
-                if ($code->isEmpty()) {
-                    $value->code = '';
-                    $value->discount = false;
-                } else {
+                $value->code = '';
+                $value->discount = false;
+                if (isset($code[0])) {
                     $value->code = $code[0]->customer_code;
                     if (($code[0]->point + 1) % 5 == 0) {
                         $value->discount = true;
