@@ -64,13 +64,13 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ml-auto">
                 <li class="nav-item active mr-20px">
-                    <a class="nav-link" href="#">Admin page</a>
+                    <a class="nav-link" href="#">Admin</a>
                 </li>
                 <li class="nav-item  mr-20px">
-                    <a class="nav-link" href="/admin/customer-management">Customer Management</a>
+                    <a class="nav-link" href="/admin/customer-management">Customers</a>
                 </li>
                 <li class="nav-item mr-20px">
-                    <a class="nav-link" href="/admin/complaints">Customer Complaints</a>
+                    <a class="nav-link" href="/admin/complaints">Complaints</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
@@ -206,7 +206,7 @@
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
-                            <h4 class="col-sm-6">Admin Management</h4>
+                            <h4 class="col-sm-6">Admin</h4>
                             {{--<h4 class="col-sm-4 income">Total income:</h4>--}}
                         </div>
                     </div>
@@ -222,7 +222,7 @@
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
-                            <h4 class="col-sm-6">Admin Management</h4>
+                            <h4 class="col-sm-6">Admin</h4>
                             {{--<h4 class="col-sm-4 income">Total income:</h4>--}}
                         </div>
                     </div>
