@@ -49,7 +49,7 @@
 
 <body>
 @csrf
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-purple-gradient" id="mainNav">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-purple-gradient" id="mainNav">
     <div class="container">
         <a class="navbar-brand " href="/" id="logo-text">Labella</a>
 
