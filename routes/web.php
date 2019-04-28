@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('settings');
 });
 Route::group(['middleware' => ['auth']], function()
 {
