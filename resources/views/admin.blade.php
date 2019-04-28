@@ -31,8 +31,8 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
-    {{--<link rel="stylesheet" href="{{ URL::asset('/css/style.css') }}">--}}
-    <!-- Latest compiled and minified CSS -->
+{{--<link rel="stylesheet" href="{{ URL::asset('/css/style.css') }}">--}}
+<!-- Latest compiled and minified CSS -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/css/bootstrap-select.min.css">
 
@@ -196,18 +196,23 @@
                     </div>
                 </div>
             </div>
-            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">nailslabella.se/index</span>
-            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">nailslabella.se/dropin-booking</span>
-            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;" class="btn-custom">nailslabella.se/dropin-queue</span>
+            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;"
+                  class="btn-custom">nailslabella.se/index</span>
+            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;"
+                  class="btn-custom">nailslabella.se/dropin-booking</span>
+            <span style="margin-top: 10px; color: #5f27cd !important; background-color: #fff !important; border: 1px solid #fff !important;"
+                  class="btn-custom">nailslabella.se/dropin-queue</span>
         </div>
-
         <div id="dropin-table" class="col-xl-9 col-lg-9 col-md-8 right-panel">
+            <div class="alert-checkout-text" style="display: none;"></div>
             <div class="">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
                             <h4 class="col-sm-6">Admin</h4>
-                            {{--<h4 class="col-sm-4 income">Total income:</h4>--}}
+                            <button class="col-sm-4 btn btn-sm btn-primary" data-target="#checkout-modal"
+                                    data-toggle="modal">Check out
+                            </button>
                         </div>
                     </div>
                     <div id="drop-in-queue-table">
@@ -218,12 +223,15 @@
         </div>
 
         <div id="booking-table" class="col-xl-9 col-lg-9 col-md-8 right-panel">
+            <div class="alert-checkout-text" style="display: none;"></div>
             <div class="">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
                             <h4 class="col-sm-6">Admin</h4>
-                            {{--<h4 class="col-sm-4 income">Total income:</h4>--}}
+                            <button class="col-sm-4 btn btn-sm btn-primary" data-target="#checkout-modal"
+                                    data-toggle="modal">Check out
+                            </button>
                         </div>
                     </div>
                     <div id="booking-queue-table">
@@ -307,6 +315,118 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-labelledby="checkout-modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-primary" id="exampleModalLabel">
+                            <span>Check out</span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="history-member">
+                        <div class="booking-form">
+
+                            <div class="form-group" style="margin-bottom: 0">
+                                <span class="form-label">Code</span>
+
+                                <div class="input-group mb-3">
+                                    <input type="number" id="checkout-code"
+                                           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                           maxlength="4"
+                                           class="form-control" placeholder="Code" aria-label="code"
+                                           aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" id="validate-code" type="button">
+                                            Validate
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="height: 30px" id="checkout-code-error">
+                                </div>
+                            </div>
+
+                            <div class="form-group hidden-info" hidden>
+                                <span class="form-label">Name</span>
+                                <input class="form-control" type="text" id="checkout-name" name="name_checkout"
+                                       placeholder="Name" value="" disabled>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                            <span class="form-label">Service</span>
+                            <select class="form-control" name="service" id="checkout-service">
+                                <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
+                                <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
+                                <option {{ old('type') == "Fransar" ? 'selected' : '' }}>Fransar</option>
+                            </select>
+                            <div style="height: 30px" id="checkout-service-error">
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 0" hidden>
+                            <span class="form-label">Status</span>
+                            <input class="form-control" type="text" id="checkout-status"
+                                   name="status"
+                                   placeholder="Code" value="Done" disabled>
+                            <div style="height: 30px" id="checkout-status-error">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                            <span class="form-label">Staff</span>
+                            <input class="form-control" type="text" id="checkout-staff"
+                                   name="staff"
+                                   placeholder="Staff" value="">
+                            <div style="height: 30px" id="checkout-staff-error">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                            <span class="form-label">Note</span>
+                            <input class="form-control" type="text" id="checkout-note"
+                                   name="note"
+                                   placeholder="Note" value="">
+                            <div style="height: 30px" id="checkout-note-error">
+                            </div>
+                        </div>
+
+                        <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                            <span class="form-label">Payment</span>
+                            <input class="form-control" type="number" id="checkout-receipt"
+                                   name="receipt"
+                                   placeholder="Payment" value="0">
+                            <div style="height: 30px" id="checkout-receipt-error">
+                            </div>
+                        </div>
+                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
+                        <div id="alert-text" style="padding-top: 0; display: none;"></div>
+                        <input type="hidden" name="id" id="cus-id" value="">
+                        <input type="hidden" name="name" id="cus-name" value="">
+                        <input type="hidden" name="email" id="cus-email" value="">
+                        <input type="hidden" name="phone_number" id="cus-phone" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <button id="submit-checkout" class="btn btn-primary" disabled>Submit</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 <script src="{{ URL::asset('/js/admin.js') }}"></script>

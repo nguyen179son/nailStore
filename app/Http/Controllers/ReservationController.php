@@ -24,7 +24,7 @@ class ReservationController extends Controller
         if ($mbox === false) {
             return "Error opening mailbox";
         }
-        $search = 'SINCE "' . date("j F Y", strtotime("-0 days")) . '"';
+        $search = 'SINCE "' . date("j F Y", strtotime("-60 days")) . '"';
         $emails = imap_search($mbox, $search);
 
         $email_list = array();
@@ -123,6 +123,9 @@ class ReservationController extends Controller
                 continue;
             }
 
+        }
+        if (strlen($customer_notice) >= 255) {
+            $customer_notice = substr($customer_notice, 0, 254);
         }
 
 

@@ -177,4 +177,17 @@ class AdminController extends Controller
             return view('pagination_dropin_admin', compact('data'))->render();
         }
     }
+
+    public function validateCode(Request $request) {
+        $input = $request->all();
+        $validation = Validator::make($input,[
+            'code' => "required|code"
+        ]);
+        if ($validation->fails()) {
+            return response()->json(['errors' => $validation->messages()]);
+        } else {
+            $member = Member::where('customer_code',$input['code'])->first();
+            return response()->json(['member'=>$member]);
+        }
+    }
 }
