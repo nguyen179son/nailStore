@@ -708,6 +708,131 @@ $('body').on('click', "input[class='checkbox-status']", function () {
         });
     }
 });
+$('body').on('keyup','#checkout-code',function(e) {
+    if(e.keyCode == 13)
+    {
+        $("#validate-code").click();
+    }
+});
+
+$('body').on('click', '#validate-code',function () {
+    $.ajax({
+        url: "/admin/validate-code",
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $("input[name=_token]").val()
+        },
+        data: {
+            code: $("#checkout-code").val()
+        },
+        success: function (data) {
+            if (data.member) {
+                console.log(data.member);
+                $("#submit-checkout").prop("disabled", false);
+                $(".hidden-info").removeAttr('hidden');
+                $("#checkout-name").val(data.member.name);
+                $("#checkout-code").prop('disabled',true);
+                $("#date-picker").datepicker('setDate', 'today');
+                $("#cus-id").val(data.member.id);
+                $("#cus-email").val(data.member.email);
+                $("#cus-phone").val(data.member.phone_number);
+            } else {
+                $(".alert-checkout-text").removeClass("text-danger text-success").addClass("alert alert-danger");
+                $(".alert-checkout-text").text("Wrong code");
+                $(".alert-checkout-text").show();
+
+                setTimeout(function () {
+                    $(".alert-checkout-text").hide();
+                }, 2000);
+                $("#checkout-modal").modal('hide');
+                $("#checkout-code").val("");
+                $("#submit-checkout").prop("disabled", true);
+            }
+        }
+    });
+});
+
+$("body").on('hidden.bs.modal','#checkout-modal',function () {
+    $(".hidden-info").attr('hidden',"hidden");
+    $("#checkout-code").prop('disabled', false);
+    $("#checkout-code").val("");
+    $("#checkout-note").val("");
+    $("#checkout-staff").val("");
+    $("#checkout-receipt").val("");
+    $("#submit-checkout").prop("disabled", true);
+});
+
+$('body').on('click', '#submit-checkout', function (e) {
+
+    $.ajax({
+        url: '/dropin-booking/add-history',
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $("input[name=_token]").val()
+        },
+        data: {
+            id: $("#cus-id").val(),
+            name: $("#checkout-name").val(),
+            email: $("#cus-email").val(),
+            telephone: $("#cus-phone").val(),
+            type: $("#checkout-service").val(),
+            status: 'done',
+            staff: $("#checkout-staff").val(),
+            receipt: $("#checkout-receipt").val(),
+            note: $("#checkout-note").val()
+        },
+        success: function (data) {
+            $("#checkout-staff-error").html("");
+            $("#checkout-note-error").html("");
+            $("#checkout-receipt-error").html("");
+            if (data.hasOwnProperty('errors')) {
+                var errors = data.errors;
+                if (errors.hasOwnProperty('staff')) {
+                    $("#checkout-staff-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.staff[0] + "</div>");
+                }
+                if (errors.hasOwnProperty('note')) {
+                    $("#checkout-note-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.note[0] + "</div>");
+                }
+                if (errors.hasOwnProperty('receipt')) {
+                    $("#checkout-receipt-error").html("<div class=\"alert\" style=\"padding-top: 0;color: red\">" + errors.receipt[0] + "</div>");
+                }
+            } else {
+                $('#flash-message').flash_message({
+                    text: 'Checkout successfully',
+                    how: 'append'
+                });
+                $("#checkout-modal").modal('hide');
+            }
+        }
+    })
+});
+
+$.fn.flash_message = function (options) {
+
+    options = $.extend({
+        text: 'Done',
+        time: 1000,
+        how: 'before',
+        class_name: ''
+    }, options);
+
+    return $(this).each(function () {
+        if ($(this).parent().find('.flash_message').get(0))
+            return;
+
+        var message = $('<span />', {
+            'class': 'alert alert-info flash_message ' + options.class_name,
+            text: options.text
+        }).hide().fadeIn('fast');
+
+        $(this)[options.how](message);
+
+        message.delay(options.time).fadeOut('normal', function () {
+            $(this).remove();
+        });
+
+    });
+};
 
 function setDefaultValue() {
 

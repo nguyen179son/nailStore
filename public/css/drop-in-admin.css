@@ -115,3 +115,8 @@ body {
 .red-text{
     color: red;
 }
+
+/*.hidden-info {*/
+    /*!important;*/
+    /*display: none;*/
+/*}*/

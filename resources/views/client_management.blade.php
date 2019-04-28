@@ -246,13 +246,6 @@
                                     <div class="booking-form">
 
                                         <div class="form-group" style="margin-bottom: 0">
-                                            <div class="form-group">
-                                                <span class="form-label">Date</span>
-                                                <input id="date-picker" class="form-control" type="text" disabled>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" style="margin-bottom: 0">
                                             <span class="form-label">Service</span>
                                             <select class="form-control" name="service" id="service">
                                                 <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
