@@ -13,13 +13,20 @@ $(document).ready(function () {
     $(".li-staff").on('click', function () {
         if ($(this).hasClass("badge-light")) {
 
+            $(".badge-primary").removeClass("badge-light").removeClass("badge-primary").addClass("badge-light");
+            
             $(this).removeClass("badge-light").addClass("badge-primary");
+
             $("#staff").val($(this).text());
+            $("#checkout-staff").val($(this).text());
+
+
 
         } else if ($(this).hasClass("badge-primary")) {
 
             $(this).removeClass("badge-primary").addClass("badge-light");
             $("#staff").val("");
+            $("#checkout-staff").val("");
         }
     });
 
@@ -27,6 +34,9 @@ $(document).ready(function () {
         $(".badge-primary").removeClass("badge-light").removeClass("badge-primary").addClass("badge-light");
     });
 
+    $("body").on('click', '#checkout-button', function () {
+        $(".badge-primary").removeClass("badge-light").removeClass("badge-primary").addClass("badge-light");
+    });
 });
 
 function parseStaff (staffRawStr) {

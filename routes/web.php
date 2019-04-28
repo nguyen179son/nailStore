@@ -13,7 +13,7 @@
 
 
 Route::get('/', function () {
-    return view('settings');
+    return view('homepage');
 });
 Route::group(['middleware' => ['auth']], function()
 {
@@ -78,6 +78,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::post('/member', 'MemberController@addMember');
 
     Route::get('/complaints', 'ComplaintController@index');
+
+    Route::post('/validate-code', 'AdminController@validateCode');
 });
 
 
