@@ -24,7 +24,7 @@ class LinksTableSeeder extends Seeder
             array('type' => 'p3', 'url' => ''),
             array('type' => 'p4', 'url' => ''),
             array('type' => 'p5', 'url' => ''),
-            array('type' => 'p6', 'url' => ''),
+            array('type' => 'e', 'url' => ''),
         );
         DB::table('links')->insert($data);
     }

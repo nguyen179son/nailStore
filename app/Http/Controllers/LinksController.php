@@ -28,4 +28,19 @@ class LinksController extends Controller
             "success" => true
         ]);
     }
+
+    public function getBannerLinks(Request $request) {
+        $links = DB::table('links')->whereNotNull('url')->where('type', 'like','b%')->get('url');
+        return response()->json($links);
+    }
+
+    public function getPopupLinks(Request $request) {
+        $links = DB::table('links')->whereNotNull('url')->where('type', 'like','p%')->get('url');
+        return response()->json($links);
+    }
+
+    public function getEmployee(Request $request) {
+        $links = DB::table('links')->whereNotNull('url')->where('type', '=','e')->first();
+        return response()->json($links->url);
+    }
 }
