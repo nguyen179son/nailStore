@@ -54,6 +54,10 @@ Route::post('/send-complaint', 'AddComplaintController@addComplaint');
 Route::get('/member/{id}','MemberController@history');
 Route::get('/updateDB','MemberController@updateDatabases');
 Route::delete('/member/{id}','MemberController@destroy');
+
+Route::get('/links/banners', 'PublicLinksController@getBannerLinks');
+Route::get('/links/popups', 'PublicLinksController@getPopupLinks');
+
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/login','AdminLoginController@getLogin')->name('getAdminLogin');
     Route::post('/login','AdminLoginController@postLogin');
@@ -80,6 +84,18 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/complaints', 'ComplaintController@index');
 
     Route::post('/validate-code', 'AdminController@validateCode');
+
+    Route::get('/employees', 'LinksController@getEmployees');
+    Route::post('/employees/change', 'LinksController@changeLink');
+    Route::post('/employees/delete', 'LinksController@deleteLink');
+
+    Route::get('/settings', 'LinksController@index');
+
+    Route::post('settings/change', 'LinksController@changeLink');
+
+    Route::post('settings/delete', 'LinksController@deleteLink');
+
+    Route::get('settings/links', 'LinksController@getLinks');
 });
 
 

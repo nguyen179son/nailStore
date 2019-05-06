@@ -12,12 +12,19 @@ class LinksController extends Controller
         $this->middleware('auth');
     }
 
+    public function index() {
+        return view('settings');
+    }
+
     public function changeLink(Request $request) {
         $type = $request->type;
         $url = $request->url;
+//        dd($request);
         DB::table("links")->where("type", $type)->update(['url' => $url]);
         return response()->json([
-            "success" => true
+            "success" => true,
+            "type" => $type,
+            "url" => $url
         ]);
     }
 
@@ -25,7 +32,8 @@ class LinksController extends Controller
         $type = $request->type;
         DB::table("links")->where("type", $type)->update(['url' => '']);
         return response()->json([
-            "success" => true
+            "success" => true,
+            "type" => $type
         ]);
     }
 
@@ -39,7 +47,12 @@ class LinksController extends Controller
         return response()->json($links);
     }
 
-    public function getEmployee(Request $request) {
+    public function getLinks(Request $request) {
+        $links = DB::table('links')->where('type', '!=','e')->get(['type', 'url']);
+        return response()->json($links);
+    }
+
+    public function getEmployees(Request $request) {
         $links = DB::table('links')->whereNotNull('url')->where('type', '=','e')->first();
         return response()->json($links->url);
     }

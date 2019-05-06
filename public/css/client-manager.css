@@ -6,6 +6,11 @@ body {
     margin-top: 200px;
 }
 
+.mh-10px {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 @media (min-width: 576px) {
     .modal-dialog {
         max-width: 80%;
@@ -16,4 +21,17 @@ body {
 .word-break {
     word-break: break-all;
     max-width: inherit;
+}
+
+.ul-staff {
+    list-style: none;
+}
+
+.li-staff {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+.width-95pc {
+    width: 95%;
 }

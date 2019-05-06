@@ -72,6 +72,9 @@
                 <li class="nav-item mr-20px">
                     <a class="nav-link" href="/admin/complaints">Complaints</a>
                 </li>
+                <li class="nav-item mr-20px">
+                    <a class="nav-link" href="/admin/settings">Settings</a>
+                </li>
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
                        style="color: purple; opacity: 0.8;">LOGOUT</a>
@@ -229,7 +232,7 @@
                     <div class="table-title">
                         <div class="row">
                             <h4 class="col-sm-6">Admin</h4>
-                            <button class="col-sm-4 btn btn-sm btn-primary" data-target="#checkout-modal"
+                            <button id="checkout-button" class="col-sm-4 btn btn-sm btn-primary" data-target="#checkout-modal"
                                     data-toggle="modal">Check out
                             </button>
                         </div>
@@ -317,118 +320,145 @@
     </div>
 </div>
 
-<div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-labelledby="checkout-modal"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title text-primary" id="exampleModalLabel">
-                            <span>Check out</span>
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="history-member">
-                        <div class="booking-form">
+<div class="container">
+    <div class="row">
+        <div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-labelledby="checkout-modal"
+        aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-primary" id="exampleModalLabel">
+                                        <span>Check out</span>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="history-member">
+                                    <div class="booking-form">
 
-                            <div class="form-group" style="margin-bottom: 0">
-                                <span class="form-label">Code</span>
+                                        <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Code</span>
 
-                                <div class="input-group mb-3">
-                                    <input type="number" id="checkout-code"
-                                           oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                                           maxlength="4"
-                                           class="form-control" placeholder="Code" aria-label="code"
-                                           aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" id="validate-code" type="button">
-                                            Validate
-                                        </button>
+                                            <div class="input-group mb-3">
+                                                <input type="number" id="checkout-code"
+                                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                    maxlength="4"
+                                                    class="form-control" placeholder="Code"
+                                                       {{--aria-label="code"--}}
+                                                    {{--aria-describedby="basic-addon2"--}}
+                                                    autofocus
+                                                >
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" id="validate-code" type="button">
+                                                        Validate
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div style="height: 30px" id="checkout-code-error">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group hidden-info" hidden>
+                                            <span class="form-label">Name</span>
+                                            <input class="form-control" type="text" id="checkout-name" name="name_checkout"
+                                                placeholder="Name" value="" disabled>
+                                        </div>
                                     </div>
+
+
+                                    <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                                        <span class="form-label">Service</span>
+                                        <select class="form-control" name="service" id="checkout-service">
+                                            <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
+                                            <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
+                                            <option {{ old('type') == "Fransar" ? 'selected' : '' }}>Fransar</option>
+                                        </select>
+                                        <div style="height: 30px" id="checkout-service-error">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="margin-bottom: 0" hidden>
+                                        <span class="form-label">Status</span>
+                                        <input class="form-control" type="text" id="checkout-status"
+                                            name="status"
+                                            placeholder="Code" value="Done" disabled>
+                                        <div style="height: 30px" id="checkout-status-error">
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                                        <span class="form-label">Staff</span>
+                                        <input class="form-control" type="text" id="checkout-staff"
+                                            name="staff"
+                                            placeholder="Staff" value="">
+                                        <div style="height: 30px" id="checkout-staff-error">
+                                        </div>
+                                    </div> -->
+
+                                    <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                                        <span class="form-label">Staff</span>
+                                        <div id="staff-container" class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
+                                        </div>
+                                        <input type="hidden" id="checkout-staff" name="staff" value="">
+                                    </div>
+
+                                    <!-- <div class="form-group row" style="margin-bottom: 0;">
+                                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1" style="margin-top: 6px;">
+                                            <span class="form-label float-left mh-10px">Staff</span>
+                                        </div>
+                                        <div id="staff-container" class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
+                                        </div>
+                                        <input type="hidden" id="staff" name="staff" value="">
+                                    </div> -->
+
+
+                                    <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                                        <span class="form-label">Note</span>
+                                        <input class="form-control" type="text" id="checkout-note"
+                                            name="note"
+                                            placeholder="Note" value="">
+                                        <div style="height: 30px" id="checkout-note-error">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
+                                        <span class="form-label">Payment</span>
+                                        <input class="form-control" type="number" id="checkout-receipt"
+                                            name="receipt"
+                                            placeholder="Payment" value="0">
+                                        <div style="height: 30px" id="checkout-receipt-error">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+
+                                    <div id="alert-text" style="padding-top: 0; display: none;"></div>
+                                    <input type="hidden" name="id" id="cus-id" value="">
+                                    <input type="hidden" name="name" id="cus-name" value="">
+                                    <input type="hidden" name="email" id="cus-email" value="">
+                                    <input type="hidden" name="phone_number" id="cus-phone" value="">
                                 </div>
-                                <div style="height: 30px" id="checkout-code-error">
+                                <div class="modal-footer">
+                                    <button id="submit-checkout" class="btn btn-primary" disabled>Submit</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
+                                    </button>
                                 </div>
                             </div>
-
-                            <div class="form-group hidden-info" hidden>
-                                <span class="form-label">Name</span>
-                                <input class="form-control" type="text" id="checkout-name" name="name_checkout"
-                                       placeholder="Name" value="" disabled>
-                            </div>
                         </div>
-
-
-                        <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
-                            <span class="form-label">Service</span>
-                            <select class="form-control" name="service" id="checkout-service">
-                                <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
-                                <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
-                                <option {{ old('type') == "Fransar" ? 'selected' : '' }}>Fransar</option>
-                            </select>
-                            <div style="height: 30px" id="checkout-service-error">
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="margin-bottom: 0" hidden>
-                            <span class="form-label">Status</span>
-                            <input class="form-control" type="text" id="checkout-status"
-                                   name="status"
-                                   placeholder="Code" value="Done" disabled>
-                            <div style="height: 30px" id="checkout-status-error">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
-                            <span class="form-label">Staff</span>
-                            <input class="form-control" type="text" id="checkout-staff"
-                                   name="staff"
-                                   placeholder="Staff" value="">
-                            <div style="height: 30px" id="checkout-staff-error">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
-                            <span class="form-label">Note</span>
-                            <input class="form-control" type="text" id="checkout-note"
-                                   name="note"
-                                   placeholder="Note" value="">
-                            <div style="height: 30px" id="checkout-note-error">
-                            </div>
-                        </div>
-
-                        <div class="form-group hidden-info" style="margin-bottom: 0" hidden>
-                            <span class="form-label">Payment</span>
-                            <input class="form-control" type="number" id="checkout-receipt"
-                                   name="receipt"
-                                   placeholder="Payment" value="0">
-                            <div style="height: 30px" id="checkout-receipt-error">
-                            </div>
-                        </div>
-                        <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-
-                        <div id="alert-text" style="padding-top: 0; display: none;"></div>
-                        <input type="hidden" name="id" id="cus-id" value="">
-                        <input type="hidden" name="name" id="cus-name" value="">
-                        <input type="hidden" name="email" id="cus-email" value="">
-                        <input type="hidden" name="phone_number" id="cus-phone" value="">
-                    </div>
-                    <div class="modal-footer">
-                        <button id="submit-checkout" class="btn btn-primary" disabled>Submit</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
-                        </button>
                     </div>
                 </div>
             </div>
+        
         </div>
     </div>
 </div>
 </div>
 
 <script src="{{ URL::asset('/js/admin.js') }}"></script>
+<script src="{{ URL::asset('/js/fetchStaff.js') }}"></script>
 </body>
 </html>

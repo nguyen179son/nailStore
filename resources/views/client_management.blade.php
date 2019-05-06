@@ -232,7 +232,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="container">
                     <div class="row d-flex justify-content-center">
-                        <div class="col-xs-6 col-lg-6 col-md-9 col-sm-10 col-12">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title text-primary" id="exampleModalLabel">
@@ -245,7 +245,34 @@
                                 <div class="modal-body" id="history-member">
                                     <div class="booking-form">
 
-                                        <div class="form-group" style="margin-bottom: 0">
+                                        <div class="form-group row" style="margin-bottom: 0;">
+                                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6" style="margin-top: 6px;">
+                                                <span class="form-label float-left mh-10px">Service</span>
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                                                <select class="form-control" name="service" id="service">
+                                                    <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
+                                                    <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
+                                                    <option {{ old('type') == "Fransar" ? 'selected' : '' }}>Fransar</option>
+                                                </select>
+                                                <div style="height: 30px" id="service-error"> </div>
+                                            </div>
+
+                                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-6" style="margin-top: 6px;">
+                                                <span class="form-label float-left mh-10px">Payment</span>
+                                            </div>
+
+                                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6">
+                                                <input class="form-control" type="number" id="receipt"
+                                                    name="receipt"
+                                                    placeholder="Payment" value="0">
+                                                <div style="height: 30px" id="receipt-error">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        <!-- <div class="form-group" style="margin-bottom: 0">
                                             <span class="form-label">Service</span>
                                             <select class="form-control" name="service" id="service">
                                                 <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
@@ -254,7 +281,7 @@
                                             </select>
                                             <div style="height: 30px" id="service-error">
                                             </div>
-                                        </div>
+                                        </div> -->
 
                                         <div class="form-group" hidden style="margin-bottom: 0">
                                             <span class="form-label">Status</span>
@@ -265,32 +292,42 @@
                                             </div>
                                         </div>
 
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Staff</span>
-                                            <input class="form-control" type="text" id="staff"
-                                                   name="staff"
-                                                   placeholder="Staff" value="">
-                                            <div style="height: 30px" id="staff-error">
+                                        <div class="form-group row" style="margin-bottom: 0;">
+                                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1" style="margin-top: 6px;">
+                                                <span class="form-label float-left mh-10px">Staff</span>
                                             </div>
+                                            <div id="staff-container" class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
+                                                <!-- <span class="li-staff badge badge-light">Hung</span>
+                                                <span class="li-staff badge badge-light">minh</span>
+                                                <span class="li-staff badge badge-light">Son</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span>
+                                                <span class="li-staff badge badge-light">Primary</span> -->
+                                            </div>
+                                            <input type="hidden" id="staff" name="staff" value="">
                                         </div>
 
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Note</span>
+                                        <div class="form-group" style="margin-top: 20px; margin-bottom: 0">
+                                            <span class="form-label mh-10px">Note</span>
                                             <input class="form-control" type="text" id="note"
                                                    name="note"
                                                    placeholder="Note" value="">
                                             <div style="height: 30px" id="note-error">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Payment</span>
-                                            <input class="form-control" type="number" id="receipt"
-                                                   name="receipt"
-                                                   placeholder="Payment" value="0">
-                                            <div style="height: 30px" id="receipt-error">
                                             </div>
                                         </div>
 
@@ -334,25 +371,7 @@
         </div>
     </div>
 </div>
+
+<script src="{{ URL::asset('/js/fetchStaff.js') }}"></script>
 </body>
-
-<script>
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-
-    today = yyyy + '/' + mm + '/' + dd;
-
-    var datePicker = document.getElementById("date-picker");
-    datePicker.value = today;
-</script>
 </html>
