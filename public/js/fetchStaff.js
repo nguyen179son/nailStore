@@ -1,20 +1,54 @@
 $(document).ready(function () {
 
-    // Need staff-container and add-history button.
-
-    var staffRawStr = "Hung1, Hung2, Hung3, Hung4, Hung5, Hung6, Hung7, Hung8, Hung9, Hung10, Hung11, Hung12, Hung13, Hung14, Hung15, Hung16, Hung17, Hung18, Hung19";
-    
-    var staffList = parseStaff(staffRawStr);
-
-    staffList.forEach(function (value) {
-        $("#staff-container").append("<span class=\"li-staff badge badge-light\">"+value+"</span>");
+    $("body").on('click', '.add-history', function () {
+        $(".badge-primary").removeClass("badge-light").removeClass("badge-primary").addClass("badge-light");
     });
-    
+
+    $("body").on('click', '#checkout-button', function () {
+        $(".badge-primary").removeClass("badge-light").removeClass("badge-primary").addClass("badge-light");
+        $("#checkout-code").focus();
+    });
+
+    // Need staff-container and add-history button.
+    fetchStaff();
+});
+
+function fetchStaff() {
+    return fetch('/admin/employees').then(res => res.json()).then(data => {
+        var staffList = parseStaff(data);
+
+        staffList.forEach(function (value) {
+            $("#staff-container").append("<span class=\"li-staff badge badge-light\" style=\"margin-right: 6px;\">"+value+"</span>");
+        });
+
+        bindOnClickLiStaff();
+    }).catch(e => console.log(e));
+}
+
+function parseStaff (staffRawStr) {
+
+    var re = /\s*([A-Za-z1-9]+)\s*\,?\s*/g;
+    var result;
+
+    var staffList = [];
+
+    do {
+        result = re.exec(staffRawStr);
+        if (result) {
+            staffList.push(result[1]);
+            // console.log(result[1]);
+        }
+    } while (result);
+
+    return staffList;
+}
+
+function bindOnClickLiStaff() {
     $(".li-staff").on('click', function () {
         if ($(this).hasClass("badge-light")) {
 
             $(".badge-primary").removeClass("badge-light").removeClass("badge-primary").addClass("badge-light");
-            
+
             $(this).removeClass("badge-light").addClass("badge-primary");
 
             $("#staff").val($(this).text());
@@ -29,31 +63,4 @@ $(document).ready(function () {
             $("#checkout-staff").val("");
         }
     });
-
-    $("body").on('click', '.add-history', function () {
-        $(".badge-primary").removeClass("badge-light").removeClass("badge-primary").addClass("badge-light");
-    });
-
-    $("body").on('click', '#checkout-button', function () {
-        $(".badge-primary").removeClass("badge-light").removeClass("badge-primary").addClass("badge-light");
-    });
-});
-
-function parseStaff (staffRawStr) {
-
-    var re = /\s*([A-Za-z1-9]+)\s*\,?\s*/g;
-    // var staffRawStr = "Hung1, Hung2, Hung3, Hung4, Hung5, Hung6, Hung7, Hung8, Hung9, Hung10, Hung11, Hung12, Hung13, Hung14, Hung15, Hung16, Hung17, Hung18, Hung19";
-    var result;
-
-    var staffList = [];
-
-    do {
-        result = re.exec(staffRawStr);
-        if (result) {
-            staffList.push(result[1]);
-            console.log(result[1]);
-        }
-    } while (result);
-
-    return staffList;
 }

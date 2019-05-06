@@ -25,31 +25,6 @@ $(document).ready(function () {
         $('#discount-modal').modal();
     }
 
-    function sendRequestToUpdateEmail() {
-        $.ajax({
-            type: "get",
-            url: '/update-online-reservation-emails',
-            success:function(data)
-            {
-                //console.log the response
-                console.log("sent");
-                //Send another request in 10 seconds.
-                setTimeout(function(){
-                    sendRequestToUpdateEmail();
-                }, 60000);
-            },
-
-            error:function() {
-                console.log("error");
-                setTimeout(function(){
-                    sendRequestToUpdateEmail();
-                }, 60000);
-            }
-        });
-    }
-
-    sendRequestToUpdateEmail();
-
     $('body').on('click', '#send-complaint', function () {
         var content = $('#complaint-content').val();
         var name = $('#name').val();
@@ -105,7 +80,75 @@ $(document).ready(function () {
             }
         });
     });
+
+    fetchBanners();
+    fetchPopups();
+
+    sendRequestToUpdateEmail();
 });
+
+function fetchBanners() {
+    $.ajax({
+        type: "get",
+        url: '/links/banners',
+        success: function(data)
+        {
+            data.forEach(v => {
+                console.log(v.url);
+                if (v.url !== "") {
+                    // to do
+                }
+            });
+        },
+
+        error:function(e) {
+            console.log(`Error ${e}`);
+        }
+    });
+}
+
+function fetchPopups() {
+    $.ajax({
+        type: "get",
+        url: '/links/popups',
+        success: function(data)
+        {
+            data.forEach(v => {
+                console.log(v.url);
+                if (v.url !== "") {
+                    // to do
+                }
+            });
+        },
+
+        error:function(e) {
+            console.log(`Error ${e}`);
+        }
+    });
+}
+
+function sendRequestToUpdateEmail() {
+    $.ajax({
+        type: "get",
+        url: '/update-online-reservation-emails',
+        success:function(data)
+        {
+            //console.log the response
+            console.log("sent");
+            //Send another request in 10 seconds.
+            setTimeout(function(){
+                sendRequestToUpdateEmail();
+            }, 60000);
+        },
+
+        error:function() {
+            console.log("error");
+            setTimeout(function(){
+                sendRequestToUpdateEmail();
+            }, 60000);
+        }
+    });
+}
 
 
 

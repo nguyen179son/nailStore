@@ -72,6 +72,9 @@
                 <li class="nav-item mr-20px">
                     <a class="nav-link" href="/admin/complaints">Complaints</a>
                 </li>
+                <li class="nav-item mr-20px">
+                    <a class="nav-link" href="/admin/settings">Settings</a>
+                </li>
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
                        style="color: purple; opacity: 0.8;">LOGOUT</a>
@@ -344,8 +347,11 @@
                                                 <input type="number" id="checkout-code"
                                                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                     maxlength="4"
-                                                    class="form-control" placeholder="Code" aria-label="code"
-                                                    aria-describedby="basic-addon2">
+                                                    class="form-control" placeholder="Code"
+                                                       {{--aria-label="code"--}}
+                                                    {{--aria-describedby="basic-addon2"--}}
+                                                    autofocus
+                                                >
                                                 <div class="input-group-append">
                                                     <button class="btn btn-outline-secondary" id="validate-code" type="button">
                                                         Validate

@@ -61,10 +61,7 @@
                     <a class="nav-link" href="/admin">Admin</a>
                 </li>
                 <li class="nav-item active mr-20px">
-                    <a class="nav-link" href="#">Customers</a>
-                </li>
-                <li class="nav-item mr-20px">
-                    <a class="nav-link" href="/admin/complaints">Complaints</a>
+                    <a class="nav-link" href="#">Settings</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-sm btn-outline-light nav-link active" href="{{ route("adminLogout") }}"
@@ -89,37 +86,37 @@
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 1" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="b1" type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 1" style="width: 80%;">
+            <a id="change-b1" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-b1" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 2" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="b2" type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 2" style="width: 80%;">
+            <a id="change-b2" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-b2" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 3" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="b3" type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 3" style="width: 80%;">
+            <a id="change-b3" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-b3" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 4" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="b4" type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 4" style="width: 80%;">
+            <a id="change-b4" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-b4" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 5" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="b5" type="text" class="form-control float-left mh-10px" placeholder="Link to Banner 5" style="width: 80%;">
+            <a id="change-b5" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-b5" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
     </div>
@@ -132,37 +129,37 @@
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 1" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="p1" type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 1" style="width: 80%;">
+            <a id="change-p1" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-p1" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 2" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="p2" type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 2" style="width: 80%;">
+            <a id="change-p2" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-p2" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 3" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="p3" type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 3" style="width: 80%;">
+            <a id="change-p3" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-p3" class="btn btn-danger mh-10px">Delete</a>
+            <!-- </div> -->
+        </div>
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">
+            <input id="p4" type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 4" style="width: 80%;">
+            <a id="change-p4" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-p4" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 4" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
-            <!-- </div> -->
-        </div>
-
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 5" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="p5" type="text" class="form-control float-left mh-10px" placeholder="Link to Pop-up 5" style="width: 80%;">
+            <a id="change-p5" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-p5" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
     </div>
@@ -176,17 +173,19 @@
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 d-flex justify-content-center mv-10px">            
-            <input type="text" class="form-control float-left mh-10px" placeholder="Link to RAW staff" style="width: 80%;">
-            <a class="btn btn-primary mh-10px">Save</a>
-            <a class="btn btn-danger mh-10px">Delete</a>
+            <input id="e" type="text" class="form-control float-left mh-10px" placeholder="Write the staff names..." style="width: 80%;">
+            <a id="change-e" class="btn btn-primary mh-10px">Save</a>
+            <a id="delete-e" class="btn btn-danger mh-10px">Delete</a>
             <!-- </div> -->
         </div>
 
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <p>Chú có thể tạo raw text link ở trang sau <a href="https://pastebin.com" target="_blank">ĐÂY</a> !</p>
+            <p>Chú viết tên nhân viên theo ví dụ: `diep bui, diu cap, nam nguyen, `</p>
         </div>
     </div>
 </div>
+
+<input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
 
 <script src="{{ URL::asset('/js/settings.js') }}"></script>
 </body>
