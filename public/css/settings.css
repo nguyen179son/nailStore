@@ -1,0 +1,50 @@
+body {
+    font-size: 1em;
+    color: #2c3e50;
+}
+
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 5px solid rgba(0, 0, 0, 0.1);
+}
+
+.mt-200px {
+    margin-top: 200px;
+}
+
+.mh-10px {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.mv-10px {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 80%;
+        margin: 1.75rem auto;
+    }
+}
+
+.word-break {
+    word-break: break-all;
+    max-width: inherit;
+}
+
+.btn-primary {
+    background-color: #2980b9;
+    color: #ecf0f1 !important;
+    font-weight: 600;
+}
+
+.btn-danger {
+    background-color: #c0392b;
+    color: #ecf0f1 !important;
+    font-weight: 600;
+}
