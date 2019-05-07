@@ -19,11 +19,11 @@ function collapseMenu() {
 }
 
 $(document).ready(function () {
-    var today = new Date();
-    if(Date.parse('04/21/2019 23:59:59') >= today)
-    {
-        $('#discount-modal').modal();
-    }
+    // var today = new Date();
+    // if(Date.parse('04/21/2019 23:59:59') >= today)
+    // {
+    //     $('#discount-modal').modal();
+    // }
 
     $('body').on('click', '#send-complaint', function () {
         var content = $('#complaint-content').val();
@@ -93,11 +93,21 @@ function fetchBanners() {
         url: '/links/banners',
         success: function(data)
         {
-            data.forEach(v => {
-                console.log(v.url);
-                if (v.url !== "") {
-                    // to do
+            var index = 1;
+            data.forEach((value) => {
+                var url = value.url;
+
+                // console.log(url);
+                if (url !== "") {
+                    $('#banners-carousel-indicators').append(`<li data-target=\"#slides\" data-slide-to=\"${index+1}\"></li>`);
+                    $('#banners-carousel-inner').append(`<div class=\"carousel-item\"> <img src=\"${url}\"> </div>`);
+
+                    index += 1;
                 }
+            });
+
+            $('#slides').carousel({
+                interval: 2500
             });
         },
 
@@ -113,12 +123,29 @@ function fetchPopups() {
         url: '/links/popups',
         success: function(data)
         {
-            data.forEach(v => {
-                console.log(v.url);
-                if (v.url !== "") {
-                    // to do
+            var index = 0;
+            var shouldShow = false;
+
+            data.forEach((value) => {
+                var url = value.url;
+
+                // console.log(value.url);
+
+                if (url !== "") {
+                    $('#popups-carousel-indicators').append(`<li data-target=\"#popups-slides\" data-slide-to=\"${index}\" ${index === 0 ? "class=\"active\"" : ""}></li>`);
+                    $('#popups-carousel-inner').append(`<div class=\"carousel-item ${index === 0 ? "active" : " "}\"> <img src=\"${url}\"> </div>`);
+
+                    shouldShow = true;
+                    index += 1;
                 }
             });
+
+            if(shouldShow) {
+                $('#discount-modal').modal();
+                $('#popups-slides').carousel({
+                    interval: 1000
+                });
+            }
         },
 
         error:function(e) {

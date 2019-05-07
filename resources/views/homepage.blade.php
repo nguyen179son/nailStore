@@ -70,10 +70,11 @@
 </nav>
 
 <div id="slides" class="carousel slide" data-ride="carousel">
-    <ul class="carousel-indicators">
+    <ul id="banners-carousel-indicators" class="carousel-indicators">
         <li data-target="#slides" data-slide-to="0" class="active"></li>
+        {{--<li data-target="#slides" data-slide-to="1" class="active"></li>--}}
     </ul>
-    <div class="carousel-inner">
+    <div id="banners-carousel-inner" class="carousel-inner">
         <div class="carousel-item active">
             <img src="{{ URL::asset('/images/background_2.jpg') }}">
             <div class="carousel-caption">
@@ -83,6 +84,10 @@
                 <a class="btn btn-primary btn-lg" href="#contact">Contact</a>
             </div>
         </div>
+
+        {{--<div class="carousel-item">--}}
+            {{--<img src="">--}}
+        {{--</div>--}}
     </div>
 </div>
 
@@ -295,8 +300,23 @@
 
 
       <div class="modal-body" style="padding-top: 0;">
-        <img alt="picture" src="{{ URL::asset('/images/discount_image_21_04_19.jpg') }}"
-                     class="img-fluid">
+        {{--<img alt="picture" src="{{ URL::asset('/images/discount_image_21_04_19.jpg') }}"--}}
+                     {{--class="img-fluid">--}}
+
+          <div id="popups-slides" class="carousel slide" data-ride="carousel">
+              <ul id="popups-carousel-indicators" class="carousel-indicators">
+                  {{--<li data-target="#slides" data-slide-to="0" class="active"></li>--}}
+              </ul>
+              <div id="popups-carousel-inner" class="carousel-inner">
+                  {{--<div class="carousel-item active">--}}
+                      {{--<img src="{{ URL::asset('/images/discount_image_21_04_19.jpg') }}">--}}
+                  {{--</div>--}}
+
+                  {{--<div class="carousel-item">--}}
+                  {{--<img src="">--}}
+                  {{--</div>--}}
+              </div>
+          </div>
       </div>
       <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
