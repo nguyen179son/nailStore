@@ -168,6 +168,16 @@
                                     <div class="booking-form">
 
                                         <div class="form-group" style="margin-bottom: 0">
+                                            <span class="form-label">Code</span>
+                                            <input class="form-control" type="number" id="customer-code"
+                                                   name="customer_code"
+                                                   placeholder="Code" pattern="[0-9]*" inputmode="numeric" value="">
+                                            <div style="height: 30px" id="code-error">
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="form-group" style="margin-bottom: 0">
                                             <span class="form-label">Email</span>
                                             <input class="form-control" type="email" id="email-add-customer"
                                                    name="email" placeholder="Email"
@@ -192,15 +202,6 @@
                                             <input class="form-control text-capitalize" type="text" id="name-add-customer" name="name"
                                                    placeholder="Name" value="">
                                             <div style="height: 30px" id="name-error">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Code</span>
-                                            <input class="form-control" type="number" id="customer-code"
-                                                   name="customer_code"
-                                                   placeholder="Code" pattern="[0-9]*" inputmode="numeric" value="">
-                                            <div style="height: 30px" id="code-error">
                                             </div>
                                         </div>
 
@@ -271,18 +272,6 @@
                                             </div>
                                         </div>
                                         </div>
-
-                                        <!-- <div class="form-group" style="margin-bottom: 0">
-                                            <span class="form-label">Service</span>
-                                            <select class="form-control" name="service" id="service">
-                                                <option {{ old('type') == "Pedikyr" ? 'selected' : '' }}>Pedikyr</option>
-                                                <option {{ old('type') == "Naglar" ? 'selected' : '' }}>Naglar</option>
-                                                <option {{ old('type') == "Fransar" ? 'selected' : '' }}>Fransar</option>
-                                            </select>
-                                            <div style="height: 30px" id="service-error">
-                                            </div>
-                                        </div> -->
-
                                         <div class="form-group" hidden style="margin-bottom: 0">
                                             <span class="form-label">Status</span>
                                             <input class="form-control" type="text" id="status"
@@ -297,27 +286,7 @@
                                                 <span class="form-label float-left mh-10px">Staff</span>
                                             </div>
                                             <div id="staff-container" class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11">
-                                                <!-- <span class="li-staff badge badge-light">Hung</span>
-                                                <span class="li-staff badge badge-light">minh</span>
-                                                <span class="li-staff badge badge-light">Son</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span>
-                                                <span class="li-staff badge badge-light">Primary</span> -->
+
                                             </div>
                                             <input type="hidden" id="staff" name="staff" value="">
                                         </div>

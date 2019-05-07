@@ -322,7 +322,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-labelledby="checkout-modal"
+        <div class="modal fade" id="checkout-modal" role="dialog" aria-labelledby="checkout-modal"
         aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="container">
@@ -348,8 +348,6 @@
                                                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                     maxlength="4"
                                                     class="form-control" placeholder="Code"
-                                                       {{--aria-label="code"--}}
-                                                    {{--aria-describedby="basic-addon2"--}}
                                                     autofocus
                                                 >
                                                 <div class="input-group-append">
