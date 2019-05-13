@@ -25,13 +25,13 @@ class MemberController extends Controller
                 'email' => 'email',
                 'phone_number' => 'required|phone_number|max:20|unique:customers',
                 'name' => 'required|string',
-                'customer_code' => 'required|'
+                'customer_code' => 'required|unique:customers'
             ]);
         } else {
             $validation = Validator::make($input, [
                 'phone_number' => 'required|phone_number|max:20|unique:customers',
                 'name' => 'required|string',
-                'customer_code' => 'required|'
+                'customer_code' => 'required|unique:customers'
             ]);
         }
         if ($validation->fails()) {
